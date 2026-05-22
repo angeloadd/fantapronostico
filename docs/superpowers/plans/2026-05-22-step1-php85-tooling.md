@@ -2,6 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 > **Model:** Spawn all subagents with `model: haiku` to minimise token cost. Each task is self-contained so Haiku has sufficient context.
+> **Subagent instructions:** Each subagent must invoke the `caveman` skill at session start and run at `/effort medium`.
 
 **Goal:** Run the entire app on PHP 8.5 with PHPUnit 11, current dev tooling, and a clean PHPStan + Pint result.
 

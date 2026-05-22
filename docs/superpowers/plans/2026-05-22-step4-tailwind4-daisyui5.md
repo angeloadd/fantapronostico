@@ -2,6 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 > **Model:** Spawn all subagents with `model: haiku` to minimise token cost. Each task is self-contained so Haiku has sufficient context.
+> **Subagent instructions:** Each subagent must invoke the `caveman` skill at session start and run at `/effort medium`.
 
 **Goal:** Replace the Tailwind 3 + DaisyUI 4 CSS pipeline with Tailwind 4 + DaisyUI 5, rewrite the custom `fp2024` theme in CSS syntax, and remove the `tailwind.config.js` entirely.
 

@@ -2,6 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 > **Model:** Spawn all subagents with `model: haiku` to minimise token cost. Each task is self-contained so Haiku has sufficient context.
+> **Subagent instructions:** Each subagent must invoke the `caveman` skill at session start and run at `/effort medium`.
 
 **Goal:** Modernise the entire JS build stack to Node 24 and Vite 6, remove Cypress, and bump Alpine, htmx, and Biome to their latest versions.
 
