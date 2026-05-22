@@ -1,6 +1,7 @@
 # Step 1: PHP 8.5 + Tooling — Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **Model:** Spawn all subagents with `model: haiku` to minimise token cost. Each task is self-contained so Haiku has sufficient context.
 
 **Goal:** Run the entire app on PHP 8.5 with PHPUnit 11, current dev tooling, and a clean PHPStan + Pint result.
 
