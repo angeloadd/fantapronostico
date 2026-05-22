@@ -365,12 +365,14 @@ final class GroupePhaseSeeder extends Seeder
         Game::all()->each(function (Game $game) use ($users): void {
             if (now()->gte($game->started_at)) {
                 $users->each(function (User $user) use ($game): void {
-                    Prediction::factory([
-                        'user_id' => $user->id,
-                        'game_id' => $game->id,
-                        'home_scorer_id' => $game->home_team->players->random()->id,
-                        'away_scorer_id' => $game->away_team->players->random()->id,
-                    ])->create();
+                    if ($game->home_team && $game->away_team) {
+                        Prediction::factory([
+                            'user_id' => $user->id,
+                            'game_id' => $game->id,
+                            'home_scorer_id' => $game->home_team->players->random()->id,
+                            'away_scorer_id' => $game->away_team->players->random()->id,
+                        ])->create();
+                    }
                 });
 
                 $game->update([

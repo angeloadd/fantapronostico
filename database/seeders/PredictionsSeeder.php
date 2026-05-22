@@ -18,10 +18,6 @@ use Illuminate\Support\Carbon;
 
 final class PredictionsSeeder extends Seeder
 {
-    private Carbon $now;
-
-    private Tournament $tournament;
-
     public function run(): void
     {
         //        User::factory(40)->create();
@@ -36,7 +32,7 @@ final class PredictionsSeeder extends Seeder
         //        ]);
         //
         $users = User::all();
-        League::first()->users()->attach($users, ['status' => 'accepted']);
+        League::first()?->users()->attach($users, ['status' => 'accepted']);
 
         //        $users->each(function (User $user): void {
         //            $teams = Team::all();
@@ -50,20 +46,22 @@ final class PredictionsSeeder extends Seeder
 
         Game::all()->each(function (Game $game) use ($users): void {
             if (now()->gte($game->started_at)) {
-                $users->each(function (User $user) use ($game): void {
-                    $homeScorers = $game->home_team->players->map(fn (Player $player): int => $player->id);
-                    $homeScorers->add(0);
-                    $homeScorers->add(-1);
-                    $awayScorers = $game->away_team->players->map(fn (Player $player): int => $player->id);
-                    $awayScorers->add(0);
-                    $awayScorers->add(-1);
-                    Prediction::factory([
-                        'user_id' => $user->id,
-                        'game_id' => $game->id,
-                        'home_scorer_id' => $homeScorers->random(),
-                        'away_scorer_id' => $awayScorers->random(),
-                    ])->create();
-                });
+                if ($game->home_team && $game->away_team) {
+                    $users->each(function (User $user) use ($game): void {
+                        $homeScorers = $game->home_team->players->map(fn (Player $player): int => $player->id);
+                        $homeScorers->add(0);
+                        $homeScorers->add(-1);
+                        $awayScorers = $game->away_team->players->map(fn (Player $player): int => $player->id);
+                        $awayScorers->add(0);
+                        $awayScorers->add(-1);
+                        Prediction::factory([
+                            'user_id' => $user->id,
+                            'game_id' => $game->id,
+                            'home_scorer_id' => $homeScorers->random(),
+                            'away_scorer_id' => $awayScorers->random(),
+                        ])->create();
+                    });
+                }
             }
         });
     }
