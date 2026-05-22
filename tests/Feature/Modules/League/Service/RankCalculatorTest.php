@@ -24,7 +24,7 @@ final class RankCalculatorTest extends TestCase
     private League $league;
 
     /**
-     * @var Collection<User>
+     * @var Collection<int, User>
      */
     private Collection $users;
 
@@ -56,7 +56,7 @@ final class RankCalculatorTest extends TestCase
         $awayTeam = Team::factory()
             ->create(['is_national' => true]);
 
-        /** @var Player $var */
+        /** @var int $scorerId */
         $scorerId = Player::factory()->create(['national_id' => $homeTeam->id])->id;
         Player::factory()->create(['national_id' => $awayTeam->id]);
 
@@ -91,7 +91,7 @@ final class RankCalculatorTest extends TestCase
             'home_score' => '0',
             'away_score' => '1',
             'home_scorer_id' => 0,
-            'away_scorer_id' => $game->away_team->players->first()->id,
+            'away_scorer_id' => $game->away_team?->players->first()->id,
             'user_id' => $this->users[2]->id,
         ])->create();
         Prediction::factory([
@@ -134,7 +134,7 @@ final class RankCalculatorTest extends TestCase
         $awayTeam = Team::factory()
             ->create(['is_national' => true]);
 
-        /** @var Player $var */
+        /** @var int $scorerId */
         $scorerId = Player::factory()->create(['national_id' => $homeTeam->id])->id;
         Player::factory()->create(['national_id' => $awayTeam->id]);
 
