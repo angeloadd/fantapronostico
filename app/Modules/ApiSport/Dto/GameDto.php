@@ -16,8 +16,7 @@ final readonly class GameDto
         public string $stage,
         public GameStatus $status,
         public int $tournamentApiId
-    ) {
-    }
+    ) {}
 
     public static function getGameType(string $round): string
     {

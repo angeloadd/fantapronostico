@@ -11,11 +11,17 @@ use Illuminate\Support\Collection;
 
 final class PredictionRepository implements PredictionRepositoryInterface
 {
+    /**
+     * @return Collection<int, Prediction>
+     */
     public function getSortedDescByUpdatedAtByGame(Game $game): Collection
     {
         return $game->predictions->sortByDesc('updated_at')->values();
     }
 
+    /**
+     * @return Collection<int, Prediction>
+     */
     public function getByUser(User $user): Collection
     {
         return $user->predictions;

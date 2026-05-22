@@ -8,7 +8,5 @@ use App\Enums\GameStatus;
 
 final class GameStatusDto implements ApiSportDto
 {
-    public function __construct(public readonly int $apiId, public readonly GameStatus $status)
-    {
-    }
+    public function __construct(public readonly int $apiId, public readonly GameStatus $status) {}
 }

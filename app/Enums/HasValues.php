@@ -9,6 +9,9 @@ use ReflectionClass;
 
 trait HasValues
 {
+    /**
+     * @return array<int|string>
+     */
     public static function values(): array
     {
         if ( ! (new ReflectionClass(self::class))->isEnum()) {

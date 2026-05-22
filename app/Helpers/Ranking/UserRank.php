@@ -21,8 +21,7 @@ final class UserRank
         public bool $winner = false,
         public bool $topScorer = false,
         public ?DateTimeInterface $latestGameStartedAt = null
-    ) {
-    }
+    ) {}
 
     public function finalPredictionTimestamp(): int
     {

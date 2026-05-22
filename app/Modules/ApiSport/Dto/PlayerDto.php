@@ -9,6 +9,5 @@ final readonly class PlayerDto
     public function __construct(
         public int $apiId,
         public string $name,
-    ) {
-    }
+    ) {}
 }

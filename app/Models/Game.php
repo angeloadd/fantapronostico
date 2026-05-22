@@ -313,10 +313,8 @@ final class Game extends Model
     public function getScoreParsed(string $type): array
     {
         $goals = $this->goals->filter(
-            function (GameGoal $goal) use ($type) {
-                return $goal->player->national_id === $this->{$type . '_team'}->id ||
-                    $goal->player->club_id === $this->{$type . '_team'}->id;
-            }
+            fn (GameGoal $goal) => $goal->player->national_id === $this->{$type . '_team'}->id ||
+                    $goal->player->club_id === $this->{$type . '_team'}->id
         )->map(
             static function (GameGoal $goal) {
                 if ($goal->is_autogoal) {

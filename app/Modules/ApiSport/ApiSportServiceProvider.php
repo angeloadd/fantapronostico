@@ -18,8 +18,8 @@ use App\Modules\ApiSport\Mapper\Strategy\GameGoalsMapperStrategy;
 use App\Modules\ApiSport\Mapper\Strategy\GamesMapperStrategy;
 use App\Modules\ApiSport\Mapper\Strategy\GameStatusMapperStrategy;
 use App\Modules\ApiSport\Mapper\Strategy\NationalsMapperStrategy;
-use App\Modules\ApiSport\Mapper\Strategy\TopScorersMapperStrategy;
 use App\Modules\ApiSport\Mapper\Strategy\TeamsMapperStrategy;
+use App\Modules\ApiSport\Mapper\Strategy\TopScorersMapperStrategy;
 use App\Modules\ApiSport\Repository\ApiSportGameRepositoryInterface;
 use App\Modules\ApiSport\Repository\ApiSportPlayerRepositoryInterface;
 use App\Modules\ApiSport\Repository\ApiSportTeamRepositoryInterface;
@@ -61,9 +61,7 @@ final class ApiSportServiceProvider extends ServiceProvider
         $this->provideScheduleLogger();
     }
 
-    public function boot(): void
-    {
-    }
+    public function boot(): void {}
 
     private function provideScheduleLogger(): void
     {

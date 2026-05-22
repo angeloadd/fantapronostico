@@ -19,9 +19,7 @@ final class GameGoalsUpdated implements ShouldQueue
     /**
      * Create a new event instance.
      */
-    public function __construct(public readonly League $league)
-    {
-    }
+    public function __construct(public readonly League $league) {}
 
     public function handle(GameGoalsUpdated $event): void
     {

@@ -11,8 +11,14 @@ use Illuminate\Support\Collection;
 
 interface PredictionRepositoryInterface
 {
+    /**
+     * @return Collection<int, Prediction>
+     */
     public function getSortedDescByUpdatedAtByGame(Game $game): Collection;
 
+    /**
+     * @return Collection<int, Prediction>
+     */
     public function getByUser(User $user): Collection;
 
     public function getByGameAndUser(Game $game, User $user): ?Prediction;

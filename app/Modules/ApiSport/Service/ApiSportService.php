@@ -30,8 +30,7 @@ final readonly class ApiSportService implements ApiSportServiceInterface
     public function __construct(
         private ApiSportClientInterface $apiSportClient,
         private MapperInterface $mapper,
-    ) {
-    }
+    ) {}
 
     /**
      * @throws InvalidApisportTokenException
@@ -44,7 +43,7 @@ final readonly class ApiSportService implements ApiSportServiceInterface
 
         $gamesDto = $this->mapper->map($response);
 
-        if (!$gamesDto instanceof TeamsDto) {
+        if ( ! $gamesDto instanceof TeamsDto) {
             throw InvalidMappingException::create($gamesDto::class, TeamsDto::class);
         }
 
@@ -61,7 +60,7 @@ final readonly class ApiSportService implements ApiSportServiceInterface
         $response = $this->apiSportClient->get($request::ENDPOINT, $request->toQuery());
 
         $gamesDto = $this->mapper->map($response);
-        if (!$gamesDto instanceof GamesDto) {
+        if ( ! $gamesDto instanceof GamesDto) {
             throw InvalidMappingException::create($gamesDto::class, GamesDto::class);
         }
 
@@ -69,7 +68,7 @@ final readonly class ApiSportService implements ApiSportServiceInterface
     }
 
     /**
-     * @param GetPlayersByNationalRequest[] $requests
+     * @param  GetPlayersByNationalRequest[]  $requests
      *
      * @throws ConnectionException
      * @throws InvalidApisportTokenException
@@ -83,7 +82,7 @@ final readonly class ApiSportService implements ApiSportServiceInterface
 
             $national = $this->mapper->map($response);
 
-            if (!$national instanceof NationalDto) {
+            if ( ! $national instanceof NationalDto) {
                 throw InvalidMappingException::create($national::class, NationalDto::class);
             }
 
@@ -103,7 +102,7 @@ final readonly class ApiSportService implements ApiSportServiceInterface
 
         $mapping = $this->mapper->map($externalResponse);
 
-        if (!$mapping instanceof GameStatusDto) {
+        if ( ! $mapping instanceof GameStatusDto) {
             throw InvalidMappingException::create($mapping::class, GameStatusDto::class);
         }
 
@@ -119,7 +118,7 @@ final readonly class ApiSportService implements ApiSportServiceInterface
 
         $mapping = $this->mapper->map($externalResponse);
 
-        if (!$mapping instanceof GameGoalsDto) {
+        if ( ! $mapping instanceof GameGoalsDto) {
             throw InvalidMappingException::create($mapping::class, GameGoalsDto::class);
         }
 
@@ -127,7 +126,7 @@ final readonly class ApiSportService implements ApiSportServiceInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function getTopScorers(GetTopScorersRequest $request): PlayersDto
     {
@@ -135,7 +134,7 @@ final readonly class ApiSportService implements ApiSportServiceInterface
 
         $mapping = $this->mapper->map($externalResponse);
 
-        if (!$mapping instanceof PlayersDto) {
+        if ( ! $mapping instanceof PlayersDto) {
             throw InvalidMappingException::create($mapping::class, PlayersDto::class);
         }
 

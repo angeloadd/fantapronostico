@@ -6,6 +6,4 @@ namespace Tests\Unit;
 
 use Illuminate\Foundation\Testing\TestCase;
 
-abstract class UnitTestCase extends TestCase
-{
-}
+abstract class UnitTestCase extends TestCase {}

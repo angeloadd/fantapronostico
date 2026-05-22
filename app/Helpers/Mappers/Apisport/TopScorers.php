@@ -6,27 +6,43 @@ namespace App\Helpers\Mappers\Apisport;
 
 final class TopScorers
 {
-    public function __construct(private array $players)
-    {
-    }
+    public function __construct(private array $players) {}
 
     public static function fromArray(mixed $response): self
     {
         $previous = 0;
         $players = [];
+        if ( ! is_array($response)) {
+            return new self($players);
+        }
         foreach ($response as $player) {
-            if ($previous > $player['statistics'][0]['goals']['total']) {
+            if ( ! is_array($player) || ! isset($player['statistics']) || ! is_array($player['statistics']) ||
+                ! isset($player['statistics'][0]) || ! is_array($player['statistics'][0]) ||
+                ! isset($player['statistics'][0]['goals']) || ! is_array($player['statistics'][0]['goals'])) {
                 break;
+            }
+            $goalsTotal = $player['statistics'][0]['goals']['total'];
+            if ( ! is_int($goalsTotal)) {
+                break;
+            }
+            if ($previous > $goalsTotal) {
+                break;
+            }
+            if ( ! is_array($player['player']) || ! isset($player['player']['id'])) {
+                continue;
             }
             $players[] = [
                 'id' => $player['player']['id'],
             ];
-            $previous = $player['statistics'][0]['goals']['total'];
+            $previous = $goalsTotal;
         }
 
         return new self($players);
     }
 
+    /**
+     * @return array<int, array<string, int>>
+     */
     public function toArray(): array
     {
         return $this->players;

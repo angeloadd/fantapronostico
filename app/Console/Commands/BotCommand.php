@@ -35,7 +35,7 @@ final class BotCommand extends Command
     public function handle(TelegramServiceInterface $telegramService): int
     {
         foreach ($this->getRoundPhaseReminderTimes() as $roundPhaseReminderTime) {
-            if(abs(now()->unix() - $roundPhaseReminderTime->unix()) < 60) {
+            if (abs(now()->unix() - $roundPhaseReminderTime->unix()) < 60) {
                 $telegramService->sendRoundPhaseReminder(-1001766446905);
             }
         }
@@ -55,11 +55,12 @@ final class BotCommand extends Command
             }
         }
 
+        /** @var array<int, TelegramReminderViewDto> $dtos */
         $dtos = $games->map(
             static fn (Game $game) => new TelegramReminderViewDto(
                 $game->id,
-                $game->home_team->name,
-                $game->away_team->name,
+                $game->home_team->name ?? '',
+                $game->away_team->name ?? '',
                 (string) str($game->started_at->isoFormat('\e\n\t\r\o \i\l D MMMM YYYY \a\l\l\e HH:mm'))->title()
             )
         )->toArray();
@@ -76,6 +77,9 @@ final class BotCommand extends Command
         }
     }
 
+    /**
+     * @return array<int, Carbon>
+     */
     private function getRoundPhaseReminderTimes(): array
     {
         return [
@@ -86,6 +90,9 @@ final class BotCommand extends Command
 
     }
 
+    /**
+     * @return Collection<int, Game>
+     */
     private function getGamesFromTo(int $from, int $to): Collection
     {
         return Game::whereBetween('started_at', [now()->addMinutes($from), now()->addMinutes($to)])->get();

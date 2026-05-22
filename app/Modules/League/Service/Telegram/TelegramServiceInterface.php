@@ -10,7 +10,7 @@ use Telegram\Bot\Exceptions\TelegramSDKException;
 interface TelegramServiceInterface
 {
     /**
-     * @param  TelegramReminderViewDto[]  $dtos
+     * @param  array<int, TelegramReminderViewDto>  $dtos
      *
      * @throws TelegramSDKException
      */

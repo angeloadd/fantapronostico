@@ -19,8 +19,7 @@ final readonly class PredictionScore
         public bool $awayScorer,
         public bool $isFinal,
         public int $timestamp
-    ) {
-    }
+    ) {}
 
     public function total(): int
     {

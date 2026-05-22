@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use App\Helpers\Mappers\Apisport\TopScorers;
 use App\Helpers\Mappers\Apisport\Winner;
-use App\Models\Player;
 use App\Models\Tournament;
 use App\Modules\ApiSport\Client\ApiSportClientInterface;
 use App\Modules\ApiSport\Exceptions\ExternalSystemUnavailableException;
@@ -56,8 +54,10 @@ final class FetchWinnerAndTopScorerCommand extends Command
         try {
             if ($winner->toInt()) {
                 $winner = Team::find($winner->toInt());
-                Tournament::first()?->teams()->updateExistingPivot($winner->id, ['is_winner' => true]);
-                $winner->save();
+                if ($winner) {
+                    Tournament::first()?->teams()->updateExistingPivot($winner->id, ['is_winner' => true]);
+                    $winner->save();
+                }
             }
         } catch (Throwable $e) {
             Log::error(

@@ -32,6 +32,7 @@ final class LeaguesWidget extends BaseWidget
                     ->state(static fn (Model $model) => $model->leagues->first()?->pivot->status)->color(fn (string $state): string => match ($state) {
                         'accepted' => 'success',
                         'pending' => 'warning',
+                        default => 'gray',
                     }),
             ])
             ->actions([

@@ -10,7 +10,5 @@ final class GetGameStatusRequest
 
     public const ENDPOINT = 'fixtures';
 
-    public function __construct(public readonly int $id)
-    {
-    }
+    public function __construct(public readonly int $id) {}
 }

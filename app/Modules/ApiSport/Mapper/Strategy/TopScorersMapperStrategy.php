@@ -7,29 +7,27 @@ namespace App\Modules\ApiSport\Mapper\Strategy;
 use App\Modules\ApiSport\Dto\ApiSportDto;
 use App\Modules\ApiSport\Dto\PlayerDto;
 use App\Modules\ApiSport\Dto\PlayersDto;
-use App\Modules\ApiSport\Mapper\Strategy\MapperStrategyInterface;
 
 final class TopScorersMapperStrategy implements MapperStrategyInterface
 {
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function supports(array $externalResponse): bool
     {
-        return $externalResponse['get'] === 'players/topscorers';
+        return 'players/topscorers' === $externalResponse['get'];
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function map(array $externalResponse): ApiSportDto
     {
         $players = [];
         $maxGoals = 0;
 
-
         foreach ($externalResponse['response'] as $player) {
-            if($player['statistics'][0]['goals']['total'] < $maxGoals) {
+            if ($player['statistics'][0]['goals']['total'] < $maxGoals) {
                 break;
             }
 
@@ -41,6 +39,7 @@ final class TopScorersMapperStrategy implements MapperStrategyInterface
             );
 
         }
+
         return new PlayersDto(...$players);
     }
 }

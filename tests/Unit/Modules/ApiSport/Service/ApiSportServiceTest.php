@@ -34,7 +34,7 @@ final class ApiSportServiceTest extends UnitTestCase
         $this->subject = new ApiSportService($this->client, $this->mapper);
     }
 
-    public function test_getTeamsBySeasonAndLeague_returns_a_dto(): void
+    public function test_get_teams_by_season_and_league_returns_a_dto(): void
     {
         $response = ['parameters' => ['league' => 1], 'response' => ['teams' => ['ok']]];
         $this->client->expects($this->once())->method('get')
@@ -46,7 +46,7 @@ final class ApiSportServiceTest extends UnitTestCase
         $this->subject->getTeamsBySeasonAndLeague(new GetTeamsRequest(1, 2050));
     }
 
-    public function test_getGamesBySeasonAndLeague_returns_a_dto(): void
+    public function test_get_games_by_season_and_league_returns_a_dto(): void
     {
         $response = ['parameters' => ['league' => 1], 'response' => ['fixtures' => ['ok']]];
         $this->client->expects($this->once())->method('get')
@@ -58,7 +58,7 @@ final class ApiSportServiceTest extends UnitTestCase
         $this->subject->getGamesBySeasonAndLeague(new GetGamesRequest(1, 2050));
     }
 
-    public function test_getPlayersByNational_returns_a_dto(): void
+    public function test_get_players_by_national_returns_a_dto(): void
     {
         Sleep::fake();
         $response = ['parameters' => ['national' => 1], 'response' => ['players' => ['ok']]];

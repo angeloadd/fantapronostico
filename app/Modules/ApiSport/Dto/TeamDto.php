@@ -12,8 +12,7 @@ final readonly class TeamDto
         public string $code,
         public string $logo,
         public bool $isNational,
-    ) {
-    }
+    ) {}
 
     /**
      * @return array{

@@ -13,6 +13,5 @@ final readonly class GetGamesRequest
     public function __construct(
         public int $league,
         public int $season
-    ) {
-    }
+    ) {}
 }

@@ -179,6 +179,6 @@ final class ChampionController extends Controller
 
     private function competitionStarted(): bool
     {
-        return $this->getFirstMatchStartDate()?->isPast();
+        return (bool) $this->getFirstMatchStartDate()?->isPast();
     }
 }

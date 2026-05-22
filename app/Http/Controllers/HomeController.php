@@ -13,7 +13,6 @@ use App\Modules\Auth\Repository\UserRepositoryInterface;
 use App\Modules\League\Models\League;
 use App\Repository\Game\GameRepositoryInterface;
 use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 final class HomeController extends Controller
@@ -22,8 +21,7 @@ final class HomeController extends Controller
         private readonly RankingCalculatorInterface $calculator,
         private readonly GameRepositoryInterface $gameRepository,
         private readonly UserRepositoryInterface $userRepository
-    ) {
-    }
+    ) {}
 
     public function index(): Renderable
     {
@@ -31,7 +29,7 @@ final class HomeController extends Controller
 
         $league = $user->selectedLeague ?? $user->leagues->first();
 
-        if (!$league instanceof League) {
+        if ( ! $league instanceof League) {
             throw new UnauthorizedHttpException('You shall not pass!!');
         }
 
@@ -55,7 +53,7 @@ final class HomeController extends Controller
             'hasFinalStarted' => $this->hasFinalStarted($tournament),
             'lastResults' => $this->gameRepository->getLastResults(now()),
             'isWinnerDeclared' => $this->isWinnerDeclared($tournament),
-            'winnerName' => $ranking->first()->userName(),
+            'winnerName' => $ranking->first()?->userName() ?? '',
             'leagueName' => $league->name,
             'games' => $this->gameRepository->getAll(),
         ]);

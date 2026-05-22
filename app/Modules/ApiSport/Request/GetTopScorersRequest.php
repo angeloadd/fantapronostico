@@ -10,7 +10,5 @@ final class GetTopScorersRequest
 
     public const ENDPOINT = 'players/topscorers';
 
-    public function __construct(public readonly int $league, public readonly int $season)
-    {
-    }
+    public function __construct(public readonly int $league, public readonly int $season) {}
 }

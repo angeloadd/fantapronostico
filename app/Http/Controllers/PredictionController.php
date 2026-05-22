@@ -62,8 +62,10 @@ final class PredictionController extends Controller
                 ->with('errore_message', session('error_message') ?: null);
         }
 
-        //Controllo per presenza pronostico da mostrare
-        $prediction = $this->predictionRepository->getByGameAndUser($game, Auth::user());
+        // Controllo per presenza pronostico da mostrare
+        /** @var \App\Modules\Auth\Models\User $authUser */
+        $authUser = Auth::user();
+        $prediction = $this->predictionRepository->getByGameAndUser($game, $authUser);
         if (null === $prediction) {
             return redirect(route('prediction.create', compact('game')))
                 ->with('message', session('message') ?: null)
@@ -114,19 +116,26 @@ final class PredictionController extends Controller
                 ->with('errore_message', session('error_message') ?: null);
         }
 
-        if ($this->predictionRepository->existsByGameAndUser($game, Auth::user())) {
+        /** @var \App\Modules\Auth\Models\User $authUser */
+        $authUser = Auth::user();
+        if ($this->predictionRepository->existsByGameAndUser($game, $authUser)) {
             return redirect(route('prediction.show', compact('game')))
                 ->with('message', session('message') ?: null)
                 ->with('errore_message', session('error_message') ?: null);
         }
+
+        /** @var Team $homeTeam */
+        $homeTeam = $game->home_team;
+        /** @var Team $awayTeam */
+        $awayTeam = $game->away_team;
 
         return view(
             'pages.prediction.create',
             compact('game'),
             [
                 'games' => $this->gameRepository->getAll(),
-                'homeTeamPlayers' => $this->getTeamScorersList($game->home_team),
-                'awayTeamPlayers' => $this->getTeamScorersList($game->away_team),
+                'homeTeamPlayers' => $this->getTeamScorersList($homeTeam),
+                'awayTeamPlayers' => $this->getTeamScorersList($awayTeam),
             ]
         );
     }
@@ -148,7 +157,9 @@ final class PredictionController extends Controller
                 ->with('error_message', 'L\'incontro non è ancora accessibile');
         }
 
-        if ($this->predictionRepository->existsByGameAndUser($game, Auth::user())) {
+        /** @var \App\Modules\Auth\Models\User $authUser */
+        $authUser = Auth::user();
+        if ($this->predictionRepository->existsByGameAndUser($game, $authUser)) {
             return redirect(route('prediction.show', compact('game')))
                 ->with('error_message', 'Hai già pronosticato per questo incontro');
         }
@@ -175,7 +186,7 @@ final class PredictionController extends Controller
 
         $game = $prediction->game;
 
-        //Controllo per modifica oltre tempo limite
+        // Controllo per modifica oltre tempo limite
         if ($game->started_at->isPast()) {
             return redirect(route('prediction.index', compact('game')))
                 ->with('message', session('message') ?: null)
@@ -186,7 +197,7 @@ final class PredictionController extends Controller
             return abort(404);
         }
 
-        //Controllo per non anticipare troppo i pronostici
+        // Controllo per non anticipare troppo i pronostici
         if ($game->isNotPredictableYet()) {
             return redirect(route('prediction.409', compact('game')))
                 ->with('message', session('message') ?: null)
@@ -194,12 +205,17 @@ final class PredictionController extends Controller
         }
 
         // Controllo per view edit
+        /** @var Team $homeTeam */
+        $homeTeam = $game->home_team;
+        /** @var Team $awayTeam */
+        $awayTeam = $game->away_team;
+
         return view(
             'pages.prediction.edit',
             compact('prediction', 'game'),
             [
-                'homeTeamPlayers' => $this->getTeamScorersList($game->home_team),
-                'awayTeamPlayers' => $this->getTeamScorersList($game->away_team),
+                'homeTeamPlayers' => $this->getTeamScorersList($homeTeam),
+                'awayTeamPlayers' => $this->getTeamScorersList($awayTeam),
             ]
         );
     }

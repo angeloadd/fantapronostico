@@ -125,7 +125,7 @@ final class TeamTest extends TestCase
         $this->assertSame($attributes['is_national'], $team->is_national);
     }
 
-    public function test_upsertMany_can_persist_multiple_team_dto(): void
+    public function test_upsert_many_can_persist_multiple_team_dto(): void
     {
         $tournament = FactoryHelper::makeTournament();
         $teamDto1 = new TeamDto(1, 'team_name', 'TEN', 'team_logo', true);

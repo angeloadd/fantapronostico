@@ -7,13 +7,11 @@ namespace App\Helpers\Ranking;
 use App\Enums\GameStatus;
 use App\Models\Champion;
 use App\Models\Game;
-use App\Models\Player;
 use App\Models\Prediction;
 use App\Modules\Auth\Models\User;
 use App\Modules\League\Models\League;
 use App\Modules\Tournament\Models\Team;
 use Carbon\Carbon;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Psr\Log\LoggerInterface;
@@ -21,9 +19,7 @@ use stdClass;
 
 final readonly class RankingCalculator implements RankingCalculatorInterface
 {
-    public function __construct(private SorterInterface $sorter, private LoggerInterface $logger)
-    {
-    }
+    public function __construct(private SorterInterface $sorter, private LoggerInterface $logger) {}
 
     public function calculate(League $league): void
     {

@@ -8,9 +8,7 @@ use Illuminate\Http\Request;
 
 final readonly class RequestProviderService implements RequestProviderServiceInterface
 {
-    public function __construct(private Request $request)
-    {
-    }
+    public function __construct(private Request $request) {}
 
     public function request(): Request
     {

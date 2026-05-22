@@ -25,7 +25,10 @@ final class FixPlayersCommand extends Command
      */
     protected $description = 'Manual fix for player list where the api did not get updated yet on injured or last our swaps';
 
-    public function insertPlayerOrUpdate($player): void
+    /**
+     * @param  array<string, mixed>  $player
+     */
+    public function insertPlayerOrUpdate(array $player): void
     {
         Player::updateOrInsert(['id' => $player['id']], $player);
     }

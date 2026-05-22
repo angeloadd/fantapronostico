@@ -18,6 +18,5 @@ final readonly class GameResult
         public string $sign,
         public array $homeScorers,
         public array $awayScorers
-    ) {
-    }
+    ) {}
 }

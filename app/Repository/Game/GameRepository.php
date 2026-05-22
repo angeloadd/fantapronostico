@@ -19,6 +19,9 @@ final class GameRepository implements ApiSportGameRepositoryInterface, GameRepos
         return $game instanceof Game ? $game : null;
     }
 
+    /**
+     * @return Collection<int, Game>
+     */
     public function getAll(): Collection
     {
         return Game::all();
@@ -38,7 +41,7 @@ final class GameRepository implements ApiSportGameRepositoryInterface, GameRepos
             return null;
         }
 
-        if ($gamesFromDb->count() > 1 && $game->id === $gamesFromDb->last()->id) {
+        if ($gamesFromDb->count() > 1 && $game->id === $gamesFromDb->last()?->id) {
             return $gamesFromDb->first();
         }
 
@@ -54,13 +57,16 @@ final class GameRepository implements ApiSportGameRepositoryInterface, GameRepos
             return null;
         }
 
-        if ($gamesFromDb->count() > 1 && $game->id === $gamesFromDb->first()->id) {
+        if ($gamesFromDb->count() > 1 && $game->id === $gamesFromDb->first()?->id) {
             return $gamesFromDb->last();
         }
 
         return Game::where('started_at', '>', $game->started_at)->first();
     }
 
+    /**
+     * @return Collection<int, Game>
+     */
     public function getLastResults(DateTimeInterface $dateTime): Collection
     {
         return Game::lastResults($dateTime)->get();

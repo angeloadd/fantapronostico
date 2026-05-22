@@ -70,8 +70,9 @@ final class Player extends Model
         'club_id',
     ];
 
-    public static function getAllPlayerCached(string $sortBy = 'national_id'): array
+    public static function getAllPlayerCached(string $sortBy = 'national_id'): Collection
     {
+        /** @var Collection<int, Player> */
         return Cache::remember(
             'playersList',
             Carbon::create('tomorrow at 5:00'),
@@ -96,11 +97,24 @@ final class Player extends Model
                         'first_name' => '',
                         'last_name' => '',
                     ]);
-            }
 
-            if (0 === $nationalModel->tournaments->first()?->players->where('api_id', $player->apiId)->count()) {
-                $nationalModel->tournaments->first()?->players()->attach($player->apiId);
+                if (0 === $nationalModel->tournaments->first()?->players->where('api_id', $player->apiId)->count()) {
+                    $nationalModel->tournaments->first()?->players()->attach($player->apiId);
+                }
             }
+        }
+    }
+
+    public static function setTopScorers(PlayersDto $dto, Tournament $tournament): void
+    {
+        Player::all()->each(
+            function (Player $player) use ($tournament): void {
+                $player->tournaments()->attach($tournament->id);
+            }
+        );
+        foreach ($dto->players() as $player) {
+            $tournament->players()->updateExistingPivot($player->apiId, ['is_top_scorer' => true]);
+            $tournament->save();
         }
     }
 
@@ -144,19 +158,6 @@ final class Player extends Model
         return $this->belongsToMany(Game::class);
     }
 
-    public static function setTopScorers(PlayersDto $dto, Tournament $tournament): void
-    {
-        Player::all()->each(
-            function (Player $player) use ($dto, $tournament): void {
-                $player->tournaments()->attach($tournament->id);
-            }
-        );
-        foreach ($dto->players() as $player) {
-            $tournament->players()->updateExistingPivot($player->apiId, ['is_top_scorer' => true]);
-            $tournament->save();
-        }
-    }
-
     protected static function booted(): void
     {
         self::saving(static function (Player $player): void {
@@ -169,7 +170,7 @@ final class Player extends Model
             }
 
             // We have to check national exists before the flag to avoid that a null is casted to boolean
-            if ($player->national && !$player->national->is_national) {
+            if ($player->national && ! $player->national->is_national) {
                 throw NationalTeamCannotBeClubException::forPlayerId($player->id);
             }
         });

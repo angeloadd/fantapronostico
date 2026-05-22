@@ -32,7 +32,6 @@ final class RankCalculatorTest extends TestCase
     {
         parent::setUp();
 
-        /** @var Tournament $tournament */
         $this->tournament = Tournament::factory()
             ->create();
         $this->league = League::create([
@@ -74,7 +73,7 @@ final class RankCalculatorTest extends TestCase
             'away_score' => '0',
             'home_scorer_id' => $scorerId,
             'away_scorer_id' => 0,
-            'user_id' => $this->users[0]->id,
+            'user_id' => $this->users[0]?->id,
         ])->create();
         Prediction::factory([
             'game_id' => $game->id,
@@ -83,7 +82,7 @@ final class RankCalculatorTest extends TestCase
             'away_score' => '0',
             'home_scorer_id' => 0,
             'away_scorer_id' => -1,
-            'user_id' => $this->users[1]->id,
+            'user_id' => $this->users[1]?->id,
         ])->create();
         Prediction::factory([
             'game_id' => $game->id,
@@ -91,8 +90,8 @@ final class RankCalculatorTest extends TestCase
             'home_score' => '0',
             'away_score' => '1',
             'home_scorer_id' => 0,
-            'away_scorer_id' => $game->away_team?->players->first()->id,
-            'user_id' => $this->users[2]->id,
+            'away_scorer_id' => $game->away_team?->players?->first()?->id,
+            'user_id' => $this->users[2]?->id,
         ])->create();
         Prediction::factory([
             'game_id' => $game->id,
@@ -101,7 +100,7 @@ final class RankCalculatorTest extends TestCase
             'away_score' => '1',
             'home_scorer_id' => $scorerId,
             'away_scorer_id' => 0,
-            'user_id' => $this->users[3]->id,
+            'user_id' => $this->users[3]?->id,
         ])->create();
 
         $homeTeam->players->map(static fn (Player $player) => $player->games()->attach($game));
@@ -112,14 +111,14 @@ final class RankCalculatorTest extends TestCase
         $calculator->calculate($this->league);
         $rank = $calculator->get($this->league);
 
-        $this->assertSame(8, $rank[0]->total());
-        $this->assertSame($this->users[0]->id, $rank[0]->userId());
-        $this->assertSame(4, $rank[1]->total());
-        $this->assertSame($this->users[1]->id, $rank[1]->userId());
-        $this->assertSame(4, $rank[2]->total());
-        $this->assertSame($this->users[3]->id, $rank[2]->userId());
-        $this->assertSame(0, $rank[3]->total());
-        $this->assertSame($this->users[2]->id, $rank[3]->userId());
+        $this->assertSame(8, $rank[0]?->total());
+        $this->assertSame($this->users[0]?->id, $rank[0]->userId());
+        $this->assertSame(4, $rank[1]?->total());
+        $this->assertSame($this->users[1]?->id, $rank[1]->userId());
+        $this->assertSame(4, $rank[2]?->total());
+        $this->assertSame($this->users[3]?->id, $rank[2]->userId());
+        $this->assertSame(0, $rank[3]?->total());
+        $this->assertSame($this->users[2]?->id, $rank[3]->userId());
     }
 
     public function test_calculate_for_group(): void
@@ -153,7 +152,7 @@ final class RankCalculatorTest extends TestCase
             'home_scorer_id' => null,
             'away_scorer_id' => null,
             'league_id' => $this->league->id,
-            'user_id' => $this->users[0]->id,
+            'user_id' => $this->users[0]?->id,
         ])->create();
         Prediction::factory([
             'game_id' => $game->id,
@@ -163,7 +162,7 @@ final class RankCalculatorTest extends TestCase
             'home_scorer_id' => null,
             'away_scorer_id' => null,
             'league_id' => $this->league->id,
-            'user_id' => $this->users[1]->id,
+            'user_id' => $this->users[1]?->id,
         ])->create();
         Prediction::factory([
             'game_id' => $game->id,
@@ -173,7 +172,7 @@ final class RankCalculatorTest extends TestCase
             'home_scorer_id' => null,
             'away_scorer_id' => null,
             'league_id' => $this->league->id,
-            'user_id' => $this->users[2]->id,
+            'user_id' => $this->users[2]?->id,
         ])->create();
         Prediction::factory([
             'game_id' => $game->id,
@@ -183,7 +182,7 @@ final class RankCalculatorTest extends TestCase
             'home_scorer_id' => null,
             'away_scorer_id' => null,
             'league_id' => $this->league->id,
-            'user_id' => $this->users[3]->id,
+            'user_id' => $this->users[3]?->id,
         ])->create();
 
         $homeTeam->players->map(static fn (Player $player) => $player->games()->attach($game));
@@ -193,13 +192,13 @@ final class RankCalculatorTest extends TestCase
         $calculator->calculate($this->league);
         $rank = $calculator->get($this->league);
 
-        $this->assertSame(5, $rank[0]->total());
-        $this->assertSame($this->users[1]->id, $rank[0]->userId());
-        $this->assertSame(4, $rank[1]->total());
-        $this->assertSame($this->users[0]->id, $rank[1]->userId());
-        $this->assertSame(1, $rank[2]->total());
-        $this->assertSame($this->users[3]->id, $rank[2]->userId());
-        $this->assertSame(0, $rank[3]->total());
-        $this->assertSame($this->users[2]->id, $rank[3]->userId());
+        $this->assertSame(5, $rank[0]?->total());
+        $this->assertSame($this->users[1]?->id, $rank[0]->userId());
+        $this->assertSame(4, $rank[1]?->total());
+        $this->assertSame($this->users[0]?->id, $rank[1]->userId());
+        $this->assertSame(1, $rank[2]?->total());
+        $this->assertSame($this->users[3]?->id, $rank[2]->userId());
+        $this->assertSame(0, $rank[3]?->total());
+        $this->assertSame($this->users[2]?->id, $rank[3]->userId());
     }
 }

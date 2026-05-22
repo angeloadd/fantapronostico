@@ -10,25 +10,25 @@ $doScheduleBeforeTournamentIsFinished = static fn () => Tournament::first()
     ?->addHours(6)
     ?->isFuture();
 
-//Schedule::command('fp:teams:get')
+// Schedule::command('fp:teams:get')
 //    ->dailyAt('04:10')
 //    ->when($doScheduleBeforeTournamentIsFinished);
-//Schedule::command('fp:games:get')
+// Schedule::command('fp:games:get')
 //    ->dailyAt('04:15')
 //    ->when($doScheduleBeforeTournamentIsFinished);
-//Schedule::command('fp:players:get')
+// Schedule::command('fp:players:get')
 //    ->dailyAt('04:20')
 //    ->when($doScheduleBeforeTournamentIsFinished);
 //
-//Schedule::command('fp:games:set-ongoing')
+// Schedule::command('fp:games:set-ongoing')
 //    ->hourlyAt('5')
 //    ->when($doScheduleBeforeTournamentIsFinished);
 //
-//Schedule::command('fp:games:goals:get')
+// Schedule::command('fp:games:goals:get')
 //    ->hourly()
 //    ->when($doScheduleBeforeTournamentIsFinished);
 //
-//Schedule::command('fp:topscorers:get')
+// Schedule::command('fp:topscorers:get')
 //    ->hourlyAt('10')
 //    ->when(
 //        static fn () => Tournament::first()?->final_started_at->isPast() && Tournament::first()
@@ -37,7 +37,7 @@ $doScheduleBeforeTournamentIsFinished = static fn () => Tournament::first()
 //            ->isFuture() &&
 //            Game::all()->every('status', '=', 'finished')
 //    );
-//Schedule::command('fp:fetch:champions')
+// Schedule::command('fp:fetch:champions')
 //    ->everyTenMinutes()
 //    ->when(
 //        static fn () => Tournament::first()?->final_started_at->isPast() && Tournament::first()
@@ -47,5 +47,5 @@ $doScheduleBeforeTournamentIsFinished = static fn () => Tournament::first()
 //            Game::all()->every('status', '=', 'finished')
 //    );
 
-//Schedule::command('fp:bot:telegram')
+// Schedule::command('fp:bot:telegram')
 //    ->everyThirtyMinutes();

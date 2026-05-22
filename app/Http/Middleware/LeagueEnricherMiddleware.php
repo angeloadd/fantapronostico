@@ -17,7 +17,7 @@ final class LeagueEnricherMiddleware
     {
         $user = $request->user();
 
-        if (!$user instanceof User || $user->selectedLeague instanceof League) {
+        if ( ! $user instanceof User || $user->selectedLeague instanceof League) {
             return $next($request);
         }
 

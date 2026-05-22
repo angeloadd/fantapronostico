@@ -18,8 +18,14 @@ final class RankingController extends Controller
     // classifica completa
     public function officialStanding(Request $request): View
     {
+        $league = $request->user()?->selectedLeague;
+
+        if (null === $league) {
+            abort(404);
+        }
+
         return view('pages.ranking.index', [
-            'ranking' => $this->calculator->get($request->user()->selectedLeague),
+            'ranking' => $this->calculator->get($league),
         ]);
     }
 }

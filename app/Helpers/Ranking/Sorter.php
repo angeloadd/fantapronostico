@@ -45,6 +45,7 @@ final class Sorter implements SorterInterface
             return $collection->sortBy($currentSorter);
         }
 
+        // @phpstan-ignore-next-line return.type
         return $collection->sortByDesc($currentSorter)
             ->groupBy($currentSorter)
             ->map(fn (Collection $collection) => $this->sortCollectionByCallback($collection, $index + 1));

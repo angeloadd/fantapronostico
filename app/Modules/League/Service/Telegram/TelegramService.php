@@ -7,6 +7,7 @@ namespace App\Modules\League\Service\Telegram;
 use App\Modules\League\Dto\TelegramReminderViewDto;
 use Telegram\Bot\Exceptions\TelegramSDKException;
 use Telegram\Bot\Laravel\Facades\Telegram;
+use Throwable;
 
 final class TelegramService implements TelegramServiceInterface
 {
@@ -30,12 +31,12 @@ final class TelegramService implements TelegramServiceInterface
 
     public function sendRoundPhaseReminder(int $chatId): void
     {
-        try{
+        try {
 
             $bot = Telegram::bot('fpbot');
             $bot->sendMessage([
                 'chat_id' => -1001766446905,
-                'text' => <<<TEXT
+                'text' => <<<'TEXT'
 <strong>Sabato alle 18 inizierà la fase finale dell'Europeo 2024.</strong>
 
 Ricordo che dalla prima partita Svizzera Italia alle 18 si potrà pronosticare per ogni partita, oltre che al risultato e segno,
@@ -46,7 +47,7 @@ Per ulteriori informazioni vi invito a visitare la sezione regolamento: https://
 TEXT,
                 'parse_mode' => 'HTML',
             ]);
-        }catch (\Throwable $e){
+        } catch (Throwable $e) {
             dump($e);
         }
     }

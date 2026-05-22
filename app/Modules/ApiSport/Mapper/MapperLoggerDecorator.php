@@ -11,9 +11,7 @@ use Psr\Log\LoggerInterface;
 
 final readonly class MapperLoggerDecorator implements MapperInterface
 {
-    public function __construct(private MapperInterface $mapper, private LoggerInterface $logger)
-    {
-    }
+    public function __construct(private MapperInterface $mapper, private LoggerInterface $logger) {}
 
     /**
      * {@inheritdoc}

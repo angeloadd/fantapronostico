@@ -21,6 +21,4 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withCommands(glob(__DIR__ . '/../app/Modules/*/Console'))
-    ->withExceptions(function (Exceptions $exceptions): void {
-
-    })->create();
+    ->withExceptions(function (Exceptions $exceptions): void {})->create();

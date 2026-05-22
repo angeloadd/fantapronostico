@@ -21,8 +21,7 @@ final readonly class ApiSportClient implements ApiSportClientInterface
     public function __construct(
         private string $host,
         private string $apiToken
-    ) {
-    }
+    ) {}
 
     /**
      * @param  array<string, int|string>  $query

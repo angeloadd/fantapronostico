@@ -4,6 +4,4 @@ declare(strict_types=1);
 
 namespace App\Shared\CommandHandler;
 
-interface CommandInterface
-{
-}
+interface CommandInterface {}

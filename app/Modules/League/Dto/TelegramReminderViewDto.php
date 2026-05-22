@@ -11,6 +11,5 @@ final readonly class TelegramReminderViewDto
         public string $homeTeamName,
         public string $awayTeamName,
         public string $formattedBefore
-    ) {
-    }
+    ) {}
 }

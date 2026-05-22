@@ -28,17 +28,15 @@ final class ApiSportMapperTest extends UnitTestCase
     public function test_map_returns_a_dto(): void
     {
         $this->mapperStrategy
-            ->expects(self::once())->method('supports')
+            ->expects($this->once())->method('supports')
             ->with(['get' => 'teams'])
             ->willReturn(true);
 
         $this->mapperStrategy
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('map')
             ->with(['get' => 'teams'])
-            ->willReturn(new class() implements ApiSportDto
-            {
-            });
+            ->willReturn(new class() implements ApiSportDto {});
         $this->apiSportMapper = new ApiSportMapper($this->mapperStrategy);
         $this->apiSportMapper->map(['get' => 'teams']);
     }
@@ -46,7 +44,7 @@ final class ApiSportMapperTest extends UnitTestCase
     public function test_map_throws_exception_if_no_strategy_supports(): void
     {
         $this->expectException(NoMapperStrategyFoundException::class);
-        $this->mapperStrategy->expects(self::once())
+        $this->mapperStrategy->expects($this->once())
             ->method('supports')
             ->with(['get' => 'teams'])
             ->willReturn(false);
@@ -58,6 +56,6 @@ final class ApiSportMapperTest extends UnitTestCase
     {
         $this->expectException(NoMapperStrategyFoundException::class);
 
-        (new ApiSportMapper())->map(['get' => 'teams']);
+        new ApiSportMapper()->map(['get' => 'teams']);
     }
 }

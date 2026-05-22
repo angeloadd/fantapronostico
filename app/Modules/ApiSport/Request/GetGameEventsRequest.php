@@ -10,7 +10,5 @@ final class GetGameEventsRequest
 
     public const ENDPOINT = 'fixtures/events';
 
-    public function __construct(public readonly int $fixture, public readonly string $type = 'Goal')
-    {
-    }
+    public function __construct(public readonly int $fixture, public readonly string $type = 'Goal') {}
 }

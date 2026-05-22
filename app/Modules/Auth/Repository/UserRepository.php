@@ -14,8 +14,7 @@ final readonly class UserRepository implements UserRepositoryInterface
     public function __construct(
         private RequestProviderServiceInterface $requestProviderService,
         private StatefulGuard $auth
-    ) {
-    }
+    ) {}
 
     public function getAuthenticatedUser(): User
     {

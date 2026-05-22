@@ -10,7 +10,5 @@ final readonly class GetPlayersByNationalRequest
 
     public const ENDPOINT = '/players/squads';
 
-    public function __construct(public int $team)
-    {
-    }
+    public function __construct(public int $team) {}
 }
