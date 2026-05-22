@@ -1,39 +1,27 @@
-version: '3.9'
-
 services:
-  fantapronostico:
-    env_file:
-      - .env
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args:
-        BUILD_VERSION: dev
-        COMPOSER_ARGS: ""
-    platform: linux/arm64
-    command: "supervisord -c /etc/supervisor/supervisord.conf"
-    volumes:
-      - .:/var/www/html
-    restart: always
-    ports:
-      - "8080:8080"
-
   fantapronostico-db:
-    image: postgres:14-alpine
-    restart: always
-    command: postgres
+    image: postgres:17-alpine
+    restart: unless-stopped
     volumes:
-      - .fly/data/:/var/lib/postgresql/
+      - db_data:/var/lib/postgresql/data
     ports:
       - "5433:5432"
     environment:
-      - POSTGRES_USER=${DB_USERNAME}
-      - POSTGRES_PASSWORD=${DB_PASSWORD}
-      - POSTGRES_DB=${DB_DATABASE}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME} -d ${DB_DATABASE}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   fantapronostico-mail:
-    platform: linux/amd64
-    image: mailhog/mailhog
+    image: axllent/mailpit
+    restart: unless-stopped
     ports:
       - "1025:1025"
       - "8025:8025"
+
+volumes:
+  db_data:
