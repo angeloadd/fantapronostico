@@ -8,7 +8,7 @@
 
 **Architecture:** JS/pnpm-only changes. No PHP, CSS, or Tailwind changes. `vite.config.js` structure is unchanged — `laravel-vite-plugin` 1.x is API-compatible with pnpm. htmx 2 requires no changes in this codebase (only `htmx.config.withCredentials` and CSRF headers are used, both unchanged in v2).
 
-**Tech Stack:** Node 24, pnpm 9.x, Vite 6, laravel-vite-plugin 1.x, Alpine.js 3.x, htmx 2.x, Biome 1.9.x, Sass 1.80.x
+**Tech Stack:** Node 24, pnpm (latest), Vite 6, laravel-vite-plugin 1.x, Alpine.js 3.x, htmx 2.x, Biome 1.9.x, Sass 1.80.x
 
 > ⚠️ **Review gate:** Do NOT commit at any point without first presenting the diff to the user and receiving explicit approval.
 
@@ -102,18 +102,27 @@ Replace the `scripts` section with:
 
 Delete the `dependencies` block entirely (it only contained `graceful-fs`, a Cypress transitive dep).
 
-- [ ] **Step 4: Add packageManager field and pnpm security config**
+- [ ] **Step 4: Add packageManager field to package.json**
 
-Add these two fields to `package.json`:
+Add to `package.json`:
 
 ```json
-"packageManager": "pnpm@9",
-"pnpm": {
-    "onlyBuiltDependencies": ["@biomejs/biome", "esbuild", "sass"]
-}
+"packageManager": "pnpm@11.2.2"
 ```
 
-`onlyBuiltDependencies` whitelists only these three packages to run install scripts. All other packages are blocked from running postinstall/preinstall scripts, preventing supply-chain script attacks.
+- [ ] **Step 5: Configure pnpm security in .npmrc**
+
+In `.npmrc`, add/ensure these lines (pnpm v10+ reads security settings from `.npmrc`, not `package.json`):
+
+```ini
+onlyBuiltDependencies[]=@biomejs/biome
+onlyBuiltDependencies[]=esbuild
+onlyBuiltDependencies[]=sass
+supplyChainPolicy=audit
+minimumReleaseAge=7d
+```
+
+`onlyBuiltDependencies` whitelists only these three packages to run install scripts. `supplyChainPolicy=audit` logs provenance warnings. `minimumReleaseAge=7d` blocks packages published in the last 7 days (day-zero supply chain protection).
 
 ---
 

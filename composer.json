@@ -7,7 +7,7 @@
     "require": {
         "php": "^8.5",
         "filament/filament": "^4.11",
-        "telegram-bot-sdk/telegram-bot-sdk": "^4.0",
+        "irazasyed/telegram-bot-sdk": "^3.16",
         "laravel/fortify": "^1.37",
         "laravel/framework": "^13.11",
         "laravel/tinker": "^3.0",
@@ -74,7 +74,9 @@
             "composer install --no-dev --optimize-autoloader -q",
             "php artisan migrate --force",
             "php artisan optimize",
-            "npm run build",
+            "pnpm install --frozen-lockfile",
+            "pnpm rebuild @biomejs/biome esbuild sass",
+            "pnpm run build",
             "chown -R www-data:www-data storage/ bootstrap/cache/"
         ]
     },

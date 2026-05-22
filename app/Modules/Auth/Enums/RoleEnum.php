@@ -9,7 +9,7 @@ use App\Enums\HasValues;
 enum RoleEnum: string
 {
     use HasValues;
-    case ADMIN = 'admin';
 
+    case ADMIN = 'admin';
     case MOD = 'mod';
 }

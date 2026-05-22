@@ -1,29 +1,25 @@
 {
     "private": true,
     "type": "module",
+    "packageManager": "pnpm@11.2.2",
     "scripts": {
         "dev": "vite",
         "build": "vite build",
         "lf": "biome check --apply . --verbose --log-level=info --log-kind=compact",
         "check": "biome check . --verbose --log-level=info --log-kind=compact",
         "format": "biome format . --write --verbose --log-level=info --log-kind=compact",
-        "lint": "biome lint . --verbose --log-level=info --log-kind=compact",
-        "test:cypress": "php artisan serve --port=8001 --env=cypress & cypress open"
+        "lint": "biome lint . --verbose --log-level=info --log-kind=compact"
     },
     "devDependencies": {
-        "@biomejs/biome": "1.4.1",
-        "alpinejs": "^3.13.5",
-        "autoprefixer": "^10.4.16",
-        "cypress": "^13.6.6",
-        "daisyui": "^4.4.24",
-        "htmx.org": "^1.9.10",
-        "laravel-vite-plugin": "^0.8.0",
-        "postcss": "^8.4.32",
-        "sass": "^1.71.1",
-        "tailwindcss": "^3.4.0",
-        "vite": "^4.0.0"
-    },
-    "dependencies": {
-        "graceful-fs": "^4.2.11"
+        "@biomejs/biome": "1.9.4",
+        "alpinejs": "3.15.12",
+        "autoprefixer": "10.5.0",
+        "daisyui": "4.12.24",
+        "htmx.org": "2.0.10",
+        "laravel-vite-plugin": "1.3.0",
+        "postcss": "8.5.15",
+        "sass": "1.99.0",
+        "tailwindcss": "3.4.19",
+        "vite": "6.4.2"
     }
 }
