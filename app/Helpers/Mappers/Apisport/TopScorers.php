@@ -6,7 +6,10 @@ namespace App\Helpers\Mappers\Apisport;
 
 final class TopScorers
 {
-    public function __construct(private array $players) {}
+    /**
+     * @param  array<int, array<string, int>>  $players
+     */
+    public function __construct(private readonly array $players) {}
 
     public static function fromArray(mixed $response): self
     {
@@ -16,9 +19,7 @@ final class TopScorers
             return new self($players);
         }
         foreach ($response as $player) {
-            if ( ! is_array($player) || ! isset($player['statistics']) || ! is_array($player['statistics']) ||
-                ! isset($player['statistics'][0]) || ! is_array($player['statistics'][0]) ||
-                ! isset($player['statistics'][0]['goals']) || ! is_array($player['statistics'][0]['goals'])) {
+            if ( ! isset($player['statistics'][0]['goals']) || ! is_array($player['statistics'][0]['goals'])) {
                 break;
             }
             $goalsTotal = $player['statistics'][0]['goals']['total'];
