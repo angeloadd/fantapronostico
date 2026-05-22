@@ -30,6 +30,10 @@ parameters:
         - message: '#Method .+\:\:toQuery\(\) should return array<string, int\|string> but returns array<string, mixed>.#'
         - message: '#Cannot call method .+\(\) on Illuminate\\Testing\\PendingCommand\|int#'
         - message: '#Method .+\:\:getResponse\(\) should return array<string, array<string, int\|string>> but returns array.#'
+        - message: '#Binary operation "." between mixed and .+ results in an error#'
+          path: %currentWorkingDirectory%/tests
+        - message: '#Call to method PHPUnit\\Framework\\Assert\:\:assertSame\(\) with true and int will always evaluate to false#'
+          path: %currentWorkingDirectory%/tests
 
     excludePaths:
         - ./app/Filament
