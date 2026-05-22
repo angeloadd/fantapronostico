@@ -1,147 +1,147 @@
 {
-    "get": "fixtures\/events",
-    "parameters": {
-        "fixture": "1145509",
-        "type": "Goal"
-    },
-    "errors": [],
-    "results": 6,
-    "paging": {
-        "current": 1,
-        "total": 1
-    },
-    "response": [
-        {
-            "time": {
-                "elapsed": 10,
-                "extra": null
-            },
-            "team": {
-                "id": 25,
-                "name": "Germany",
-                "logo": "https:\/\/media.api-sports.io\/football\/teams\/25.png"
-            },
-            "player": {
-                "id": 203224,
-                "name": "F. Wirtz"
-            },
-            "assist": {
-                "id": 502,
-                "name": "J. Kimmich"
-            },
-            "type": "Goal",
-            "detail": "Normal Goal",
-            "comments": null
-        },
-        {
-            "time": {
-                "elapsed": 19,
-                "extra": null
-            },
-            "team": {
-                "id": 25,
-                "name": "Germany",
-                "logo": "https:\/\/media.api-sports.io\/football\/teams\/25.png"
-            },
-            "player": {
-                "id": 181812,
-                "name": "J. Musiala"
-            },
-            "assist": {
-                "id": 978,
-                "name": "K. Havertz"
-            },
-            "type": "Goal",
-            "detail": "Normal Goal",
-            "comments": null
-        },
-        {
-            "time": {
-                "elapsed": 45,
-                "extra": 1
-            },
-            "team": {
-                "id": 25,
-                "name": "Germany",
-                "logo": "https:\/\/media.api-sports.io\/football\/teams\/25.png"
-            },
-            "player": {
-                "id": 978,
-                "name": "K. Havertz"
-            },
-            "assist": {
-                "id": null,
-                "name": null
-            },
-            "type": "Goal",
-            "detail": "Penalty",
-            "comments": null
-        },
-        {
-            "time": {
-                "elapsed": 68,
-                "extra": null
-            },
-            "team": {
-                "id": 25,
-                "name": "Germany",
-                "logo": "https:\/\/media.api-sports.io\/football\/teams\/25.png"
-            },
-            "player": {
-                "id": 25391,
-                "name": "N. F\u00fcllkrug"
-            },
-            "assist": {
-                "id": null,
-                "name": null
-            },
-            "type": "Goal",
-            "detail": "Normal Goal",
-            "comments": null
-        },
-        {
-            "time": {
-                "elapsed": 87,
-                "extra": null
-            },
-            "team": {
-                "id": 1108,
-                "name": "Scotland",
-                "logo": "https:\/\/media.api-sports.io\/football\/teams\/1108.png"
-            },
-            "player": {
-                "id": 2285,
-                "name": "A. R\u00fcdiger"
-            },
-            "assist": {
-                "id": null,
-                "name": null
-            },
-            "type": "Goal",
-            "detail": "Own Goal",
-            "comments": null
-        },
-        {
-            "time": {
-                "elapsed": 90,
-                "extra": 3
-            },
-            "team": {
-                "id": 25,
-                "name": "Germany",
-                "logo": "https:\/\/media.api-sports.io\/football\/teams\/25.png"
-            },
-            "player": {
-                "id": 864,
-                "name": "E. Can"
-            },
-            "assist": {
-                "id": 522,
-                "name": "T. M\u00fcller"
-            },
-            "type": "Goal",
-            "detail": "Normal Goal",
-            "comments": null
-        }
-    ]
+	"get": "fixtures\/events",
+	"parameters": {
+		"fixture": "1145509",
+		"type": "Goal"
+	},
+	"errors": [],
+	"results": 6,
+	"paging": {
+		"current": 1,
+		"total": 1
+	},
+	"response": [
+		{
+			"time": {
+				"elapsed": 10,
+				"extra": null
+			},
+			"team": {
+				"id": 25,
+				"name": "Germany",
+				"logo": "https:\/\/media.api-sports.io\/football\/teams\/25.png"
+			},
+			"player": {
+				"id": 203224,
+				"name": "F. Wirtz"
+			},
+			"assist": {
+				"id": 502,
+				"name": "J. Kimmich"
+			},
+			"type": "Goal",
+			"detail": "Normal Goal",
+			"comments": null
+		},
+		{
+			"time": {
+				"elapsed": 19,
+				"extra": null
+			},
+			"team": {
+				"id": 25,
+				"name": "Germany",
+				"logo": "https:\/\/media.api-sports.io\/football\/teams\/25.png"
+			},
+			"player": {
+				"id": 181812,
+				"name": "J. Musiala"
+			},
+			"assist": {
+				"id": 978,
+				"name": "K. Havertz"
+			},
+			"type": "Goal",
+			"detail": "Normal Goal",
+			"comments": null
+		},
+		{
+			"time": {
+				"elapsed": 45,
+				"extra": 1
+			},
+			"team": {
+				"id": 25,
+				"name": "Germany",
+				"logo": "https:\/\/media.api-sports.io\/football\/teams\/25.png"
+			},
+			"player": {
+				"id": 978,
+				"name": "K. Havertz"
+			},
+			"assist": {
+				"id": null,
+				"name": null
+			},
+			"type": "Goal",
+			"detail": "Penalty",
+			"comments": null
+		},
+		{
+			"time": {
+				"elapsed": 68,
+				"extra": null
+			},
+			"team": {
+				"id": 25,
+				"name": "Germany",
+				"logo": "https:\/\/media.api-sports.io\/football\/teams\/25.png"
+			},
+			"player": {
+				"id": 25391,
+				"name": "N. F\u00fcllkrug"
+			},
+			"assist": {
+				"id": null,
+				"name": null
+			},
+			"type": "Goal",
+			"detail": "Normal Goal",
+			"comments": null
+		},
+		{
+			"time": {
+				"elapsed": 87,
+				"extra": null
+			},
+			"team": {
+				"id": 1108,
+				"name": "Scotland",
+				"logo": "https:\/\/media.api-sports.io\/football\/teams\/1108.png"
+			},
+			"player": {
+				"id": 2285,
+				"name": "A. R\u00fcdiger"
+			},
+			"assist": {
+				"id": null,
+				"name": null
+			},
+			"type": "Goal",
+			"detail": "Own Goal",
+			"comments": null
+		},
+		{
+			"time": {
+				"elapsed": 90,
+				"extra": 3
+			},
+			"team": {
+				"id": 25,
+				"name": "Germany",
+				"logo": "https:\/\/media.api-sports.io\/football\/teams\/25.png"
+			},
+			"player": {
+				"id": 864,
+				"name": "E. Can"
+			},
+			"assist": {
+				"id": 522,
+				"name": "T. M\u00fcller"
+			},
+			"type": "Goal",
+			"detail": "Normal Goal",
+			"comments": null
+		}
+	]
 }

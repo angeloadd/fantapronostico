@@ -1,23 +1,28 @@
 {
-	"$schema": "https://biomejs.dev/schemas/1.4.1/schema.json",
-	"organizeImports": {
-		"enabled": true
-	},
+	"$schema": "https://biomejs.dev/schemas/2.4.15/schema.json",
+	"assist": { "actions": { "source": { "organizeImports": "on" } } },
 	"linter": {
 		"enabled": true,
 		"rules": {
 			"recommended": true
 		}
 	},
+	"html": {
+		"experimentalFullSupportEnabled": true
+	},
 	"files": {
-		"include": ["**/*.blade.php"],
-		"ignore": [
-			"node_modules",
-			"vendor",
-			"public",
-			"storage",
-			"**/*.{yaml,yml,toml,neon,xml,md,cache}",
-			"tests/cypress/support/**"
+		"includes": [
+			"**",
+			"**/*.blade.php",
+			"!**/node_modules",
+			"!**/vendor",
+			"!**/public",
+			"!**/storage",
+			"!**/.serena",
+			"!**/.claude",
+			"!**/.superpowers",
+			"!**/*.{yaml,yml,toml,neon,xml,md,cache}",
+			"!**/tests/cypress/support"
 		]
 	}
 }
