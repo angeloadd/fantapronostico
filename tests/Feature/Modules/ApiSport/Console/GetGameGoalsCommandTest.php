@@ -49,7 +49,8 @@ final class GetGameGoalsCommandTest extends TestCase
         Player::factory()->create(['id' => 2285]);
         Player::factory()->create(['id' => 864]);
         $this->artisan('fp:games:goals:get')
-            ->assertOk();
+            ->assertOk()
+            ->run();
 
         $this->assertDatabaseHas(
             'game_goals',

@@ -31,7 +31,8 @@ final class SetGameOngoingCommandTest extends TestCase
             'status' => GameStatus::NOT_STARTED,
         ]);
         $this->artisan('fp:games:set-ongoing')
-            ->assertOk();
+            ->assertOk()
+            ->run();
 
         $this->assertDatabaseHas(
             'games',

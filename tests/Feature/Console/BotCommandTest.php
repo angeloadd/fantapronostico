@@ -61,8 +61,6 @@ final class BotCommandTest extends TestCase
             ->method('sendReminder')
             ->with(-1001766446905, $telegramReminderViewDtos);
 
-        $this->artisan('fp:bot:telegram')
-            ->assertOk()
-            ->run();
+        $this->artisan('fp:bot:telegram')->assertOk()->run();
     }
 }
