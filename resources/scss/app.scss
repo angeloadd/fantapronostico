@@ -1,6 +1,33 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: nord, fp2024;
+}
+
+@plugin "daisyui/theme" {
+  name: fp2024;
+  default: true;
+  color-scheme: light;
+
+  --color-primary: oklch(from #00AACC l c h);
+  --color-secondary: oklch(from #01B359 l c h);
+  --color-accent: oklch(from #00849E l c h);
+  --color-neutral: oklch(from #13525F l c h);
+  --color-info: oklch(from #14B0D0 l c h);
+  --color-success: oklch(from #01DB6E l c h);
+
+  --color-primary-content: oklch(from #ECEFF4 l c h);
+  --color-secondary-content: oklch(from #ECEFF4 l c h);
+  --color-accent-content: oklch(from #ECEFF4 l c h);
+  --color-info-content: oklch(from #ECEFF4 l c h);
+  --color-success-content: oklch(from #ECEFF4 l c h);
+  --color-error-content: oklch(from #ECEFF4 l c h);
+  --color-warning-content: oklch(from #ECEFF4 l c h);
+
+  --color-base-100: oklch(from #ECEFF4 l c h);
+  --color-base-200: oklch(from #E5E9F0 l c h);
+  --color-base-300: oklch(from #D8DEE9 l c h);
+  --color-base-content: oklch(from #2E3440 l c h);
+}
 
 // my style
 @import 'fireworks';
