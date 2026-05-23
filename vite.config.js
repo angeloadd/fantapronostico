@@ -8,4 +8,11 @@ export default defineConfig({
 			refresh: ["./resources", "./app/Modules/**/Views"],
 		}),
 	],
+	css: {
+		preprocessorOptions: {
+			scss: {
+				silenceDeprecations: ["import"],
+			},
+		},
+	},
 });
