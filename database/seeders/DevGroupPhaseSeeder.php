@@ -1,0 +1,43 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Database\Seeders;
+
+use Illuminate\Support\Carbon;
+
+final class DevGroupPhaseSeeder extends DevBaseSeeder
+{
+    private const FINISHED_COUNT = 24;
+
+    public function run(): void
+    {
+        $now = Carbon::now();
+
+        $tournamentStart = $this->computeStartedAt(0, self::FINISHED_COUNT, $now);
+        $finalStart      = $this->computeStartedAt(51, self::FINISHED_COUNT, $now);
+
+        $tournament = $this->createTournament($tournamentStart, $finalStart);
+        $league     = $this->createLeague($tournament);
+        $teams      = $this->createTeamsAndPlayers($tournament);
+        $users      = $this->createUsers($league);
+
+        $this->createChampions($users, $teams);
+
+        foreach (self::SCHEDULE as $i => $slot) {
+            $homeTeam  = $teams[$slot['home']];
+            $awayTeam  = $teams[$slot['away']];
+            $startedAt = $this->computeStartedAt($i, self::FINISHED_COUNT, $now);
+            $status    = $i < self::FINISHED_COUNT ? 'finished' : 'not_started';
+
+            $game = $this->createGame($homeTeam, $awayTeam, $slot['stage'], $startedAt, $tournament, $status);
+
+            if ('finished' === $status) {
+                $this->createGoalsForGame($game, $homeTeam, $awayTeam);
+                $this->createPredictionsForGame($game, $homeTeam, $awayTeam, $users, $league);
+            }
+        }
+
+        $this->createRanks($users, $league, self::FINISHED_COUNT);
+    }
+}
