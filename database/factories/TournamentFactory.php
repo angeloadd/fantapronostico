@@ -9,7 +9,7 @@ use DateInterval;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Tournament>
+ * @extends Factory<Tournament>
  */
 final class TournamentFactory extends Factory
 {

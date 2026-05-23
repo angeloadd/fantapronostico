@@ -18,18 +18,18 @@ final class DevFinalSeeder extends DevBaseSeeder
         $now = Carbon::now();
 
         $tournamentStart = $this->computeStartedAt(0, self::FINISHED_COUNT, $now);
-        $finalStart      = $this->computeStartedAt(51, self::FINISHED_COUNT, $now);
+        $finalStart = $this->computeStartedAt(51, self::FINISHED_COUNT, $now);
 
         $tournament = $this->createTournament($tournamentStart, $finalStart);
-        $league     = $this->createLeague($tournament);
-        $teams      = $this->createTeamsAndPlayers($tournament);
-        $users      = $this->createUsers($league);
+        $league = $this->createLeague($tournament);
+        $teams = $this->createTeamsAndPlayers($tournament);
+        $users = $this->createUsers($league);
 
         $this->createChampions($users, $teams);
 
         foreach (self::SCHEDULE as $i => $slot) {
-            $homeTeam  = $teams[$slot['home']];
-            $awayTeam  = $teams[$slot['away']];
+            $homeTeam = $teams[$slot['home']];
+            $awayTeam = $teams[$slot['away']];
             $startedAt = $this->computeStartedAt($i, self::FINISHED_COUNT, $now);
 
             $game = $this->createGame($homeTeam, $awayTeam, $slot['stage'], $startedAt, $tournament, 'finished');
@@ -38,7 +38,7 @@ final class DevFinalSeeder extends DevBaseSeeder
         }
 
         // Mark tournament winner and top scorer on pivot tables
-        $winnerTeam      = $teams[self::WINNER_TEAM_INDEX];
+        $winnerTeam = $teams[self::WINNER_TEAM_INDEX];
         $topScorerPlayer = $winnerTeam->players->values()->get(self::TOP_SCORER_PLAYER_LOCAL_INDEX);
 
         $tournament->teams()->updateExistingPivot($winnerTeam->id, ['is_winner' => true]);
@@ -50,14 +50,14 @@ final class DevFinalSeeder extends DevBaseSeeder
         // Apply bonuses for users whose champion pick matched
         $users->each(function (User $user) use ($league, $winnerTeam, $topScorerPlayer): void {
             $champion = Champion::where('user_id', $user->id)->first();
-            if (! $champion instanceof Champion) {
+            if (!$champion instanceof Champion) {
                 return;
             }
 
-            $isWinner    = $champion->team_id === $winnerTeam->id;
+            $isWinner = $champion->team_id === $winnerTeam->id;
             $isTopScorer = $champion->player_id === $topScorerPlayer->id;
 
-            if (! $isWinner && ! $isTopScorer) {
+            if (!$isWinner && !$isTopScorer) {
                 return;
             }
 
@@ -67,9 +67,9 @@ final class DevFinalSeeder extends DevBaseSeeder
                 ->where('user_id', $user->id)
                 ->where('league_id', $league->id)
                 ->update([
-                    'winner'     => $isWinner,
+                    'winner' => $isWinner,
                     'top_scorer' => $isTopScorer,
-                    'total'      => DB::raw("total + {$bonus}"),
+                    'total' => DB::raw("total + {$bonus}"),
                 ]);
         });
     }

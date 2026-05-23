@@ -12,7 +12,7 @@ final class ApiSportParsingException extends RuntimeException
     public static function withCause(Throwable $exception): self
     {
         return new self(
-            'Error parsing API Sport response: ' . $exception->getMessage(),
+            'Error parsing API Sport response: '.$exception->getMessage(),
             400,
             $exception
         );

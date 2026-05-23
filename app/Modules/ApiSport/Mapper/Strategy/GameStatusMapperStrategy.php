@@ -23,7 +23,7 @@ final class GameStatusMapperStrategy implements MapperStrategyInterface
      */
     public function supports(array $externalResponse): bool
     {
-        if ( ! array_key_exists('get', $externalResponse)) {
+        if (!array_key_exists('get', $externalResponse)) {
             return false;
         }
 
@@ -31,11 +31,11 @@ final class GameStatusMapperStrategy implements MapperStrategyInterface
             return false;
         }
 
-        if ( ! array_key_exists('parameters', $externalResponse)) {
+        if (!array_key_exists('parameters', $externalResponse)) {
             return false;
         }
 
-        return ! ( ! array_key_exists('id', $externalResponse['parameters']));
+        return !(!array_key_exists('id', $externalResponse['parameters']));
     }
 
     /**

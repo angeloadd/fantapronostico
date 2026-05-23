@@ -378,7 +378,7 @@ abstract class DevBaseSeeder extends Seeder
 
     protected function createChampions(Collection $users, Collection $teams, array $skipEmails = []): void
     {
-        $now = now()->toDateTimeString();
+        $now = now();
 
         $users->each(function (User $user) use ($teams, $skipEmails, $now): void {
             if (in_array($user->email, $skipEmails, true)) {

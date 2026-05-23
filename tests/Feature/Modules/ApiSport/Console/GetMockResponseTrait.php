@@ -19,7 +19,7 @@ trait GetMockResponseTrait
     private function getResponse(string $fileName): array
     {
         $response = (new Filesystem())->get(
-            base_path('tests/mocks/' . $fileName)
+            base_path('tests/mocks/'.$fileName)
         );
 
         return (array) json_decode($response, true, 512, JSON_THROW_ON_ERROR);

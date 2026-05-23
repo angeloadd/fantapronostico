@@ -35,7 +35,7 @@ final class ApiSportServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/config/api-sport.php',
+            __DIR__.'/config/api-sport.php',
             'api-sport'
         );
 

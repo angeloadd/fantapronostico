@@ -18,7 +18,7 @@ final class GetGamesCommandTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        if ( ! Config::has('api-sport.host')) {
+        if (!Config::has('api-sport.host')) {
             $this->fail('ApiSport host not configured');
         }
         Config::set('api-sport.host', 'api-sport-host');

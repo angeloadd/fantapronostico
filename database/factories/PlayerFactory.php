@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
+use App\Models\Player;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Player>
+ * @extends Factory<Player>
  */
 final class PlayerFactory extends Factory
 {
@@ -20,7 +21,7 @@ final class PlayerFactory extends Factory
     {
         $firstName = $this->faker->firstNameMale;
         $lastName = $this->faker->lastName;
-        $displayedName = ucfirst($firstName[0]) . '. ' . $lastName;
+        $displayedName = ucfirst($firstName[0]).'. '.$lastName;
 
         return [
             'first_name' => $firstName,

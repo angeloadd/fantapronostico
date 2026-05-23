@@ -19,7 +19,7 @@ final class LeagueController extends Controller
         /** @var Collection $userLeagues */
         $userLeagues = $request->user()->leagues;
 
-        $leagues = $leagues->filter(static fn (League $league) => ! $userLeagues->some(static fn (League $l) => $l->id === $league->id));
+        $leagues = $leagues->filter(static fn (League $league) => !$userLeagues->some(static fn (League $l) => $l->id === $league->id));
 
         if (0 === $leagues->count()) {
             return redirect(route('leagues.pending'));

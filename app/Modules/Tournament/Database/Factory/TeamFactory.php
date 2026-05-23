@@ -8,7 +8,7 @@ use App\Modules\Tournament\Models\Team;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Modules\Tournament\Models\Team>
+ * @extends Factory<Team>
  */
 final class TeamFactory extends Factory
 {

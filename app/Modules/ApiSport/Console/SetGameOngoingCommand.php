@@ -27,7 +27,7 @@ final class SetGameOngoingCommand extends Command
     {
         $league = League::first();
         if (null === $league) {
-            $logger->error('No league found in command: ' . self::class);
+            $logger->error('No league found in command: '.self::class);
 
             return 1;
         }
@@ -45,13 +45,13 @@ final class SetGameOngoingCommand extends Command
             }
 
         } catch (Throwable $e) {
-            $logger->error('Error updating games: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
-            $this->error('Error updating games: ' . $e->getMessage());
+            $logger->error('Error updating games: '.$e->getMessage(), ['trace' => $e->getTraceAsString()]);
+            $this->error('Error updating games: '.$e->getMessage());
 
             return 1;
         }
 
-        $logger->info('Set games to ongoing: ' . $games->count());
+        $logger->info('Set games to ongoing: '.$games->count());
 
         return 0;
     }

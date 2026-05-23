@@ -8,7 +8,6 @@ use App\Modules\Auth\Models\User;
 use App\Modules\Tournament\Models\Team;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -44,23 +43,14 @@ final class Champion extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['team_id', 'player_id', 'created_at', 'updated_at'];
+    protected $dateFormat = 'Y-m-d H:i:s.u';
 
-    public function createdAt(): Attribute
-    {
-        return Attribute::make(
-            get: static fn ($value) => (new Carbon($value))->timezone('Europe/Rome'),
-            set: static fn ($value, $attributes) => $attributes['updated_at']
-        );
-    }
-
-    public function updatedAt(): Attribute
-    {
-        return Attribute::make(
-            get: static fn ($value) => (new Carbon($value))->timezone('Europe/Rome'),
-            set: static fn ($value) => (new Carbon($value))->timezone('Europe/Rome')->format('d-m-Y H:i:s.u')
-        );
-    }
+    protected $fillable = [
+        'team_id',
+        'player_id',
+        'created_at',
+        'updated_at',
+    ];
 
     public function user(): BelongsTo
     {

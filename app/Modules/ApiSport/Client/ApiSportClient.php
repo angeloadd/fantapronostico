@@ -43,7 +43,7 @@ final readonly class ApiSportClient implements ApiSportClientInterface
             throw InvalidApisportTokenException::create();
         }
 
-        if ( ! Arr::has($json, self::RESPONSE_KEY)) {
+        if (!Arr::has($json, self::RESPONSE_KEY)) {
             throw ExternalSystemUnavailableException::fromResponse((string) $response);
         }
 

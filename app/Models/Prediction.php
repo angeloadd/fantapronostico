@@ -66,6 +66,8 @@ final class Prediction extends Model
 {
     use HasFactory;
 
+    protected $dateFormat = 'Y-m-d H:i:s.u';
+
     protected $fillable = [
         'home_score',
         'away_score',
@@ -78,22 +80,6 @@ final class Prediction extends Model
         'created_at',
         'updated_at',
     ];
-
-    public function createdAt(): Attribute
-    {
-        return Attribute::make(
-            get: static fn ($value) => (new Carbon($value))->timezone('Europe/Rome'),
-            set: static fn ($value, $attributes) => $attributes['updated_at']
-        );
-    }
-
-    public function updatedAt(): Attribute
-    {
-        return Attribute::make(
-            get: static fn ($value) => (new Carbon($value))->timezone('Europe/Rome'),
-            set: static fn ($value) => (new Carbon($value))->timezone('Europe/Rome')->format('d-m-Y H:i:s.u')
-        );
-    }
 
     public function user(): BelongsTo
     {

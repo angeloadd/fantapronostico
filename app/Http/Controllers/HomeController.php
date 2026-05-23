@@ -29,7 +29,7 @@ final class HomeController extends Controller
 
         $league = $user->selectedLeague ?? $user->leagues->first();
 
-        if ( ! $league instanceof League) {
+        if (!$league instanceof League) {
             throw new UnauthorizedHttpException('You shall not pass!!');
         }
 

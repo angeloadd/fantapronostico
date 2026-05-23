@@ -340,7 +340,7 @@ final class PreEuroStateSeeder extends Seeder
 
     public function createGame(?Team $homeTeam, ?Team $awayTeam, int $gameNumber): void
     {
-        if ( ! isset($homeTeam, $awayTeam)) {
+        if (!isset($homeTeam, $awayTeam)) {
             return;
         }
         $gameMeta = self::CALENDAR[$gameNumber];
@@ -366,7 +366,7 @@ final class PreEuroStateSeeder extends Seeder
             $hour
         );
 
-        if ( ! $time) {
+        if (!$time) {
             $time = now();
         }
 

@@ -82,7 +82,7 @@ final class AppServiceProvider extends ServiceProvider
 
     private function registerPagesNamespace(): void
     {
-        $foldersInPages = glob(resource_path('/views/pages') . '/**/');
+        $foldersInPages = glob(resource_path('/views/pages').'/**/');
         if (is_array($foldersInPages)) {
             foreach ($foldersInPages as $folder) {
                 Blade::anonymousComponentPath(
@@ -97,10 +97,10 @@ final class AppServiceProvider extends ServiceProvider
 
     private function registerRequestMacro(): void
     {
-        if ( ! Request::hasMacro('getCurrentLeague')) {
+        if (!Request::hasMacro('getCurrentLeague')) {
             Request::macro('getCurrentLeague', function (): League {
                 $league = request()->league;
-                if ( ! $league instanceof League) {
+                if (!$league instanceof League) {
                     throw new InvalidArgumentException('Current league cannot be retrieved');
                 }
 

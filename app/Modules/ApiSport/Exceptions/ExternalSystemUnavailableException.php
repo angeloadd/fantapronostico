@@ -10,6 +10,6 @@ final class ExternalSystemUnavailableException extends RuntimeException
 {
     public static function fromResponse(string $response): self
     {
-        return new self('External system unavailable: ' . $response, 424);
+        return new self('External system unavailable: '.$response, 424);
     }
 }

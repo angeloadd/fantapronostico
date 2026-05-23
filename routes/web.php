@@ -24,8 +24,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group([], static function (Router $r): void {
-    $routesFromModules = glob(__DIR__ . '/../app/Modules/*/Http/Routes/*.php');
-    if ( ! $routesFromModules) {
+    $routesFromModules = glob(__DIR__.'/../app/Modules/*/Http/Routes/*.php');
+    if (!$routesFromModules) {
         $routesFromModules = [];
     }
     foreach ($routesFromModules as $moduleRoutesPath) {

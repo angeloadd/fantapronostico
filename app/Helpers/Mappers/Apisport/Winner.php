@@ -17,7 +17,7 @@ final class Winner
 
         $game = current($final);
 
-        if ( ! isset($game)) {
+        if (!isset($game)) {
             return new self(null);
         }
 

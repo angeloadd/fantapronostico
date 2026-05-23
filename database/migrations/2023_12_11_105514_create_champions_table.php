@@ -19,8 +19,7 @@ return new class() extends Migration
                 $table->foreignId('user_id')->unique()->constrained();
                 $table->foreignId('team_id')->constrained();
                 $table->foreignId('player_id')->constrained();
-                $table->string('created_at');
-                $table->string('updated_at');
+                $table->timestamps(6);
             }
         );
     }

@@ -57,11 +57,11 @@ final class GetGameGoalsCommand extends Command
                     'status' => GameStatus::FINISHED,
                 ]);
 
-                $logger->info('Updated game goals: ' . $game->home_team->name . ' vs ' . $game->away_team->name);
-                $this->info('Updated game goals: ' . $game->home_team->name . ' vs ' . $game->away_team->name);
+                $logger->info('Updated game goals: '.$game->home_team->name.' vs '.$game->away_team->name);
+                $this->info('Updated game goals: '.$game->home_team->name.' vs '.$game->away_team->name);
             } catch (Throwable $e) {
-                $logger->error('Error updating game goals: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
-                $this->error('Error updating game goals: ' . $e->getMessage());
+                $logger->error('Error updating game goals: '.$e->getMessage(), ['trace' => $e->getTraceAsString()]);
+                $this->error('Error updating game goals: '.$e->getMessage());
 
                 continue;
             }

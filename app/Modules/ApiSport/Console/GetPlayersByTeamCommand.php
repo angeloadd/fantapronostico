@@ -55,14 +55,14 @@ final class GetPlayersByTeamCommand extends Command
         } catch (Throwable $e) {
             DB::rollBack();
             $logger->error(
-                'Failed to fetch: ' . $e->getMessage(),
+                'Failed to fetch: '.$e->getMessage(),
                 [
                     'message' => $e->getMessage(),
                     'trace' => $e->getTraceAsString(),
                 ]
             );
 
-            $this->error('Failed to fetch: ' . $e->getMessage());
+            $this->error('Failed to fetch: '.$e->getMessage());
 
             return self::FAILURE;
         }

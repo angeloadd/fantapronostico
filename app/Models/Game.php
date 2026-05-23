@@ -131,7 +131,7 @@ final class Game extends Model
                 'tournament_id' => $tournamentId,
             ]);
 
-            if ( ! isset($gameModel->home_team, $gameModel->away_team)) {
+            if (!isset($gameModel->home_team, $gameModel->away_team)) {
                 $gameModel->teams()
                     ->attach([
                         Team::whereApiId($game->homeTeamApiId)->firstOrFail()->id => ['is_away' => false],
@@ -198,7 +198,7 @@ final class Game extends Model
     public function homeTeam(): Attribute
     {
         return Attribute::make(
-            get: fn (): ?Team => $this->teams->filter(static fn (Team $team): bool => ! $team->pivot->is_away)->first()
+            get: fn (): ?Team => $this->teams->filter(static fn (Team $team): bool => !$team->pivot->is_away)->first()
         );
     }
 
@@ -216,7 +216,7 @@ final class Game extends Model
     {
         return Attribute::make(
             get: fn (): int => $this->goals->filter(
-                fn (GameGoal $goal): bool => $goal->player->national_id === $this->home_team->id && ! $goal->is_autogoal
+                fn (GameGoal $goal): bool => $goal->player->national_id === $this->home_team->id && !$goal->is_autogoal
             )->count() + $this->goals->filter(fn (GameGoal $goal): bool => $goal->player->national_id === $this->away_team->id && $goal->is_autogoal)->count(),
         );
     }
@@ -225,7 +225,7 @@ final class Game extends Model
     {
         return Attribute::get(
             fn (): int => $this->goals->filter(
-                fn (GameGoal $goal): bool => $goal->player->national_id === $this->away_team->id && ! $goal->is_autogoal
+                fn (GameGoal $goal): bool => $goal->player->national_id === $this->away_team->id && !$goal->is_autogoal
             )->count() + $this->goals->filter(fn (GameGoal $goal): bool => $goal->player->national_id === $this->home_team->id && $goal->is_autogoal)->count(),
         );
     }
@@ -252,7 +252,7 @@ final class Game extends Model
         return Attribute::get(
             function () {
                 $homeScorers = [];
-                $this->goals->filter(fn (GameGoal $gameGoal) => $gameGoal->player->national_id === $this->home_team->id && ! $gameGoal->is_autogoal)->each(function (GameGoal $gameGoal) use (&$homeScorers): void {
+                $this->goals->filter(fn (GameGoal $gameGoal) => $gameGoal->player->national_id === $this->home_team->id && !$gameGoal->is_autogoal)->each(function (GameGoal $gameGoal) use (&$homeScorers): void {
                     $homeScorers[] = $gameGoal->player->id;
                 });
                 if ($this->goals->some(fn (GameGoal $gameGoal) => $gameGoal->player->national_id === $this->away_team->id && $gameGoal->is_autogoal)) {
@@ -273,7 +273,7 @@ final class Game extends Model
         return Attribute::get(
             function () {
                 $awayScorers = [];
-                $this->goals->filter(fn (GameGoal $gameGoal) => $gameGoal->player->national_id === $this->away_team->id && ! $gameGoal->is_autogoal)->each(function (GameGoal $gameGoal) use (&$awayScorers): void {
+                $this->goals->filter(fn (GameGoal $gameGoal) => $gameGoal->player->national_id === $this->away_team->id && !$gameGoal->is_autogoal)->each(function (GameGoal $gameGoal) use (&$awayScorers): void {
                     $awayScorers[] = $gameGoal->player->id;
                 });
                 if ($this->goals->some(fn (GameGoal $gameGoal) => $gameGoal->player->national_id === $this->home_team->id && $gameGoal->is_autogoal)) {
@@ -313,8 +313,8 @@ final class Game extends Model
     public function getScoreParsed(string $type): array
     {
         $goals = $this->goals->filter(
-            fn (GameGoal $goal) => $goal->player->national_id === $this->{$type . '_team'}->id ||
-                    $goal->player->club_id === $this->{$type . '_team'}->id
+            fn (GameGoal $goal) => $goal->player->national_id === $this->{$type.'_team'}->id ||
+                    $goal->player->club_id === $this->{$type.'_team'}->id
         )->map(
             static function (GameGoal $goal) {
                 if ($goal->is_autogoal) {

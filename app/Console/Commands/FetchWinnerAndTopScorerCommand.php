@@ -39,14 +39,14 @@ final class FetchWinnerAndTopScorerCommand extends Command
             unset($response);
         } catch (ExternalSystemUnavailableException|InvalidApisportTokenException $e) {
             Log::error(
-                'Failed to fetch: ' . $e->getMessage(),
+                'Failed to fetch: '.$e->getMessage(),
                 [
                     'message' => $e->getMessage(),
                     'trace' => $e->getTraceAsString(),
                 ]
             );
 
-            $this->error('Failed to fetch: ' . $e->getMessage());
+            $this->error('Failed to fetch: '.$e->getMessage());
 
             return self::FAILURE;
         }
@@ -61,14 +61,14 @@ final class FetchWinnerAndTopScorerCommand extends Command
             }
         } catch (Throwable $e) {
             Log::error(
-                'Internal error: ' . $e->getMessage(),
+                'Internal error: '.$e->getMessage(),
                 [
                     'message' => $e->getMessage(),
                     'trace' => $e->getTraceAsString(),
                 ]
             );
 
-            $this->error('Internal error: ' . $e->getMessage());
+            $this->error('Internal error: '.$e->getMessage());
 
             return self::FAILURE;
         }

@@ -13,6 +13,6 @@ abstract class TestCase extends BaseTestCase
 
     public function makeTestUrl(?string $uri = null): string
     {
-        return config('app.url') . $uri;
+        return config('app.url').$uri;
     }
 }

@@ -66,20 +66,20 @@ final class PredictionsSeeder extends Seeder
         });
     }
 
-//    public function createDateFromDelayInDays(int $delayInDays, int $hour): DateTimeInterface
-//    {
-//        $time = Carbon::create(
-//            $this->now->year,
-//            $this->now->month,
-//            $this->now->day + $delayInDays,
-//            $hour,
-//            timezone: 'Europe/Rome'
-//        );
-//
-//        if ( ! $time) {
-//            $time = now();
-//        }
-//
-//        return $time;
-//    }
+    //    public function createDateFromDelayInDays(int $delayInDays, int $hour): DateTimeInterface
+    //    {
+    //        $time = Carbon::create(
+    //            $this->now->year,
+    //            $this->now->month,
+    //            $this->now->day + $delayInDays,
+    //            $hour,
+    //            timezone: 'Europe/Rome'
+    //        );
+    //
+    //        if ( ! $time) {
+    //            $time = now();
+    //        }
+    //
+    //        return $time;
+    //    }
 }

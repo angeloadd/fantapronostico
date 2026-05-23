@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @plugin "daisyui" {
-  themes: nord, fp2024;
+  themes: nord, cupcake, fp2024 --default;
 }
 
 @plugin "daisyui/theme" {
@@ -73,8 +73,6 @@ h6 {
             font-weight: 600;
         }
     }
-
-
 }
 
 a.disabled {

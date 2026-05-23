@@ -48,7 +48,7 @@ final class GetTeamsCommand extends Command
             $teamRepository->upsertMany($teamsDto);
         } catch (Throwable $exception) {
             DB::rollBack();
-            $this->error('Error updating teams: ' . $exception->getMessage());
+            $this->error('Error updating teams: '.$exception->getMessage());
             $logger->error($exception->getMessage(), ['trace' => $exception->getTraceAsString()]);
 
             return self::FAILURE;

@@ -34,7 +34,7 @@ final class ApiSportClientTest extends UnitTestCase
         (new ApiSportClient(self::HOST_SUCCESSFUL, 'token'))->get('test', ['query' => 'value']);
         Http::assertSent(
             static fn (Request $request) => $request->hasHeader('x-apisports-key', 'token') &&
-                $request->url() === self::HOST_SUCCESSFUL . '/test?query=value'
+                $request->url() === self::HOST_SUCCESSFUL.'/test?query=value'
         );
     }
 

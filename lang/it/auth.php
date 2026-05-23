@@ -22,13 +22,13 @@ return [
     'throttle' => 'Troppi tentativi di login. Ti preghiamo di riprovare tra :seconds secondi.',
 
     'login' => [
-        'title' => 'Accedi - ' . $appName,
+        'title' => 'Accedi - '.$appName,
         'nav' => 'Accedi',
         'btn' => 'Accedi',
         'request_password_reset' => 'Password dimenticata?',
     ],
     'register' => [
-        'title' => 'Iscriviti - ' . $appName,
+        'title' => 'Iscriviti - '.$appName,
         'nav' => 'Iscriviti',
         'btn' => 'Crea nuovo account',
     ],
@@ -44,12 +44,12 @@ return [
         'title' => 'Leghe',
     ],
     'request_password_reset' => [
-        'title' => 'Password Dimenticata - ' . $appName,
+        'title' => 'Password Dimenticata - '.$appName,
         'paragraph' => 'Inserisci la tua e-mail e ti invieremo un link per reimpostare la tua password.',
         'btn' => 'Invia Link',
     ],
     'reset_password' => [
-        'title' => 'Reimposta Password - ' . $appName,
+        'title' => 'Reimposta Password - '.$appName,
         'btn' => 'Reimposta Password',
     ],
 ];

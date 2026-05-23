@@ -48,7 +48,7 @@ final class GameResultMapper
                     return 'N/A';
                 }
 
-                return $player->displayed_name . ' (' . __($player->national?->name) . ')';
+                return $player->displayed_name.' ('.__($player->national?->name).')';
             },
             $scorers
         );

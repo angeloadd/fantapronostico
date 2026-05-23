@@ -33,15 +33,15 @@ final class CalculateRanking extends Command
      */
     public function handle(LoggerInterface $logger, RankingCalculatorInterface $rankingCalculator): int
     {
-        if ( ! is_numeric($this->option('leagueId'))) {
+        if (!is_numeric($this->option('leagueId'))) {
             $league = League::first();
         } else {
             $league = League::find($this->option('leagueId'));
         }
 
         if (null === $league) {
-            $this->error('No league with id ' . $this->option('leagueId') . ' found');
-            $logger->error('No league with id ' . $this->option('leagueId') . ' found');
+            $this->error('No league with id '.$this->option('leagueId').' found');
+            $logger->error('No league with id '.$this->option('leagueId').' found');
 
             return self::FAILURE;
         }
@@ -49,8 +49,8 @@ final class CalculateRanking extends Command
         try {
             $rankingCalculator->calculate($league);
         } catch (Throwable $e) {
-            $logger->error('Error updating rankings for league ' . $league->name . '[id=' . $league->id . ']: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
-            $this->error('Error updating rankings: ' . $e->getMessage());
+            $logger->error('Error updating rankings for league '.$league->name.'[id='.$league->id.']: '.$e->getMessage(), ['trace' => $e->getTraceAsString()]);
+            $this->error('Error updating rankings: '.$e->getMessage());
 
             return self::FAILURE;
         }

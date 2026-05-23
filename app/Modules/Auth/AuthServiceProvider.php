@@ -24,7 +24,7 @@ final class AuthServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        $this->loadViewsFrom((__DIR__ . '/Views'), 'auth');
+        $this->loadViewsFrom((__DIR__.'/Views'), 'auth');
 
         $this->app->extend(
             RegisterResponse::class,
@@ -42,7 +42,7 @@ final class AuthServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        Blade::anonymousComponentPath(__DIR__ . '/Views', 'auth');
+        Blade::anonymousComponentPath(__DIR__.'/Views', 'auth');
 
         Fortify::createUsersUsing(CreateNewUser::class);
         Fortify::updateUserProfileInformationUsing(UpdateUserProfileInformation::class);
@@ -50,7 +50,7 @@ final class AuthServiceProvider extends ServiceProvider
         Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
 
         RateLimiter::for('login', static function (Request $request) {
-            $throttleKey = Str::transliterate(Str::lower((string) $request->input(Fortify::username())) . '|' . $request->ip());
+            $throttleKey = Str::transliterate(Str::lower((string) $request->input(Fortify::username())).'|'.$request->ip());
 
             return Limit::perMinute(5)->by($throttleKey);
         });

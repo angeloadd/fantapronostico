@@ -40,8 +40,8 @@ final class GetGamesCommand extends Command
             $gameRepository->upsertMany($gamesDto);
         } catch (Throwable $e) {
             DB::rollBack();
-            $this->error('Error updating games: ' . $e->getMessage());
-            $logger->error('Error updating games: ' . $e->getMessage(), ['trace' => $e->getTraceAsString()]);
+            $this->error('Error updating games: '.$e->getMessage());
+            $logger->error('Error updating games: '.$e->getMessage(), ['trace' => $e->getTraceAsString()]);
 
             return self::FAILURE;
         }

@@ -147,7 +147,7 @@ final class ChampionController extends Controller
 
     public function index(): RedirectResponse|Renderable
     {
-        if ( ! $this->competitionStarted()) {
+        if (!$this->competitionStarted()) {
             return redirect(route('champion.create'));
         }
 

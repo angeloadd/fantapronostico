@@ -8,6 +8,7 @@ use App\Http\Requests\CreatePredictionRequest;
 use App\Models\Game;
 use App\Models\Player;
 use App\Models\Prediction;
+use App\Modules\Auth\Models\User;
 use App\Modules\Tournament\Models\Team;
 use App\Repository\Game\GameRepositoryInterface;
 use App\Repository\Prediction\PredictionRepositoryInterface;
@@ -63,7 +64,7 @@ final class PredictionController extends Controller
         }
 
         // Controllo per presenza pronostico da mostrare
-        /** @var \App\Modules\Auth\Models\User $authUser */
+        /** @var User $authUser */
         $authUser = Auth::user();
         $prediction = $this->predictionRepository->getByGameAndUser($game, $authUser);
         if (null === $prediction) {
@@ -105,7 +106,7 @@ final class PredictionController extends Controller
                 ->with('errore_message', session('error_message') ?: null);
         }
 
-        if ( ! $this->gameRepository->areGameTeamsSet($game)) {
+        if (!$this->gameRepository->areGameTeamsSet($game)) {
             return abort(404);
         }
 
@@ -116,7 +117,7 @@ final class PredictionController extends Controller
                 ->with('errore_message', session('error_message') ?: null);
         }
 
-        /** @var \App\Modules\Auth\Models\User $authUser */
+        /** @var User $authUser */
         $authUser = Auth::user();
         if ($this->predictionRepository->existsByGameAndUser($game, $authUser)) {
             return redirect(route('prediction.show', compact('game')))
@@ -148,7 +149,7 @@ final class PredictionController extends Controller
                 ->with('error_message', 'Hai superato il limite di tempo!');
         }
 
-        if ( ! $this->gameRepository->areGameTeamsSet($game)) {
+        if (!$this->gameRepository->areGameTeamsSet($game)) {
             abort(404);
         }
 
@@ -157,7 +158,7 @@ final class PredictionController extends Controller
                 ->with('error_message', 'L\'incontro non è ancora accessibile');
         }
 
-        /** @var \App\Modules\Auth\Models\User $authUser */
+        /** @var User $authUser */
         $authUser = Auth::user();
         if ($this->predictionRepository->existsByGameAndUser($game, $authUser)) {
             return redirect(route('prediction.show', compact('game')))
@@ -193,7 +194,7 @@ final class PredictionController extends Controller
                 ->with('errore_message', session('error_message') ?: null);
         }
 
-        if ( ! $this->gameRepository->areGameTeamsSet($game)) {
+        if (!$this->gameRepository->areGameTeamsSet($game)) {
             return abort(404);
         }
 
@@ -235,7 +236,7 @@ final class PredictionController extends Controller
                 ->with('error_message', 'Hai superato il limite di tempo!');
         }
 
-        if ( ! $this->gameRepository->areGameTeamsSet($game)) {
+        if (!$this->gameRepository->areGameTeamsSet($game)) {
             return abort(404);
         }
 
@@ -277,7 +278,7 @@ final class PredictionController extends Controller
     {
         $goToGame = $this->gameRepository->getPreviousGameByOtherGame($game) ?? $game;
 
-        if ( ! $this->gameRepository->areGameTeamsSet($goToGame)) {
+        if (!$this->gameRepository->areGameTeamsSet($goToGame)) {
             return abort(404);
         }
 

@@ -15,20 +15,20 @@ final class DevGroupPhaseSeeder extends DevBaseSeeder
         $now = Carbon::now();
 
         $tournamentStart = $this->computeStartedAt(0, self::FINISHED_COUNT, $now);
-        $finalStart      = $this->computeStartedAt(51, self::FINISHED_COUNT, $now);
+        $finalStart = $this->computeStartedAt(51, self::FINISHED_COUNT, $now);
 
         $tournament = $this->createTournament($tournamentStart, $finalStart);
-        $league     = $this->createLeague($tournament);
-        $teams      = $this->createTeamsAndPlayers($tournament);
-        $users      = $this->createUsers($league);
+        $league = $this->createLeague($tournament);
+        $teams = $this->createTeamsAndPlayers($tournament);
+        $users = $this->createUsers($league);
 
         $this->createChampions($users, $teams);
 
         foreach (self::SCHEDULE as $i => $slot) {
-            $homeTeam  = $teams[$slot['home']];
-            $awayTeam  = $teams[$slot['away']];
+            $homeTeam = $teams[$slot['home']];
+            $awayTeam = $teams[$slot['away']];
             $startedAt = $this->computeStartedAt($i, self::FINISHED_COUNT, $now);
-            $status    = $i < self::FINISHED_COUNT ? 'finished' : 'not_started';
+            $status = $i < self::FINISHED_COUNT ? 'finished' : 'not_started';
 
             $game = $this->createGame($homeTeam, $awayTeam, $slot['stage'], $startedAt, $tournament, $status);
 

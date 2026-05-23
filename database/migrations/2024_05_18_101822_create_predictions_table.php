@@ -26,8 +26,12 @@ return new class() extends Migration
                 $table->enum('sign', ['1', 'x', '2']);
                 $table->integer('home_scorer_id')->nullable();
                 $table->integer('away_scorer_id')->nullable();
-                $table->string('created_at');
-                $table->string('updated_at');
+                $table->foreignId('league_id')
+                    ->default(1)
+                    ->constrained()
+                    ->nullOnDelete()
+                    ->cascadeOnUpdate();
+                $table->timestamps(6);
             }
         );
     }

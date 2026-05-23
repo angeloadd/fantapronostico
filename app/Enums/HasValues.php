@@ -14,7 +14,7 @@ trait HasValues
      */
     public static function values(): array
     {
-        if ( ! (new ReflectionClass(self::class))->isEnum()) {
+        if (!(new ReflectionClass(self::class))->isEnum()) {
             throw new InvalidArgumentException('This trait can be only used by enum classes');
         }
 

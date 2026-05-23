@@ -15,7 +15,7 @@ final class GameGoalsMapperStrategy implements MapperStrategyInterface
      */
     public function supports(array $externalResponse): bool
     {
-        if ( ! array_key_exists('get', $externalResponse)) {
+        if (!array_key_exists('get', $externalResponse)) {
             return false;
         }
 
@@ -29,7 +29,7 @@ final class GameGoalsMapperStrategy implements MapperStrategyInterface
     {
         $gameGoals = new GameGoalsDto();
 
-        if ( ! is_array($externalResponse['response'])) {
+        if (!is_array($externalResponse['response'])) {
             return $gameGoals;
         }
 
