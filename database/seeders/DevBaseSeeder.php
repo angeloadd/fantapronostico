@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Hash;
 abstract class DevBaseSeeder extends Seeder
 {
     // Group A=0-3, B=4-7, C=8-11, D=12-15, E=16-19, F=20-23
-    protected const TEAMS = [
+    protected const array TEAMS = [
         ['name' => 'Germany',        'code' => 'GER', 'api_id' => 25,   'logo' => 'https://media.api-sports.io/football/teams/25.png'],
         ['name' => 'Scotland',       'code' => 'SCO', 'api_id' => 1108, 'logo' => 'https://media.api-sports.io/football/teams/1108.png'],
         ['name' => 'Hungary',        'code' => 'HUN', 'api_id' => 769,  'logo' => 'https://media.api-sports.io/football/teams/769.png'],
@@ -52,79 +52,79 @@ abstract class DevBaseSeeder extends Seeder
     ];
 
     // 3 players per team, indexed by TEAMS index
-    protected const PLAYERS = [
-        0  => [['first_name' => 'Manuel',    'last_name' => 'Neuer',            'displayed_name' => 'M. Neuer'],
-               ['first_name' => 'Thomas',    'last_name' => 'Müller',           'displayed_name' => 'T. Müller'],
-               ['first_name' => 'Joshua',    'last_name' => 'Kimmich',          'displayed_name' => 'J. Kimmich']],
-        1  => [['first_name' => 'Andrew',    'last_name' => 'Robertson',        'displayed_name' => 'A. Robertson'],
-               ['first_name' => 'Scott',     'last_name' => 'McTominay',        'displayed_name' => 'S. McTominay'],
-               ['first_name' => 'Lyndon',    'last_name' => 'Dykes',            'displayed_name' => 'L. Dykes']],
-        2  => [['first_name' => 'Dominik',   'last_name' => 'Szoboszlai',       'displayed_name' => 'D. Szoboszlai'],
-               ['first_name' => 'Roland',    'last_name' => 'Varga',            'displayed_name' => 'R. Varga'],
-               ['first_name' => 'Roland',    'last_name' => 'Sallai',           'displayed_name' => 'R. Sallai']],
-        3  => [['first_name' => 'Xherdan',   'last_name' => 'Shaqiri',          'displayed_name' => 'X. Shaqiri'],
-               ['first_name' => 'Manuel',    'last_name' => 'Akanji',           'displayed_name' => 'M. Akanji'],
-               ['first_name' => 'Breel',     'last_name' => 'Embolo',           'displayed_name' => 'B. Embolo']],
-        4  => [['first_name' => 'Lamine',    'last_name' => 'Yamal',            'displayed_name' => 'L. Yamal'],
-               ['first_name' => 'Alvaro',    'last_name' => 'Morata',           'displayed_name' => 'A. Morata'],
-               ['first_name' => 'Pedro',     'last_name' => 'González',         'displayed_name' => 'Pedri']],
-        5  => [['first_name' => 'Luka',      'last_name' => 'Modric',           'displayed_name' => 'L. Modric'],
-               ['first_name' => 'Josko',     'last_name' => 'Gvardiol',         'displayed_name' => 'J. Gvardiol'],
-               ['first_name' => 'Andrej',    'last_name' => 'Budimir',          'displayed_name' => 'A. Budimir']],
-        6  => [['first_name' => 'Gianluigi', 'last_name' => 'Donnarumma',       'displayed_name' => 'G. Donnarumma'],
-               ['first_name' => 'Nicolo',    'last_name' => 'Barella',          'displayed_name' => 'N. Barella'],
-               ['first_name' => 'Mateo',     'last_name' => 'Retegui',          'displayed_name' => 'M. Retegui']],
-        7  => [['first_name' => 'Elseid',    'last_name' => 'Bajrami',          'displayed_name' => 'E. Bajrami'],
-               ['first_name' => 'Kristjan',  'last_name' => 'Asllani',          'displayed_name' => 'K. Asllani'],
-               ['first_name' => 'Armando',   'last_name' => 'Broja',            'displayed_name' => 'A. Broja']],
-        8  => [['first_name' => 'Harry',     'last_name' => 'Kane',             'displayed_name' => 'H. Kane'],
-               ['first_name' => 'Bukayo',    'last_name' => 'Saka',             'displayed_name' => 'B. Saka'],
-               ['first_name' => 'Jude',      'last_name' => 'Bellingham',       'displayed_name' => 'J. Bellingham']],
-        9  => [['first_name' => 'Dusan',     'last_name' => 'Vlahovic',         'displayed_name' => 'D. Vlahovic'],
-               ['first_name' => 'Dusan',     'last_name' => 'Tadic',            'displayed_name' => 'D. Tadic'],
-               ['first_name' => 'Sergej',    'last_name' => 'Milinkovic-Savic', 'displayed_name' => 'S. Milinkovic-Savic']],
+    protected const array PLAYERS = [
+        0 => [['first_name' => 'Manuel',    'last_name' => 'Neuer',            'displayed_name' => 'M. Neuer'],
+            ['first_name' => 'Thomas',    'last_name' => 'Müller',           'displayed_name' => 'T. Müller'],
+            ['first_name' => 'Joshua',    'last_name' => 'Kimmich',          'displayed_name' => 'J. Kimmich']],
+        1 => [['first_name' => 'Andrew',    'last_name' => 'Robertson',        'displayed_name' => 'A. Robertson'],
+            ['first_name' => 'Scott',     'last_name' => 'McTominay',        'displayed_name' => 'S. McTominay'],
+            ['first_name' => 'Lyndon',    'last_name' => 'Dykes',            'displayed_name' => 'L. Dykes']],
+        2 => [['first_name' => 'Dominik',   'last_name' => 'Szoboszlai',       'displayed_name' => 'D. Szoboszlai'],
+            ['first_name' => 'Roland',    'last_name' => 'Varga',            'displayed_name' => 'R. Varga'],
+            ['first_name' => 'Roland',    'last_name' => 'Sallai',           'displayed_name' => 'R. Sallai']],
+        3 => [['first_name' => 'Xherdan',   'last_name' => 'Shaqiri',          'displayed_name' => 'X. Shaqiri'],
+            ['first_name' => 'Manuel',    'last_name' => 'Akanji',           'displayed_name' => 'M. Akanji'],
+            ['first_name' => 'Breel',     'last_name' => 'Embolo',           'displayed_name' => 'B. Embolo']],
+        4 => [['first_name' => 'Lamine',    'last_name' => 'Yamal',            'displayed_name' => 'L. Yamal'],
+            ['first_name' => 'Alvaro',    'last_name' => 'Morata',           'displayed_name' => 'A. Morata'],
+            ['first_name' => 'Pedro',     'last_name' => 'González',         'displayed_name' => 'Pedri']],
+        5 => [['first_name' => 'Luka',      'last_name' => 'Modric',           'displayed_name' => 'L. Modric'],
+            ['first_name' => 'Josko',     'last_name' => 'Gvardiol',         'displayed_name' => 'J. Gvardiol'],
+            ['first_name' => 'Andrej',    'last_name' => 'Budimir',          'displayed_name' => 'A. Budimir']],
+        6 => [['first_name' => 'Gianluigi', 'last_name' => 'Donnarumma',       'displayed_name' => 'G. Donnarumma'],
+            ['first_name' => 'Nicolo',    'last_name' => 'Barella',          'displayed_name' => 'N. Barella'],
+            ['first_name' => 'Mateo',     'last_name' => 'Retegui',          'displayed_name' => 'M. Retegui']],
+        7 => [['first_name' => 'Elseid',    'last_name' => 'Bajrami',          'displayed_name' => 'E. Bajrami'],
+            ['first_name' => 'Kristjan',  'last_name' => 'Asllani',          'displayed_name' => 'K. Asllani'],
+            ['first_name' => 'Armando',   'last_name' => 'Broja',            'displayed_name' => 'A. Broja']],
+        8 => [['first_name' => 'Harry',     'last_name' => 'Kane',             'displayed_name' => 'H. Kane'],
+            ['first_name' => 'Bukayo',    'last_name' => 'Saka',             'displayed_name' => 'B. Saka'],
+            ['first_name' => 'Jude',      'last_name' => 'Bellingham',       'displayed_name' => 'J. Bellingham']],
+        9 => [['first_name' => 'Dusan',     'last_name' => 'Vlahovic',         'displayed_name' => 'D. Vlahovic'],
+            ['first_name' => 'Dusan',     'last_name' => 'Tadic',            'displayed_name' => 'D. Tadic'],
+            ['first_name' => 'Sergej',    'last_name' => 'Milinkovic-Savic', 'displayed_name' => 'S. Milinkovic-Savic']],
         10 => [['first_name' => 'Christian', 'last_name' => 'Eriksen',          'displayed_name' => 'C. Eriksen'],
-               ['first_name' => 'Pierre',    'last_name' => 'Hojbjerg',         'displayed_name' => 'P. Hojbjerg'],
-               ['first_name' => 'Kasper',    'last_name' => 'Schmeichel',       'displayed_name' => 'K. Schmeichel']],
+            ['first_name' => 'Pierre',    'last_name' => 'Hojbjerg',         'displayed_name' => 'P. Hojbjerg'],
+            ['first_name' => 'Kasper',    'last_name' => 'Schmeichel',       'displayed_name' => 'K. Schmeichel']],
         11 => [['first_name' => 'Benjamin',  'last_name' => 'Sesko',            'displayed_name' => 'B. Sesko'],
-               ['first_name' => 'Jan',       'last_name' => 'Oblak',            'displayed_name' => 'J. Oblak'],
-               ['first_name' => 'Jaka',      'last_name' => 'Bijol',            'displayed_name' => 'J. Bijol']],
+            ['first_name' => 'Jan',       'last_name' => 'Oblak',            'displayed_name' => 'J. Oblak'],
+            ['first_name' => 'Jaka',      'last_name' => 'Bijol',            'displayed_name' => 'J. Bijol']],
         12 => [['first_name' => 'Kylian',    'last_name' => 'Mbappe',           'displayed_name' => 'K. Mbappe'],
-               ['first_name' => 'Antoine',   'last_name' => 'Griezmann',        'displayed_name' => 'A. Griezmann'],
-               ['first_name' => 'Eduardo',   'last_name' => 'Camavinga',        'displayed_name' => 'E. Camavinga']],
+            ['first_name' => 'Antoine',   'last_name' => 'Griezmann',        'displayed_name' => 'A. Griezmann'],
+            ['first_name' => 'Eduardo',   'last_name' => 'Camavinga',        'displayed_name' => 'E. Camavinga']],
         13 => [['first_name' => 'Marko',     'last_name' => 'Arnautovic',       'displayed_name' => 'M. Arnautovic'],
-               ['first_name' => 'Marcel',    'last_name' => 'Sabitzer',         'displayed_name' => 'M. Sabitzer'],
-               ['first_name' => 'David',     'last_name' => 'Alaba',            'displayed_name' => 'D. Alaba']],
+            ['first_name' => 'Marcel',    'last_name' => 'Sabitzer',         'displayed_name' => 'M. Sabitzer'],
+            ['first_name' => 'David',     'last_name' => 'Alaba',            'displayed_name' => 'D. Alaba']],
         14 => [['first_name' => 'Virgil',    'last_name' => 'van Dijk',         'displayed_name' => 'V. van Dijk'],
-               ['first_name' => 'Memphis',   'last_name' => 'Depay',            'displayed_name' => 'M. Depay'],
-               ['first_name' => 'Cody',      'last_name' => 'Gakpo',            'displayed_name' => 'C. Gakpo']],
+            ['first_name' => 'Memphis',   'last_name' => 'Depay',            'displayed_name' => 'M. Depay'],
+            ['first_name' => 'Cody',      'last_name' => 'Gakpo',            'displayed_name' => 'C. Gakpo']],
         15 => [['first_name' => 'Robert',    'last_name' => 'Lewandowski',      'displayed_name' => 'R. Lewandowski'],
-               ['first_name' => 'Sebastian', 'last_name' => 'Szymanski',        'displayed_name' => 'S. Szymanski'],
-               ['first_name' => 'Nicola',    'last_name' => 'Zalewski',         'displayed_name' => 'N. Zalewski']],
+            ['first_name' => 'Sebastian', 'last_name' => 'Szymanski',        'displayed_name' => 'S. Szymanski'],
+            ['first_name' => 'Nicola',    'last_name' => 'Zalewski',         'displayed_name' => 'N. Zalewski']],
         16 => [['first_name' => 'Kevin',     'last_name' => 'De Bruyne',        'displayed_name' => 'K. De Bruyne'],
-               ['first_name' => 'Romelu',    'last_name' => 'Lukaku',           'displayed_name' => 'R. Lukaku'],
-               ['first_name' => 'Youri',     'last_name' => 'Tielemans',        'displayed_name' => 'Y. Tielemans']],
+            ['first_name' => 'Romelu',    'last_name' => 'Lukaku',           'displayed_name' => 'R. Lukaku'],
+            ['first_name' => 'Youri',     'last_name' => 'Tielemans',        'displayed_name' => 'Y. Tielemans']],
         17 => [['first_name' => 'Ondrej',    'last_name' => 'Duda',             'displayed_name' => 'O. Duda'],
-               ['first_name' => 'Milan',     'last_name' => 'Skriniar',         'displayed_name' => 'M. Skriniar'],
-               ['first_name' => 'Stanislav', 'last_name' => 'Lobotka',          'displayed_name' => 'S. Lobotka']],
+            ['first_name' => 'Milan',     'last_name' => 'Skriniar',         'displayed_name' => 'M. Skriniar'],
+            ['first_name' => 'Stanislav', 'last_name' => 'Lobotka',          'displayed_name' => 'S. Lobotka']],
         18 => [['first_name' => 'Nicolae',   'last_name' => 'Stanciu',          'displayed_name' => 'N. Stanciu'],
-               ['first_name' => 'George',    'last_name' => 'Puscas',           'displayed_name' => 'G. Puscas'],
-               ['first_name' => 'Denis',     'last_name' => 'Dragus',           'displayed_name' => 'D. Dragus']],
+            ['first_name' => 'George',    'last_name' => 'Puscas',           'displayed_name' => 'G. Puscas'],
+            ['first_name' => 'Denis',     'last_name' => 'Dragus',           'displayed_name' => 'D. Dragus']],
         19 => [['first_name' => 'Mykhailo',  'last_name' => 'Mudryk',           'displayed_name' => 'M. Mudryk'],
-               ['first_name' => 'Oleksandr', 'last_name' => 'Zinchenko',        'displayed_name' => 'O. Zinchenko'],
-               ['first_name' => 'Artem',     'last_name' => 'Dovbyk',           'displayed_name' => 'A. Dovbyk']],
+            ['first_name' => 'Oleksandr', 'last_name' => 'Zinchenko',        'displayed_name' => 'O. Zinchenko'],
+            ['first_name' => 'Artem',     'last_name' => 'Dovbyk',           'displayed_name' => 'A. Dovbyk']],
         20 => [['first_name' => 'Hakan',     'last_name' => 'Calhanoglu',       'displayed_name' => 'H. Calhanoglu'],
-               ['first_name' => 'Arda',      'last_name' => 'Guler',            'displayed_name' => 'A. Guler'],
-               ['first_name' => 'Kenan',     'last_name' => 'Yildiz',           'displayed_name' => 'K. Yildiz']],
+            ['first_name' => 'Arda',      'last_name' => 'Guler',            'displayed_name' => 'A. Guler'],
+            ['first_name' => 'Kenan',     'last_name' => 'Yildiz',           'displayed_name' => 'K. Yildiz']],
         21 => [['first_name' => 'Khvicha',   'last_name' => 'Kvaratskhelia',    'displayed_name' => 'K. Kvaratskhelia'],
-               ['first_name' => 'Georges',   'last_name' => 'Mikautadze',       'displayed_name' => 'G. Mikautadze'],
-               ['first_name' => 'Giorgi',    'last_name' => 'Davitashvili',     'displayed_name' => 'G. Davitashvili']],
+            ['first_name' => 'Georges',   'last_name' => 'Mikautadze',       'displayed_name' => 'G. Mikautadze'],
+            ['first_name' => 'Giorgi',    'last_name' => 'Davitashvili',     'displayed_name' => 'G. Davitashvili']],
         22 => [['first_name' => 'Cristiano', 'last_name' => 'Ronaldo',          'displayed_name' => 'C. Ronaldo'],
-               ['first_name' => 'Bruno',     'last_name' => 'Fernandes',        'displayed_name' => 'B. Fernandes'],
-               ['first_name' => 'Joao',      'last_name' => 'Felix',            'displayed_name' => 'J. Felix']],
+            ['first_name' => 'Bruno',     'last_name' => 'Fernandes',        'displayed_name' => 'B. Fernandes'],
+            ['first_name' => 'Joao',      'last_name' => 'Felix',            'displayed_name' => 'J. Felix']],
         23 => [['first_name' => 'Patrik',    'last_name' => 'Schick',           'displayed_name' => 'P. Schick'],
-               ['first_name' => 'Tomas',     'last_name' => 'Soucek',           'displayed_name' => 'T. Soucek'],
-               ['first_name' => 'Vladimir',  'last_name' => 'Coufal',           'displayed_name' => 'V. Coufal']],
+            ['first_name' => 'Tomas',     'last_name' => 'Soucek',           'displayed_name' => 'T. Soucek'],
+            ['first_name' => 'Vladimir',  'last_name' => 'Coufal',           'displayed_name' => 'V. Coufal']],
     ];
 
     // 52 game slots: [stage, home TEAMS index, away TEAMS index]
@@ -195,10 +195,10 @@ abstract class DevBaseSeeder extends Seeder
         ['stage' => 'Round of 16',  'home' => 14, 'away' => 18],
         ['stage' => 'Round of 16',  'home' => 20, 'away' => 13],
         // Quarter-Finals (indices 44-47)
-        ['stage' => 'Quarter-Final','home' => 4,  'away' => 0],
-        ['stage' => 'Quarter-Final','home' => 12, 'away' => 22],
-        ['stage' => 'Quarter-Final','home' => 8,  'away' => 3],
-        ['stage' => 'Quarter-Final','home' => 14, 'away' => 20],
+        ['stage' => 'Quarter-Final', 'home' => 4,  'away' => 0],
+        ['stage' => 'Quarter-Final', 'home' => 12, 'away' => 22],
+        ['stage' => 'Quarter-Final', 'home' => 8,  'away' => 3],
+        ['stage' => 'Quarter-Final', 'home' => 14, 'away' => 20],
         // Semi-Finals (indices 48-49)
         ['stage' => 'Semi-Final',   'home' => 4,  'away' => 12],
         ['stage' => 'Semi-Final',   'home' => 8,  'away' => 14],
@@ -209,22 +209,24 @@ abstract class DevBaseSeeder extends Seeder
     ];
 
     // Spain (TEAMS index 4) wins; Yamal (PLAYERS[4][0]) is top scorer
-    protected const WINNER_TEAM_INDEX             = 4;
-    protected const TOP_SCORER_TEAM_INDEX         = 4;
-    protected const TOP_SCORER_PLAYER_LOCAL_INDEX = 0;
+    protected const int WINNER_TEAM_INDEX = 4;
+
+    protected const int TOP_SCORER_TEAM_INDEX = 4;
+
+    protected const int TOP_SCORER_PLAYER_LOCAL_INDEX = 0;
 
     protected function computeStartedAt(int $gameIndex, int $finishedCount, Carbon $now): Carbon
     {
         if ($gameIndex < $finishedCount) {
-            $daysAgo = (int)(($finishedCount - 1 - $gameIndex) / 2) + 1;
-            $hour    = 18 + ($gameIndex % 2) * 3;
+            $daysAgo = (int) (($finishedCount - 1 - $gameIndex) / 2) + 1;
+            $hour = 18 + ($gameIndex % 2) * 3;
 
             return $now->copy()->subDays($daysAgo)->setHour($hour)->setMinute(0)->setSecond(0);
         }
 
         $futureIndex = $gameIndex - $finishedCount;
-        $daysFromNow = (int)($futureIndex / 2) + 2;
-        $hour        = 18 + ($futureIndex % 2) * 3;
+        $daysFromNow = (int) ($futureIndex / 2) + 2;
+        $hour = 18 + ($futureIndex % 2) * 3;
 
         return $now->copy()->addDays($daysFromNow)->setHour($hour)->setMinute(0)->setSecond(0);
     }
@@ -232,13 +234,13 @@ abstract class DevBaseSeeder extends Seeder
     protected function createTournament(Carbon $start, Carbon $finalStart): Tournament
     {
         return Tournament::create([
-            'country'          => 'World',
-            'name'             => 'UEFA Euro Cup',
-            'logo'             => 'https://media.api-sports.io/football/leagues/4.png',
-            'is_cup'           => true,
-            'season'           => 2024,
-            'api_id'           => 4,
-            'started_at'       => $start,
+            'country' => 'World',
+            'name' => 'UEFA Euro Cup',
+            'logo' => 'https://media.api-sports.io/football/leagues/4.png',
+            'is_cup' => true,
+            'season' => 2024,
+            'api_id' => 4,
+            'started_at' => $start,
             'final_started_at' => $finalStart,
         ]);
     }
@@ -254,10 +256,10 @@ abstract class DevBaseSeeder extends Seeder
 
         foreach (self::TEAMS as $idx => $teamData) {
             $team = Team::create([
-                'name'        => $teamData['name'],
-                'code'        => $teamData['code'],
-                'api_id'      => $teamData['api_id'],
-                'logo'        => $teamData['logo'],
+                'name' => $teamData['name'],
+                'code' => $teamData['code'],
+                'api_id' => $teamData['api_id'],
+                'logo' => $teamData['logo'],
                 'is_national' => true,
             ]);
 
@@ -266,14 +268,15 @@ abstract class DevBaseSeeder extends Seeder
             foreach (self::PLAYERS[$idx] as $playerData) {
                 $player = Player::create([
                     'displayed_name' => $playerData['displayed_name'],
-                    'first_name'     => $playerData['first_name'],
-                    'last_name'      => $playerData['last_name'],
-                    'national_id'    => $team->id,
+                    'first_name' => $playerData['first_name'],
+                    'last_name' => $playerData['last_name'],
+                    'national_id' => $team->id,
                 ]);
                 $tournament->players()->attach($player->id, ['is_top_scorer' => false]);
             }
 
-            $teams->push($team->load('players'));
+            $team->setRelation('players', Player::where('national_id', $team->id)->get());
+            $teams->push($team);
         }
 
         return $teams;
@@ -292,7 +295,7 @@ abstract class DevBaseSeeder extends Seeder
         ]);
 
         $fakerUsers = User::factory(10)->create();
-        $allUsers   = $namedUsers->merge($fakerUsers);
+        $allUsers = $namedUsers->merge($fakerUsers);
 
         $allUsers->each(function (User $user) use ($league): void {
             $user->update(['selected_league_id' => $league->id]);
@@ -315,9 +318,9 @@ abstract class DevBaseSeeder extends Seeder
     ): Game {
         $game = Game::create([
             'tournament_id' => $tournament->id,
-            'stage'         => $stage,
-            'status'        => $status,
-            'started_at'    => $startedAt,
+            'stage' => $stage,
+            'status' => $status,
+            'started_at' => $startedAt,
         ]);
 
         $game->teams()->attach($homeTeam->id, ['is_away' => false]);
@@ -332,14 +335,14 @@ abstract class DevBaseSeeder extends Seeder
     protected function createGoalsForGame(Game $game, Team $homeTeam, Team $awayTeam): void
     {
         $allPlayers = $homeTeam->players->merge($awayTeam->players);
-        $goalCount  = random_int(1, 3);
+        $goalCount = random_int(1, 3);
 
         for ($i = 0; $i < $goalCount; $i++) {
             GameGoal::create([
-                'game_id'     => $game->id,
-                'player_id'   => $allPlayers->random()->id,
+                'game_id' => $game->id,
+                'player_id' => $allPlayers->random()->id,
                 'is_autogoal' => false,
-                'scored_at'   => $game->started_at->copy()->addMinutes(random_int(10, 85)),
+                'scored_at' => $game->started_at->copy()->addMinutes(random_int(10, 85)),
             ]);
         }
     }
@@ -354,19 +357,19 @@ abstract class DevBaseSeeder extends Seeder
         $users->each(function (User $user) use ($game, $homeTeam, $awayTeam, $league): void {
             $homeScore = random_int(0, 2);
             $awayScore = random_int(0, 2);
-            $sign      = match (true) {
+            $sign = match (true) {
                 $homeScore > $awayScore => '1',
                 $homeScore < $awayScore => '2',
-                default                => 'x',
+                default => 'x',
             };
 
             Prediction::create([
-                'user_id'        => $user->id,
-                'game_id'        => $game->id,
-                'league_id'      => $league->id,
-                'home_score'     => $homeScore,
-                'away_score'     => $awayScore,
-                'sign'           => $sign,
+                'user_id' => $user->id,
+                'game_id' => $game->id,
+                'league_id' => $league->id,
+                'home_score' => $homeScore,
+                'away_score' => $awayScore,
+                'sign' => $sign,
                 'home_scorer_id' => $homeScore > 0 ? $homeTeam->players->random()->id : 0,
                 'away_scorer_id' => $awayScore > 0 ? $awayTeam->players->random()->id : 0,
             ]);
@@ -383,9 +386,9 @@ abstract class DevBaseSeeder extends Seeder
             }
             $team = $teams->random();
             Champion::create([
-                'user_id'    => $user->id,
-                'team_id'    => $team->id,
-                'player_id'  => $team->players->random()->id,
+                'user_id' => $user->id,
+                'team_id' => $team->id,
+                'player_id' => $team->players->random()->id,
                 'created_at' => $now,
                 'updated_at' => $now,
             ]);
@@ -395,23 +398,23 @@ abstract class DevBaseSeeder extends Seeder
     protected function createRanks(Collection $users, League $league, int $finishedGamesCount): void
     {
         $users->each(function (User $user) use ($league, $finishedGamesCount): void {
-            $signs   = random_int(0, $finishedGamesCount);
-            $results = random_int(0, (int)($signs * 0.4));
+            $signs = random_int(0, $finishedGamesCount);
+            $results = random_int(0, (int) ($signs * 0.4));
             $scorers = random_int(0, $finishedGamesCount * 2);
-            $total   = $signs + $results * 2 + $scorers * 3;
+            $total = $signs + $results * 2 + $scorers * 3;
 
             DB::table('ranks')->insert([
-                'user_id'         => $user->id,
-                'league_id'       => $league->id,
-                'total'           => $total,
-                'results'         => $results,
-                'scorers'         => $scorers,
-                'signs'           => $signs,
-                'final_total'     => 0,
+                'user_id' => $user->id,
+                'league_id' => $league->id,
+                'total' => $total,
+                'results' => $results,
+                'scorers' => $scorers,
+                'signs' => $signs,
+                'final_total' => 0,
                 'final_timestamp' => null,
-                'winner'          => false,
-                'top_scorer'      => false,
-                'from'            => null,
+                'winner' => false,
+                'top_scorer' => false,
+                'from' => null,
             ]);
         });
     }
