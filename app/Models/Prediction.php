@@ -74,6 +74,7 @@ final class Prediction extends Model
         'away_scorer_id',
         'user_id',
         'game_id',
+        'league_id',
         'created_at',
         'updated_at',
     ];
