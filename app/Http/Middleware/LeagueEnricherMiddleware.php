@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
-use App\Modules\Auth\Models\User;
 use App\Modules\League\Models\League;
 use Closure;
 use Illuminate\Http\RedirectResponse;
@@ -17,13 +16,14 @@ final class LeagueEnricherMiddleware
     {
         $user = $request->user();
 
-        if (!$user instanceof User || $user->selectedLeague instanceof League) {
+        /** Let other Middleware handle the request */
+        if (null === $user) {
             return $next($request);
         }
 
         $leagues = $user->leagues->filter(static fn (League $league) => $league->pivot->user_id === $user->id && 'pending' !== $league->pivot->status);
 
-        if ($leagues->count() > 0) {
+        if ($leagues->count() > 0 && null === $user->selected_league_id) {
             $user->selected_league_id = $leagues->first()->id;
             $user->save();
 

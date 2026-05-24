@@ -1,39 +1,76 @@
 @import "tailwindcss";
+
 @plugin "daisyui" {
-  themes: nord, cupcake, fp2024 --default;
+    themes: corporate --default, luxury;
 }
 
 @plugin "daisyui/theme" {
-  name: fp2024;
-  default: true;
-  color-scheme: light;
+    name: corporate;
+    color-scheme: light;
 
-  --color-primary: oklch(from #00AACC l c h);
-  --color-secondary: oklch(from #01B359 l c h);
-  --color-accent: oklch(from #00849E l c h);
-  --color-neutral: oklch(from #13525F l c h);
-  --color-info: oklch(from #14B0D0 l c h);
-  --color-success: oklch(from #01DB6E l c h);
+    --color-base-100: hsl(220, 25%, 97%);
+    --color-base-200: hsl(220, 15%, 94%);
+    --color-base-300: hsl(220, 20%, 88%);
+    --color-base-content: hsl(220, 60%, 10%);
 
-  --color-primary-content: oklch(from #ECEFF4 l c h);
-  --color-secondary-content: oklch(from #ECEFF4 l c h);
-  --color-accent-content: oklch(from #ECEFF4 l c h);
-  --color-info-content: oklch(from #ECEFF4 l c h);
-  --color-success-content: oklch(from #ECEFF4 l c h);
-  --color-error-content: oklch(from #ECEFF4 l c h);
-  --color-warning-content: oklch(from #ECEFF4 l c h);
+    --color-primary: hsl(220, 60%, 15%);
+    --color-primary-content: hsl(45, 100%, 96%);
 
-  --color-base-100: oklch(from #ECEFF4 l c h);
-  --color-base-200: oklch(from #E5E9F0 l c h);
-  --color-base-300: oklch(from #D8DEE9 l c h);
-  --color-base-content: oklch(from #2E3440 l c h);
+    --color-secondary: hsl(220, 20%, 92%);
+    --color-secondary-content: hsl(220, 60%, 15%);
+
+    --color-accent: hsl(45, 100%, 50%);
+    --color-accent-content: hsl(220, 60%, 10%);
+
+    --color-neutral: hsl(220, 15%, 25%);
+    --color-neutral-content: hsl(220, 20%, 95%);
+
+    --color-error: hsl(0, 72%, 51%);
+    --color-error-content: hsl(0, 0%, 100%);
+
+    --color-success: hsl(142, 76%, 36%);
+    --color-success-content: hsl(0, 0%, 100%);
+
+    --radius-field: 0.5rem;
+    --radius-box: 0.75rem;
+}
+
+@plugin "daisyui/theme" {
+    name: luxury;
+    color-scheme: dark;
+
+    --color-base-100: hsl(220, 60%, 8%);
+    --color-base-200: hsl(220, 50%, 12%);
+    --color-base-300: hsl(220, 40%, 18%);
+    --color-base-content: hsl(220, 20%, 95%);
+
+    --color-primary: hsl(45, 100%, 50%);
+    --color-primary-content: hsl(220, 60%, 10%);
+
+    --color-secondary: hsl(220, 40%, 18%);
+    --color-secondary-content: hsl(220, 20%, 95%);
+
+    --color-accent: hsl(45, 100%, 50%);
+    --color-accent-content: hsl(220, 60%, 10%);
+
+    --color-neutral: hsl(220, 30%, 25%);
+    --color-neutral-content: hsl(220, 20%, 95%);
+
+    --color-error: hsl(0, 72%, 51%);
+    --color-error-content: hsl(0, 0%, 100%);
+
+    --color-success: hsl(142, 76%, 36%);
+    --color-success-content: hsl(0, 0%, 100%);
+
+    --radius-field: 0.5rem;
+    --radius-box: 0.75rem;
 }
 
 // my style
 @import 'fireworks';
 
-$titleFont: 'Inter';
-$bodyFont: 'Roboto';
+$titleFont: 'Beba ';
+$bodyFont: 'Inter';
 $italicFont: 'Crimson Text';
 
 *,
@@ -45,7 +82,9 @@ $italicFont: 'Crimson Text';
 body {
     margin: 0;
     padding: 0;
-    font-family: $bodyFont, sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-title: 'Bebas Neue', sans-serif;
+    font-family: var(--font-body), sans-serif;
 }
 
 h1,
@@ -54,21 +93,20 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: $titleFont, sans-serif;
+    font-weight: bold;
+    font-family: var(--font-title), sans-serif;
 }
 
 .fp2024 {
     &-title {
-        font-family: $titleFont, sans-serif;
+        font-family: var(--font-title), sans-serif;
     }
 
     &-italic {
-        font-family: $italicFont, serif;
         font-style: italic;
         font-weight: 400;
 
         &-bold {
-            font-family: $italicFont, serif;
             font-style: italic;
             font-weight: 600;
         }

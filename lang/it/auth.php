@@ -34,10 +34,9 @@ return [
     ],
     'verify_email' => [
         'title' => 'Verifica Email - FP2024',
-        'salutation' => 'Benvenuto :username',
         'heading' => 'Verifica la tua email!',
-        'paragraph' => 'Per poter partecipare al gioco devi verificare la tua email. Abbiamo inviato un link alla email che hai fornito durante la registrazione: :email.',
-        'paragraph2' => 'Se non hai ricevuto niente clicca sul link qui sotto.',
+        'paragraph' => 'Abbiamo inviato un link alla email che hai fornito durante la registrazione: :email.',
+        'paragraph2' => 'Se non hai ricevuto il link clicca sul pulsante qui sotto.',
         'btn' => 'Invia link di verifica',
     ],
     'league' => [

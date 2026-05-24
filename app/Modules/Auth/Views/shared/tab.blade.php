@@ -2,8 +2,9 @@
     href="{{route($name)}}"
     role="tab"
     @class([
-        'tab text-lg fp2024-title',
-        'tab-active disabled cursor-pointer' => Route::currentRouteName() === $name
+        'flex-1 text-center py-3 text-base transition-colors fp2024-title',
+        'border-b-2 border-primary text-primary font-semibold -mb-px' => Route::currentRouteName() === $name,
+        'text-base-content/50 hover:text-base-content/80' => Route::currentRouteName() !== $name,
     ])
 >
     {{$text}}

@@ -1,6 +1,6 @@
-<div class="drawer-side">
+<aside class="drawer-side">
     <label for="sidebarBtn" aria-label="close sidebar" class="drawer-overlay"></label>
-    <div class="min-h-screen bg-accent flex flex-col items-center justify-between text-base-100" id="sideBar">
+    <div class="min-h-screen bg-secondary flex flex-col items-center justify-between text-secondary-content" id="sideBar">
         <ul class="menu text-lg space-y-3">
             <li class="w-72 mb-9">
                 <x-partials.logo.large primary="#e5e7eb"/>
@@ -52,4 +52,4 @@
             </li>
         </ul>
     </div>
-</div>
+</aside>

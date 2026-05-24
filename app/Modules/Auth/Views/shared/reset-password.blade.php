@@ -1,5 +1,5 @@
-<div class="w-full space-y-1">
-    <span class="w-full text-center text-sm">{{__('auth.request_password_reset.paragraph')}}</span>
+<fieldset class="flex-1 flex flex-col items-center justify-center gap-4 w-full">
+    <legend class="text-center text-sm">{{__('auth.request_password_reset.paragraph')}}</legend>
     <x-auth::shared.form
         action="{{route('password.update')}}"
         method="POST"
@@ -25,4 +25,4 @@
     ]"
         btnText="{{__('auth.reset-password.btn')}}"
     />
-</div>
+</fieldset>

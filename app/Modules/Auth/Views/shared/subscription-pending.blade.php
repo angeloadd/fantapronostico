@@ -1,10 +1,10 @@
 <x-partials.notifications.toast-message sessionKey="status"/>
 
-<div class="flex flex-col justify-center items-center w-full space-y-1">
-    <h2 class="text-xl text-center">
+<div class="flex-1 flex flex-col items-center justify-center gap-4 w-full text-center">
+    <h2 class="text-2xl">
         La tua richiesta è stata inviata!
     </h2>
-    <p class="text-center text-lg">
+    <span class="">
         Attendi che un moderatore accetti la tua richiesta e potrai iniziare a giocare.
-    </p>
+    </span>
 </div>

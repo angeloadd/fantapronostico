@@ -8,6 +8,12 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="_token" content="{{ csrf_token() }}">
+        <script>
+            document.documentElement.setAttribute(
+                'data-theme',
+                window.matchMedia('(prefers-color-scheme: dark)').matches ? 'luxury' : 'corporate'
+            );
+        </script>
 
         <title>{{($title ?? null)?->isNotEmpty() ? $title : config('app.name') }}</title>
 
@@ -30,8 +36,8 @@
         <meta name="theme-color" content="#ffffff">
 
         <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=crimson-text:400i,600i|open-sans:700|roboto:400,700,900|inter:400,700" rel="stylesheet"/>
+        <link rel="stylesheet" href="{{ asset('fonts/Inter-4.1/web/inter.css') }}">
+        <link rel="stylesheet" href="{{ asset('fonts/BebasNeue_Complete/Fonts/WEB/css/bebas-neue.css') }}">
 
         <!-- Styles -->
         @vite(['resources/scss/app.scss', 'resources/js/app.js'])
@@ -39,7 +45,7 @@
             {{ $style }}
         @endif
     </head>
-    <body class="bg-base-300 min-h-screen">
+    <body class="bg-base-200 min-h-screen">
         {{ $slot }}
 
         <x-partials.notifications.toast-wrapper/>

@@ -11,7 +11,7 @@
             </form>
             <form method="dialog">
                 <!-- if there is a button in form, it will close the modal -->
-                <button class="btn btn-base-300">Chiudi</button>
+                <button class="btn btn-ghost">Chiudi</button>
             </form>
         </div>
     </div>

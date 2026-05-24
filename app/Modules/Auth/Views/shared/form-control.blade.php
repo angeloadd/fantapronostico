@@ -1,18 +1,27 @@
-<div class="form-control">
-    <label for="{{$name}}" class="label @if(!empty($hidden ?? null)) hidden @endif">{{$label ?? ''}}</label>
+@if(!empty($hidden ?? null))
     <input
         id="{{$name}}"
         name="{{$name}}"
         type="{{$type}}"
-        placeholder="{{!empty($placeholder ?? null) ? $placeholder : null}}"
-        class="input input-bordered @error($name) border-error @enderror @if(!empty($hidden ?? null)) hidden @endif"
-        required
-        @checked(!empty($checked ?? null) && $type === 'checkbox')
-        @if('password' !== $type) value="{{old($name, $value ?? null)}}" @endif
+        class="hidden"
+        value="{{old($name, $value ?? null)}}"
     />
-    @error($name)
-    @foreach($errors->get($name) as $error)
-        <span class="text-error text-sm">{{$error}}</span>
-    @endforeach
-    @enderror
-</div>
+@else
+    <div class="flex flex-col gap-1">
+        <label for="{{$name}}" class="text-sm font-medium text-base-content/70">{{$label ?? ''}}</label>
+        <input
+            id="{{$name}}"
+            name="{{$name}}"
+            type="{{$type}}"
+            placeholder="{{!empty($placeholder ?? null) ? $placeholder : null}}"
+            class="input w-full border-base-content/20 @error($name) border-error @enderror"
+            @checked(!empty($checked ?? null) && $type === 'checkbox')
+            @if('password' !== $type) value="{{old($name, $value ?? null)}}" @endif
+        />
+        @error($name)
+            @foreach($errors->get($name) as $error)
+                <span class="text-error text-xs mt-1">{{$error}}</span>
+            @endforeach
+        @enderror
+    </div>
+@endif
