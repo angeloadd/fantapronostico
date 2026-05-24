@@ -51,4 +51,7 @@ return [
         'title' => 'Reimposta Password - '.$appName,
         'btn' => 'Reimposta Password',
     ],
+    'subscription_pending' => [
+        'title' => 'Iscrizione in sospeso',
+    ],
 ];
