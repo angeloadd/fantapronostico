@@ -26,7 +26,9 @@ final class LeagueEnricherMiddleware
         if ($leagues->count() > 0 && null === $user->selected_league_id) {
             $user->selected_league_id = $leagues->first()->id;
             $user->save();
+        }
 
+        if (null !== $user->selected_league_id) {
             return $next($request);
         }
 

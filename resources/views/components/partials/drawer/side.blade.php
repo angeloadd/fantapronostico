@@ -1,9 +1,9 @@
 <aside class="drawer-side">
     <label for="sidebarBtn" aria-label="close sidebar" class="drawer-overlay"></label>
-    <div class="min-h-screen bg-secondary flex flex-col items-center justify-between text-secondary-content" id="sideBar">
+    <div class="min-h-screen bg-primary flex flex-col items-center justify-between text-secondary-content rounded-r-2xl" id="sideBar">
         <ul class="menu text-lg space-y-3">
             <li class="w-72 mb-9">
-                <x-partials.logo.large primary="#e5e7eb"/>
+                <x-partials.logo.large primary="var(--color-secondary)" secondary="var(--color-accent)"/>
             </li>
             <x-partials.drawer.item routeName="home" svg="home" text="Home"/>
             <x-partials.drawer.item routeName="prediction.next-from-ref" active="prediction" svg="bet" text="Pronostico"/>
@@ -14,7 +14,7 @@
         </ul>
         <ul class="menu w-full">
             <li class="w-full">
-                <div class="bg-base-100/70 p-[0.025rem] -mt-3 mx-3"></div>
+                <div class="bg-secondary p-[0.025rem] -mt-3 mx-3"></div>
             </li>
             <li>
                 <div class="dropdown dropdown-top dropdown-start flex hover:bg-neutral/30">

@@ -1,7 +1,8 @@
 <form action="{{$action}}" method="{{$method}}" class="w-full">
     @method($method)
     @csrf
-    <div class="flex flex-col gap-4">
+    <div class="flex flex-col gap-4 w-full">
+        @isset($slot) {{$slot}} @endisset
         @foreach($formControls as $formControl)
             <x-auth::shared.form-control
                     :name="$formControl['name']"
@@ -13,21 +14,22 @@
                     :hidden="!empty($formControl['hidden'])"
             />
         @endforeach
+
+        @if($passwordReset ?? false)
+            <a
+                    href="{{route('password.email')}}"
+                    class="text text-right text-base-content/70 hover:text-primary hover:underline"
+            >{{__('auth.login.request_password_reset')}}</a>
+        @endif
+
+        @if(isset($hint))
+            <span class="text-base-content/70 text-sm">
+                {{ $hint }}
+            </span>
+        @endif
+
         @if(isset($btnText) && ! isset($btn))
-            <div class="flex flex-col mt-2">
-                @if($passwordReset ?? false)
-                    <a
-                            href="{{route('password.email')}}"
-                            class="text-xs text-right text-base-content/50 hover:text-primary pb-2"
-                    >{{__('auth.login.request_password_reset')}}</a>
-                @endif
-                @if(isset($explanation))
-                    <span class="text-base-content/50 text-xs mb-2">
-                        {{ $explanation }}
-                    </span>
-                @endif
-                <button class="btn btn-accent text-accent-content fp2024-title">{{$btnText}}</button>
-            </div>
+            <button class="btn btn-accent">{{$btnText}}</button>
         @else
             {{$btn}}
         @endif

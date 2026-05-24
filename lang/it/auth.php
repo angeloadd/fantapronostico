@@ -35,12 +35,15 @@ return [
     'verify_email' => [
         'title' => 'Verifica Email - FP2024',
         'heading' => 'Verifica la tua email!',
-        'paragraph' => 'Abbiamo inviato un link alla email che hai fornito durante la registrazione: :email.',
+        'paragraph' => 'Abbiamo inviato un link alla email che hai fornito durante la registrazione: <strong>:email</strong>.',
         'paragraph2' => 'Se non hai ricevuto il link clicca sul pulsante qui sotto.',
         'btn' => 'Invia link di verifica',
     ],
     'league' => [
         'title' => 'Leghe',
+        'heading' => 'Inscriviti ad una lega',
+        'subscribe' => 'Richiedi Iscrizione',
+        'hint' => 'Scegli una delle leghe presenti ed iscriviti.',
     ],
     'request_password_reset' => [
         'title' => 'Password Dimenticata - '.$appName,
@@ -53,5 +56,7 @@ return [
     ],
     'subscription_pending' => [
         'title' => 'Iscrizione in sospeso',
+        'heading' => 'La tua richiesta è stata inviata!',
+        'paragraph' => 'Attendi che un moderatore accetti la tua richiesta e potrai iniziare a giocare.',
     ],
 ];
