@@ -128,7 +128,7 @@ final readonly class RankingCalculator implements RankingCalculatorInterface
                 'latest_game_started_at' => Game::whereStatus(GameStatus::FINISHED)
                     ->whereTournamentId($league->tournament_id)
                     ->orderBy('started_at', 'desc')
-                    ->first()->started_at,
+                    ->first()?->started_at,
                 'score' => PredictionScoreFactory::create($prediction),
             ]);
 

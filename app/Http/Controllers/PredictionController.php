@@ -296,6 +296,9 @@ final class PredictionController extends Controller
         );
     }
 
+    /**
+     * @return Collection<int, string>
+     */
     private function getTeamScorersList(Team $team): Collection
     {
         $players = $team->players

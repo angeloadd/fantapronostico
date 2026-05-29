@@ -78,11 +78,12 @@ use Illuminate\Support\Carbon;
  */
 final class User extends Authenticatable implements MustVerifyEmail
 {
+    /** @use HasFactory<UserFactory> */
     use HasFactory;
     use Notifiable;
 
     /**
-     * @var array<int, string>
+     * @var list<string>
      */
     protected $fillable = [
         'name',
@@ -92,7 +93,7 @@ final class User extends Authenticatable implements MustVerifyEmail
     ];
 
     /**
-     * @var array<int, string>
+     * @var list<string>
      */
     protected $hidden = [
         'password',
@@ -112,26 +113,41 @@ final class User extends Authenticatable implements MustVerifyEmail
         return UserFactory::new();
     }
 
+    /**
+     * @return HasMany<Prediction, $this>
+     */
     public function predictions(): HasMany
     {
         return $this->hasMany(Prediction::class);
     }
 
+    /**
+     * @return HasOne<Champion, $this>
+     */
     public function champion(): HasOne
     {
         return $this->hasOne(Champion::class);
     }
 
+    /**
+     * @return BelongsToMany<League, $this>
+     */
     public function leagues(): BelongsToMany
     {
         return $this->belongsToMany(League::class)->withPivot(['status']);
     }
 
+    /**
+     * @return HasMany<Role, $this>
+     */
     public function roles(): HasMany
     {
         return $this->hasMany(Role::class);
     }
 
+    /**
+     * @return Attribute<bool, never>
+     */
     public function admin(): Attribute
     {
         return Attribute::get(
@@ -139,13 +155,19 @@ final class User extends Authenticatable implements MustVerifyEmail
         );
     }
 
+    /**
+     * @return Attribute<bool, never>
+     */
     public function mod(): Attribute
     {
         return Attribute::get(
-            fn (): bool => $this->roles->some(fn (Role $role) => RoleEnum::ADMIN === $role->role || RoleEnum::MOD === $role->role)
+            fn (): bool => $this->roles->some(fn (Role $role) => in_array($role->role, [RoleEnum::MOD, RoleEnum::ADMIN], true))
         );
     }
 
+    /**
+     * @return HasOne<League, $this>
+     */
     public function selectedLeague(): HasOne
     {
         return $this->hasOne(League::class, 'id', 'selected_league_id');

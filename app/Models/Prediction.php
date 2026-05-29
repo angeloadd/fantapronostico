@@ -64,6 +64,7 @@ use Illuminate\Support\Carbon;
  */
 final class Prediction extends Model
 {
+    /** @use HasFactory<PredictionFactory> */
     use HasFactory;
 
     protected $dateFormat = 'Y-m-d H:i:s.u';
@@ -81,16 +82,25 @@ final class Prediction extends Model
         'updated_at',
     ];
 
+    /**
+     * @return BelongsTo<User, $this>
+     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * @return BelongsTo<Game, $this>
+     */
     public function game(): BelongsTo
     {
         return $this->belongsTo(Game::class);
     }
 
+    /**
+     * @return Attribute<string, never>
+     */
     public function homeScorer(): Attribute
     {
         return Attribute::get(
@@ -98,6 +108,9 @@ final class Prediction extends Model
         );
     }
 
+    /**
+     * @return Attribute<string, never>
+     */
     public function awayScorer(): Attribute
     {
         return Attribute::get(

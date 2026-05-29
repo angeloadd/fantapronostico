@@ -9,8 +9,6 @@ use Illuminate\Contracts\Support\Renderable;
 
 final class MiscController extends Controller
 {
-    public function __construct(private readonly RankingCalculatorInterface $calculator) {}
-
     public function albo(): Renderable
     {
         return view('misc.albo');

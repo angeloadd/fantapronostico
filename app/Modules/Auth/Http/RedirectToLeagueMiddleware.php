@@ -14,7 +14,7 @@ final class RedirectToLeagueMiddleware
 {
     public function handle(Request $request, Closure $next): RedirectResponse|Response
     {
-        if ($request->user()->selectedLeague instanceof League) {
+        if ($request->user()?->selectedLeague instanceof League) {
             return redirect('/')->with('success', 'La tua richiesta è stata approvata.');
         }
 

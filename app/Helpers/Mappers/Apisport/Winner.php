@@ -6,7 +6,7 @@ namespace App\Helpers\Mappers\Apisport;
 
 final class Winner
 {
-    public function __construct(private ?int $winnerTeamId) {}
+    public function __construct(private readonly ?int $winnerTeamId) {}
 
     public static function fromArray(array $response): self
     {

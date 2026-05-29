@@ -16,10 +16,10 @@ final class LeagueController extends Controller
     public function show(Request $request): View|RedirectResponse
     {
         $leagues = League::all();
-        /** @var Collection $userLeagues */
-        $userLeagues = $request->user()->leagues;
+        /** @var ?Collection<array-key, League> $userLeagues */
+        $userLeagues = $request->user()?->leagues;
 
-        $leagues = $leagues->filter(static fn (League $league) => !$userLeagues->some(static fn (League $l) => $l->id === $league->id));
+        $leagues = $leagues->filter(static fn (League $league) => !$userLeagues?->some(static fn (League $l) => $l->id === $league->id));
 
         if (0 === $leagues->count()) {
             return redirect(route('leagues.pending'));
@@ -31,7 +31,7 @@ final class LeagueController extends Controller
     public function requestSubscription(Request $request): RedirectResponse
     {
         $league = League::find($request->input('league_id'));
-        if (null !== $league) {
+        if ($league instanceof League) {
             $league->users()->attach($request->user(), ['status' => 'pending']);
 
             return redirect(route('leagues.pending'));

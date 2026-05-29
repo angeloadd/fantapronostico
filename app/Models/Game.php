@@ -68,6 +68,7 @@ use Illuminate\Support\Carbon;
  */
 final class Game extends Model
 {
+    /** @use HasFactory<GameFactory> */
     use HasFactory;
 
     private const FINAL = 'final';
@@ -84,11 +85,12 @@ final class Game extends Model
         'started_at',
     ];
 
-    /**
-     * @var array<int, string>
-     */
     protected $appends = ['home_team', 'away_team', 'away_score', 'home_score', 'sign'];
 
+    /**
+     * @param  Builder<Game>  $query
+     * @return Builder<Game>
+     */
     public static function scopeLastResults(Builder $query, DateTimeInterface $now): Builder
     {
         return $query->fromLatest()
@@ -97,6 +99,9 @@ final class Game extends Model
             ->limit(4);
     }
 
+    /**
+     * @return Collection<int, Game>
+     */
     public static function notCompletedToday(): Collection
     {
         return self::where(
@@ -151,26 +156,32 @@ final class Game extends Model
         ];
     }
 
+    /**
+     * @return HasMany<GameGoal, $this>
+     */
     public function goals(): HasMany
     {
         return $this->hasMany(GameGoal::class);
     }
 
     /**
-     * @return BelongsToMany<Player>
+     * @return BelongsToMany<Player, $this>
      */
     public function players(): BelongsToMany
     {
         return $this->belongsToMany(Player::class);
     }
 
+    /**
+     * @return HasMany<Prediction, $this>
+     */
     public function predictions(): HasMany
     {
         return $this->hasMany(Prediction::class);
     }
 
     /**
-     * @return BelongsTo<Tournament, Game>
+     * @return BelongsTo<Tournament, $this>
      */
     public function tournament(): BelongsTo
     {
@@ -178,13 +189,16 @@ final class Game extends Model
     }
 
     /**
-     * @return BelongsToMany<Team>
+     * @return BelongsToMany<Team, $this>
      */
     public function teams(): BelongsToMany
     {
         return $this->belongsToMany(Team::class)->withPivot('is_away');
     }
 
+    /**
+     * @return Attribute<Carbon, never>
+     */
     public function predictableFrom(): Attribute
     {
         return Attribute::get(
@@ -193,7 +207,7 @@ final class Game extends Model
     }
 
     /**
-     * @return Attribute<Team, Team>
+     * @return Attribute<Team, never>
      */
     public function homeTeam(): Attribute
     {
@@ -203,7 +217,7 @@ final class Game extends Model
     }
 
     /**
-     * @return Attribute<Team, Team>
+     * @return Attribute<Team, never>
      */
     public function awayTeam(): Attribute
     {
@@ -212,24 +226,33 @@ final class Game extends Model
         );
     }
 
+    /**
+     * @return Attribute<int, never>
+     */
     public function homeScore(): Attribute
     {
         return Attribute::make(
             get: fn (): int => $this->goals->filter(
-                fn (GameGoal $goal): bool => $goal->player->national_id === $this->home_team->id && !$goal->is_autogoal
-            )->count() + $this->goals->filter(fn (GameGoal $goal): bool => $goal->player->national_id === $this->away_team->id && $goal->is_autogoal)->count(),
+                fn (GameGoal $goal): bool => $goal->player->national_id === $this->home_team?->id && !$goal->is_autogoal
+            )->count() + $this->goals->filter(fn (GameGoal $goal): bool => $goal->player->national_id === $this->away_team?->id && $goal->is_autogoal)->count(),
         );
     }
 
+    /**
+     * @return Attribute<int, never>
+     */
     public function awayScore(): Attribute
     {
         return Attribute::get(
             fn (): int => $this->goals->filter(
-                fn (GameGoal $goal): bool => $goal->player->national_id === $this->away_team->id && !$goal->is_autogoal
-            )->count() + $this->goals->filter(fn (GameGoal $goal): bool => $goal->player->national_id === $this->home_team->id && $goal->is_autogoal)->count(),
+                fn (GameGoal $goal): bool => $goal->player->national_id === $this->away_team?->id && !$goal->is_autogoal
+            )->count() + $this->goals->filter(fn (GameGoal $goal): bool => $goal->player->national_id === $this->home_team?->id && $goal->is_autogoal)->count(),
         );
     }
 
+    /**
+     * @return Attribute<string, never>
+     */
     public function sign(): Attribute
     {
         return Attribute::get(
@@ -247,15 +270,18 @@ final class Game extends Model
         );
     }
 
+    /**
+     * @return Attribute<int[], never>
+     */
     public function homeScorers(): Attribute
     {
         return Attribute::get(
             function () {
                 $homeScorers = [];
-                $this->goals->filter(fn (GameGoal $gameGoal) => $gameGoal->player->national_id === $this->home_team->id && !$gameGoal->is_autogoal)->each(function (GameGoal $gameGoal) use (&$homeScorers): void {
+                $this->goals->filter(fn (GameGoal $gameGoal) => $gameGoal->player->national_id === $this->home_team?->id && !$gameGoal->is_autogoal)->each(function (GameGoal $gameGoal) use (&$homeScorers): void {
                     $homeScorers[] = $gameGoal->player->id;
                 });
-                if ($this->goals->some(fn (GameGoal $gameGoal) => $gameGoal->player->national_id === $this->away_team->id && $gameGoal->is_autogoal)) {
+                if ($this->goals->some(fn (GameGoal $gameGoal) => $gameGoal->player->national_id === $this->away_team?->id && $gameGoal->is_autogoal)) {
                     $homeScorers[] = -1;
                 }
 
@@ -268,15 +294,18 @@ final class Game extends Model
         );
     }
 
+    /**
+     * @return Attribute<list<int>, never>
+     */
     public function awayScorers(): Attribute
     {
         return Attribute::get(
             function () {
                 $awayScorers = [];
-                $this->goals->filter(fn (GameGoal $gameGoal) => $gameGoal->player->national_id === $this->away_team->id && !$gameGoal->is_autogoal)->each(function (GameGoal $gameGoal) use (&$awayScorers): void {
+                $this->goals->filter(fn (GameGoal $gameGoal) => $gameGoal->player->national_id === $this->away_team?->id && !$gameGoal->is_autogoal)->each(function (GameGoal $gameGoal) use (&$awayScorers): void {
                     $awayScorers[] = $gameGoal->player->id;
                 });
-                if ($this->goals->some(fn (GameGoal $gameGoal) => $gameGoal->player->national_id === $this->home_team->id && $gameGoal->is_autogoal)) {
+                if ($this->goals->some(fn (GameGoal $gameGoal) => $gameGoal->player->national_id === $this->home_team?->id && $gameGoal->is_autogoal)) {
                     $awayScorers[] = -1;
                 }
 
@@ -291,7 +320,7 @@ final class Game extends Model
 
     public function isFirstGame(): bool
     {
-        return self::first()->id === $this->id;
+        return self::first()?->id === $this->id;
     }
 
     public function isFinal(): bool
@@ -304,17 +333,24 @@ final class Game extends Model
         return str_contains(mb_strtolower($this->stage), self::GROUP);
     }
 
-    public function scopeFromLatest($query): void
+    /**
+     * @param  Builder<Game>  $query
+     */
+    public function scopeFromLatest(Builder $query): void
     {
         $query->orderBy('started_at', 'desc')
             ->orderBy('id', 'desc');
     }
 
+    /**
+     * @return list<string>
+     */
     public function getScoreParsed(string $type): array
     {
+        /** @var list<string> $goals */
         $goals = $this->goals->filter(
             fn (GameGoal $goal) => $goal->player->national_id === $this->{$type.'_team'}->id ||
-                    $goal->player->club_id === $this->{$type.'_team'}->id
+                $goal->player->club_id === $this->{$type.'_team'}->id
         )->map(
             static function (GameGoal $goal) {
                 if ($goal->is_autogoal) {

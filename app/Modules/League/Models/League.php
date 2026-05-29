@@ -38,18 +38,22 @@ use Illuminate\Support\Carbon;
  */
 final class League extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
         'tournament_id',
         'name',
     ];
 
+    /**
+     * @return BelongsToMany<User, $this>
+     */
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class)->withPivot(['status']);
     }
 
+    /**
+     * @return BelongsTo<Tournament, $this>
+     */
     public function tournament(): BelongsTo
     {
         return $this->belongsTo(Tournament::class);

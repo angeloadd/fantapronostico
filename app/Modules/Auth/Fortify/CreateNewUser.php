@@ -16,6 +16,8 @@ final class CreateNewUser implements CreatesNewUsers
     use PasswordValidationRules;
 
     /**
+     * @param  array<string, string>  $input
+     *
      * @throws ValidationException
      */
     public function create(array $input): User

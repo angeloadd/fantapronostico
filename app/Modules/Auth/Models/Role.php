@@ -37,8 +37,6 @@ use Illuminate\Support\Carbon;
  */
 final class Role extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
         'role',
         'user_id',
@@ -52,11 +50,17 @@ final class Role extends Model
         ];
     }
 
+    /**
+     * @return BelongsTo<League, $this>
+     */
     public function leagues(): BelongsTo
     {
         return $this->belongsTo(League::class);
     }
 
+    /**
+     * @return BelongsTo<User, $this>
+     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

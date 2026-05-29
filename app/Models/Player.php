@@ -59,6 +59,7 @@ use Illuminate\Support\Facades\Cache;
  */
 final class Player extends Model
 {
+    /** @use HasFactory<PlayerFactory> */
     use HasFactory;
 
     protected $fillable = [
@@ -70,6 +71,9 @@ final class Player extends Model
         'club_id',
     ];
 
+    /**
+     * @return Collection<int, Player>
+     */
     public static function getAllPlayerCached(string $sortBy = 'national_id'): Collection
     {
         /** @var Collection<int, Player> */
@@ -107,7 +111,7 @@ final class Player extends Model
 
     public static function setTopScorers(PlayersDto $dto, Tournament $tournament): void
     {
-        Player::all()->each(
+        self::all()->each(
             function (Player $player) use ($tournament): void {
                 $player->tournaments()->attach($tournament->id);
             }
@@ -119,7 +123,7 @@ final class Player extends Model
     }
 
     /**
-     * @return BelongsTo<Team, Player>
+     * @return BelongsTo<Team, $this>
      */
     public function national(): BelongsTo
     {
@@ -127,7 +131,7 @@ final class Player extends Model
     }
 
     /**
-     * @return BelongsTo<Team, Player>
+     * @return BelongsTo<Team, $this>
      */
     public function club(): BelongsTo
     {
@@ -135,7 +139,7 @@ final class Player extends Model
     }
 
     /**
-     * @return BelongsToMany<Tournament>
+     * @return BelongsToMany<Tournament, $this>
      */
     public function tournaments(): BelongsToMany
     {
@@ -143,7 +147,7 @@ final class Player extends Model
     }
 
     /**
-     * @return HasMany<GameGoal>
+     * @return HasMany<GameGoal, $this>
      */
     public function goals(): HasMany
     {
@@ -151,7 +155,7 @@ final class Player extends Model
     }
 
     /**
-     * @return BelongsToMany<Game>
+     * @return BelongsToMany<Game, $this>
      */
     public function games(): BelongsToMany
     {

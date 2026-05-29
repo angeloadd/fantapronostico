@@ -12,7 +12,7 @@ final class ScorerRule implements ValidationRule
 {
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        $game = request()?->route()?->parameter('game');
+        $game = request()->route()?->parameter('game');
 
         if (!$game instanceof Game) {
             return;

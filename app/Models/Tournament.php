@@ -62,6 +62,7 @@ use Illuminate\Support\Carbon;
  */
 final class Tournament extends Model
 {
+    /** @use HasFactory<TournamentFactory> */
     use HasFactory;
 
     protected $fillable = [
@@ -85,7 +86,7 @@ final class Tournament extends Model
     }
 
     /**
-     * @return BelongsToMany<Team>
+     * @return BelongsToMany<Team, $this>
      */
     public function teams(): BelongsToMany
     {
@@ -93,7 +94,7 @@ final class Tournament extends Model
     }
 
     /**
-     * @return BelongsToMany<Player>
+     * @return BelongsToMany<Player, $this>
      */
     public function players(): BelongsToMany
     {
@@ -101,18 +102,24 @@ final class Tournament extends Model
     }
 
     /**
-     * @return HasMany<Game>
+     * @return HasMany<Game, $this>
      */
     public function games(): HasMany
     {
         return $this->hasMany(Game::class);
     }
 
+    /**
+     * @return HasMany<League, $this>
+     */
     public function leagues(): HasMany
     {
         return $this->hasMany(League::class);
     }
 
+    /**
+     * @return string[]
+     */
     protected function casts(): array
     {
         return [

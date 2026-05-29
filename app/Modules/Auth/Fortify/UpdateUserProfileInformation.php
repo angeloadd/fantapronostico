@@ -15,7 +15,7 @@ final class UpdateUserProfileInformation implements UpdatesUserProfileInformatio
     /**
      * Validate and update the given user's profile information.
      *
-     * @param  array<string, string>  $input
+     * @param array<string, string> $input
      */
     public function update(User $user, array $input): void
     {
@@ -31,8 +31,8 @@ final class UpdateUserProfileInformation implements UpdatesUserProfileInformatio
             ],
         ])->validateWithBag('updateProfileInformation');
 
-        if ($input['email'] !== $user->email &&
-            $user instanceof MustVerifyEmail) {
+        // @phpstan-ignore-next-line instanceof.alwaysTrue
+        if ($input['email'] !== $user->email && $user instanceof MustVerifyEmail) {
             $this->updateVerifiedUser($user, $input);
         } else {
             $user->forceFill([
@@ -45,7 +45,7 @@ final class UpdateUserProfileInformation implements UpdatesUserProfileInformatio
     /**
      * Update the given verified user's profile information.
      *
-     * @param  array<string, string>  $input
+     * @param array<string, string> $input
      */
     private function updateVerifiedUser(User $user, array $input): void
     {

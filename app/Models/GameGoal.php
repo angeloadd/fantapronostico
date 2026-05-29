@@ -41,6 +41,7 @@ use Illuminate\Support\Carbon;
  */
 final class GameGoal extends Model
 {
+    /** @use HasFactory<GameGoalFactory> */
     use HasFactory;
 
     public $timestamps = false;
@@ -58,7 +59,7 @@ final class GameGoal extends Model
     ];
 
     /**
-     * @return BelongsTo<Game, GameGoal>
+     * @return BelongsTo<Game, $this>
      */
     public function game(): BelongsTo
     {
@@ -66,7 +67,7 @@ final class GameGoal extends Model
     }
 
     /**
-     * @return BelongsTo<Player, GameGoal>
+     * @return BelongsTo<Player, $this>
      */
     public function player(): BelongsTo
     {
