@@ -225,7 +225,7 @@ abstract class DevBaseSeeder extends Seeder
         }
 
         $futureIndex = $gameIndex - $finishedCount;
-        $daysFromNow = (int) ($futureIndex / 2) + 2;
+        $daysFromNow = (int) ($futureIndex / 2) + 1;
         $hour = 18 + ($futureIndex % 2) * 3;
 
         return $now->copy()->addDays($daysFromNow)->setHour($hour)->setMinute(0)->setSecond(0);

@@ -1,14 +1,15 @@
-<li class="w-full px-5">
+@php
+    $isCurrentRoute = str_contains(Route::currentRouteName(), $active ?? $routeName)
+@endphp
+
+1<li class="p-1">
     <a href="{{route($routeName)}}"
         @class([
-             'bg-accent hover:bg-accent' => str_contains(Route::currentRouteName(), $active ?? $routeName),
-             'text-primary-content hover:bg-accent/70' => !str_contains(Route::currentRouteName(), $active ?? $routeName)
+             'bg-[#2b3b5a] text-accent border-l-accent border-l-2 rounded-2xl hover:text-base-100' => str_contains(Route::currentRouteName(), $active ?? $routeName),
+             'text-primary-content/85 hover:bg-[#2b3b5a]0' => !str_contains(Route::currentRouteName(), $active ?? $routeName)
         ])
     >
-        <img class="me-2"
-             width="20px"
-             src="{{Vite::asset('resources/assets/images/'.$svg.'.svg')}}"
-             alt="{{$svg}}"/>
-        {{$text}}
+        <x-dynamic-component :component="'partials.svgs.'.$svg"/>
+        <span class="pl-1">{{$text}}</span>
     </a>
 </li>

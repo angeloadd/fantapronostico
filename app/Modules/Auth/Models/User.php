@@ -67,6 +67,7 @@ use Illuminate\Support\Carbon;
  * @property-read Collection<int, Role> $roles
  * @property-read int|null $roles_count
  * @property-read bool $admin
+ * @property-read bool $mod
  * @property-read object{status: string} $pivot
  * @property int|null $selected_league_id
  * @property-read League|null $selectedLeague
@@ -135,6 +136,13 @@ final class User extends Authenticatable implements MustVerifyEmail
     {
         return Attribute::get(
             fn (): bool => $this->roles->some(fn (Role $role) => RoleEnum::ADMIN === $role->role)
+        );
+    }
+
+    public function mod(): Attribute
+    {
+        return Attribute::get(
+            fn (): bool => $this->roles->some(fn (Role $role) => RoleEnum::ADMIN === $role->role || RoleEnum::MOD === $role->role)
         );
     }
 

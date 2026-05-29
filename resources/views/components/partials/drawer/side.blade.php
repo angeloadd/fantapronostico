@@ -1,55 +1,36 @@
 <aside class="drawer-side">
     <label for="sidebarBtn" aria-label="close sidebar" class="drawer-overlay"></label>
-    <div class="min-h-screen bg-primary flex flex-col items-center justify-between text-secondary-content rounded-r-2xl" id="sideBar">
-        <ul class="menu text-lg space-y-3">
-            <li class="w-72 mb-9">
-                <x-partials.logo.large primary="var(--color-secondary)" secondary="var(--color-accent)"/>
-            </li>
-            <x-partials.drawer.item routeName="home" svg="home" text="Home"/>
+    <div class="min-h-screen bg-primary flex flex-col items-center justify-start" id="sideBar">
+        <div class="h-14 flex justify-center items-center pt-1">
+            <x-partials.logo.large primary="var(--color-primary-content)" secondary="var(--color-accent)" width="w-60"/>
+        </div>
+        <div class="divider divider-neutral m-0"></div>
+
+        <ul class="menu text-lg w-full mb-4">
+            <x-partials.drawer.item routeName="home" svg="home" text="Dashboard"/>
             <x-partials.drawer.item routeName="prediction.next-from-ref" active="prediction" svg="bet" text="Pronostico"/>
             <x-partials.drawer.item routeName="champion.create" active="champion" svg="winner" text="Vincente"/>
+        </ul>
+        <p class="text-primary-content/50 text-left w-full px-5 pt-5 text-sm">ESPLORA</p>
+        <ul class="menu text-lg w-full mb-4">
             <x-partials.drawer.item routeName="standing" svg="rank" text="Classifica"/>
             <x-partials.drawer.item routeName="albo" svg="albo" text="Albo d'oro"/>
             <x-partials.drawer.item routeName="terms" svg="terms" text="Regolamento"/>
         </ul>
-        <ul class="menu w-full">
-            <li class="w-full">
-                <div class="bg-secondary p-[0.025rem] -mt-3 mx-3"></div>
-            </li>
-            <li>
-                <div class="dropdown dropdown-top dropdown-start flex hover:bg-neutral/30">
-                    <div tabindex="0" role="button" class=" flex items-center w-full">
-                        <img src="{{Vite::asset('resources/assets/images/profile.svg')}}"
-                             alt="grind"
-                             width="32"
-                             class="rounded-circle me-2">
-                        <p><strong class="text-2xl">{{Auth::user()->name ?? 'Accedi'}}</strong></p>
-                    </div>
-                    <ul tabindex="0" class="dropdown-content z-[1] text-lg rounded-lg bg-accent shadow-lg" aria-labelledby="dropdownUser1">
-                        @guest
-                            <li>
-                                <a href="{{ route('login') }}">Accedi</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('register') }}">Iscriviti</a>
-                            </li>
-                        @else
-                            @if(auth()->user()->admin)
-                                <li>
-                                    <a href="/admin">
-                                        PannelloMod
-                                    </a>
-                                </li>
-                            @endif
-                            <li>
-                                <button type="button" onclick="logOutModal.showModal()">
-                                    Logout
-                                </button>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </li>
-        </ul>
+        @auth
+            @if(auth()->user()->mod)
+                <p class="text-primary-content/50 text-left w-full px-5 pt-5 text-sm">ADMIN</p>
+                <ul class="menu text-lg w-full">
+                    <li class="p-1">
+                        <a href="/admin"
+                           class="text-primary-content/85 hover:bg-[#2b3b5a]"
+                        >
+                            <x-dynamic-component :component="'partials.svgs.admin'"/>
+                            <span class="pl-1">Pannello Mod</span>
+                        </a>
+                    </li>
+                </ul>
+            @endif
+        @endauth
     </div>
 </aside>
