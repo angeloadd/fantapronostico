@@ -6,7 +6,7 @@ namespace App\Filament\Widgets;
 
 use App\Helpers\Ranking\RankingCalculatorInterface;
 use App\Modules\Auth\Models\User;
-use Filament\Tables\Actions\Action;
+use Filament\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
@@ -35,7 +35,7 @@ final class LeaguesWidget extends BaseWidget
                         default => 'gray',
                     }),
             ])
-            ->actions([
+            ->recordActions([
                 Action::make('accept')
                     ->disabled(static fn (User $user) => 'accepted' === $user->leagues->first()?->pivot->status)
                     ->action(
