@@ -1,5 +1,5 @@
 <div class="card h-full w-full shadow-md rounded-lg border border-accent/50 bg-base-100">
-    <div class="card-body">
+    <div class="card-body overflow-scroll">
         <div class="w-full flex justify-between items-center">
             <h2 class="card-title pb-2 text-2xl">{{$title}}</h2>
             @if(! empty($link ?? null))
