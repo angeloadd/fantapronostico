@@ -1,7 +1,7 @@
 <input class="drawer-toggle" type="checkbox" id="sidebarBtn"/>
-<div class="drawer-content relative">
+<div class="drawer-content flex flex-col md:h-screen">
     <x-partials.drawer.navbar/>
-    <div class="w-full flex justify-center items-center xl:overflow-y-auto xl:h-screen xl:max-h-screen">
+    <div class="flex-1 md:overflow-auto p-4 md:p-6">
         {{$slot}}
     </div>
 </div>

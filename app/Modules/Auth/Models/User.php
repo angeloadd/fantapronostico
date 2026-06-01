@@ -74,12 +74,17 @@ use Illuminate\Support\Carbon;
  *
  * @method static Builder|User whereSelectedLeagueId($value)
  *
+ * @property string|null $two_factor_confirmed_at
+ *
+ * @method static Builder<static>|User whereTwoFactorConfirmedAt($value)
+ *
  * @mixin Eloquent
  */
 final class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory;
+
     use Notifiable;
 
     /**

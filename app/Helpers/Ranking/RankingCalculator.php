@@ -109,7 +109,9 @@ final readonly class RankingCalculator implements RankingCalculatorInterface
 
         $rank = $this->calculatePredictionScores($user, $league, $rank);
 
-        return $this->addWinnerAndTopScorerScores($user, $league, $rank);
+//        $userRank = $this->addWinnerAndTopScorerScores($user, $league, $rank);
+
+        return $rank;
     }
 
     private function calculatePredictionScores(User $user, League $league, UserRank $rank): UserRank

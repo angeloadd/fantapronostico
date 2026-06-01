@@ -342,7 +342,7 @@ abstract class DevBaseSeeder extends Seeder
                 'game_id' => $game->id,
                 'player_id' => $allPlayers->random()->id,
                 'is_autogoal' => false,
-                'scored_at' => $game->started_at->copy()->addMinutes(random_int(10, 85)),
+                'scored_at' => $game->started_at->copy()->addMinutes(random_int(10, 85))->minute,
             ]);
         }
     }

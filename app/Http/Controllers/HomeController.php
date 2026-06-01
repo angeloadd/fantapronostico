@@ -46,7 +46,7 @@ final class HomeController extends Controller
         )?->first() ?? $latestGames?->last();
 
         return view('pages.home.index', [
-            'ranking' => $ranking->filter(static fn (UserRank $rank, int $index) => $user->id === $rank->userId() || $index <= 12),
+            'ranking' => $ranking->filter(static fn (UserRank $rank, int $index) => $user->id === $rank->userId() || $index <= 9),
             'nextGame' => $nextGame,
             'champion' => $user->champion,
             'hasTournamentStarted' => $this->hasTournamentStarted($tournament),
@@ -56,6 +56,8 @@ final class HomeController extends Controller
             'winnerName' => $ranking->first()?->userName() ?? '',
             'leagueName' => $league->name,
             'games' => $this->gameRepository->getAll(),
+            'userRank' => $ranking->filter(static fn (UserRank $rank) => $rank->userId() === $user->id)->first(),
+            'tournamentStartedAt' => $tournament->started_at,
         ]);
     }
 

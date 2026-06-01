@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Helpers\Ranking\RankingCalculatorInterface;
 use Illuminate\Contracts\Support\Renderable;
 
 final class MiscController extends Controller
