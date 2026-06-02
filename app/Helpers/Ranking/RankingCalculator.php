@@ -184,7 +184,7 @@ final readonly class RankingCalculator implements RankingCalculatorInterface
             $rank->total += 20;
         }
 
-        $topScorerIds = $tournament->players()->wherePivot('is_top_scorer', true)->pluck('id');
+        $topScorerIds = $tournament->players()->wherePivot('is_top_scorer', true)->pluck('players.id');
         if ($topScorerIds->contains($champion->player_id)) {
             $rank->topScorer = true;
             $rank->total += 15;

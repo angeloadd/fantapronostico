@@ -21,6 +21,8 @@
             <x-home::components.champion
                     :champion="$champion ?? null"
                     :tournamentStartedAt="$tournamentStartedAt"
+                    :isChampionPredictionSuccessful="$userRank->winner ?? false"
+                    :isTopScorerPredictionSuccessful="$userRank->topScorer ?? false"
             />
         </div>
         <div class="min-h-0 order-4">

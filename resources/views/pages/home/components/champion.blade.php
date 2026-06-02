@@ -7,10 +7,10 @@
 <x-home::shared.card :grayed="$isPastPredictionDateOrStillNotOpen" title="Pronostico Vincente">
     <div class="my-auto gap-4 flex flex-col">
         @if(null !== $champion)
-            <x-home::shared.info-tile label="Vincitore" :value="__($champion->team->name)">
+            <x-home::shared.info-tile label="Vincitore" :value="__($champion->team->name)" :isPredictionSuccessful="$isChampionPredictionSuccessful ?? false">
                 <x-partials.svgs.rank/>
             </x-home::shared.info-tile>
-            <x-home::shared.info-tile label="Capocannoniere" :value="$champion->player->displayed_name">
+            <x-home::shared.info-tile label="Capocannoniere" :value="$champion->player->displayed_name" :isPredictionSuccessful="$isTopScorerPredictionSuccessful ?? false">
                 <x-partials.svgs.boot/>
             </x-home::shared.info-tile>
             @if($isOpenForPrediction)
