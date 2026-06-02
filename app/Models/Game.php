@@ -202,7 +202,7 @@ final class Game extends Model
     public function predictableFrom(): Attribute
     {
         return Attribute::get(
-            fn (): Carbon => $this->started_at->subDays($this->isFirstGame() ? 2 : 1)
+            fn (): Carbon => $this->started_at->avoidMutation()->subDays($this->isFirstGame() ? 2 : 1)
         );
     }
 

@@ -159,7 +159,16 @@ final class ChampionController extends Controller
 
     public function error(): Renderable
     {
-        return view('pages.champion.409', ['championSettableFrom' => $this->getChampionSettableFrom()]);
+        $tournament = Tournament::first();
+        $firstMatchStartDate = Tournament::first()?->first()?->started_at;
+        $championSettableFrom = $firstMatchStartDate->avoidMutation()->subDays(2);
+
+        return view('pages.champion.409', [
+            'championSettableFrom' => $championSettableFrom,
+            'tournamentLogo' => $tournament?->logo,
+            'tournamentName' => $tournament?->name,
+            'firstMatchDate' => $firstMatchStartDate,
+        ]);
     }
 
     public function getFirstMatchStartDate(): ?Carbon

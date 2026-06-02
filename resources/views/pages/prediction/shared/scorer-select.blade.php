@@ -7,12 +7,12 @@
     >
         <option
             value=""
-            @selected(null === $prediction || null === old($label, $prediction?->{$label}))
+            @selected(null === old($label, $prediction?->{$label}))
         >-- Seleziona Gol {{__($teamName)}} --</option>
         @foreach($players as $id => $player)
             <option
                 value="{{$id}}"
-                @selected(old($label, $prediction?->{$label}) === $id)
+                @selected(old($label, $prediction?->{$label}) === (string) $id)
             >{{$player}}</option>
         @endforeach
     </select>

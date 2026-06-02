@@ -4,7 +4,7 @@
         @foreach($predictions as $key => $prediction)
             <x-prediction::shared.table-row
                 :prediction="$prediction"
-                :lastUpdate="$prediction->updated_at->format('d/m/Y \o\r\e H:i:s \e u \m\s')"
+                :lastUpdate="$prediction->updated_at->avoidMutation()->timezone('Europe/Rome')->format('d/m/Y \o\r\e H:i:s \e u \m\s')"
                 :key="$key"
                 :isIndex="true"
             />

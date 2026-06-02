@@ -1,34 +1,43 @@
-<div class="w-full">
     <x-home::shared.card title="Prossimo Incontro">
+        @if(null !== $game && !$hasFinalStarted)
+            <div class="ml-auto">
+                <x-partials.countdown.main :isOpen="true" :date="$game->started_at"/>
+            </div>
+        @endif
         <div @class([
             'my-auto flex w-full items-center',
             'justify-center'  => !isset($game) || $hasFinalStarted,
             'justify-between' => isset($game) && !$hasFinalStarted,
         ])>
-            @if(!empty($game ?? null) && !$hasFinalStarted)
-                <div class="w-full flex flex-col justify-center items-center">
-                    <span class="text-8xl">{{ \App\Helpers\FunWithFlags::getFlag($game->home_team->code) }}</span>
-                    <h3 class="sm:text-lg font-bold text-center whitespace-nowrap">{{ $game->home_team->name }}</h3>
-                </div>
+            @if(null !== $game && !$hasFinalStarted)
+                <x-home::shared.team-display :teamCode="$game->home_team->code" :teamName="$game->home_team->name"/>
                 <div class="flex flex-col items-center gap-3">
                     <x-home::shared.game-date :date="$game->started_at"/>
                     <a href="{{ route('prediction.create', ['game' => $game]) }}" class="btn bg-accent btn-lg rounded-2xl">
                         Pronostica
                     </a>
                 </div>
-                <div class="w-full flex flex-col justify-center items-center">
-                    <span class="text-8xl">{{ \App\Helpers\FunWithFlags::getFlag($game->away_team->code) }}</span>
-                    <h3 class="sm:text-lg font-bold text-center whitespace-nowrap">{{ $game->away_team->name }}</h3>
-                </div>
+                <x-home::shared.team-display :teamCode="$game->away_team->code" :teamName="$game->away_team->name"/>
             @else
-                <x-home::shared.illustration img="waiting.svg" alt="A cartoon figure waiting and laying on a tree">
-                    @if($hasFinalStarted)
-                        Attendi il risultato Finale!<br/>È in corso la finale!
-                    @else
-                        Il prossimo Incontro non è Disponibile
-                    @endif
-                </x-home::shared.illustration>
+                <div class="flex flex-col justify-center items-center gap-3 w-full">
+                    <div class="ml-auto">
+                        <x-partials.countdown.main :isExpired="true" :isOpen="false"/>
+                    </div>
+                    <div class="flex-1 flex flex-col items-center justify-center gap-3 text-center">
+                        <div class="bg-base-300 size-12 rounded-full flex items-center justify-center text-base-content/50">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-6">
+                                <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                            </svg>
+                        </div>
+                        @if($hasFinalStarted)
+                            <span class="font-bold text-base-content/60">Finale in corso</span>
+                            <span class="text-center">Attendi il risultato finale!</span>
+                        @else
+                            <span class="font-bold text-base-content/60">Il Prossimo incontro non è disponibile!</span>
+                        @endif
+                    </div>
+                </div>
             @endif
         </div>
     </x-home::shared.card>
-</div>
