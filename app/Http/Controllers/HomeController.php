@@ -49,15 +49,14 @@ final class HomeController extends Controller
             'ranking' => $ranking->filter(static fn (UserRank $rank, int $index) => $user->id === $rank->userId() || $index <= 9),
             'nextGame' => $nextGame,
             'champion' => $user->champion,
-            'hasTournamentStarted' => $this->hasTournamentStarted($tournament),
             'hasFinalStarted' => $this->hasFinalStarted($tournament),
-            'lastResults' => $this->gameRepository->getLastResults(now()),
+            'lastResults' => $this->gameRepository->getLastResults(now())->take(3),
             'isWinnerDeclared' => $this->isWinnerDeclared($tournament),
             'winnerName' => $ranking->first()?->userName() ?? '',
             'leagueName' => $league->name,
             'games' => $this->gameRepository->getAll(),
             'userRank' => $ranking->filter(static fn (UserRank $rank) => $rank->userId() === $user->id)->first(),
-            'tournamentStartedAt' => $tournament->started_at,
+            'tournamentStartedAt' => $tournament->started_at->toImmutable(),
         ]);
     }
 
@@ -65,11 +64,6 @@ final class HomeController extends Controller
     {
         return $tournament->final_started_at->isPast() &&
             $tournament->games->every('status', '=', GameStatus::FINISHED);
-    }
-
-    private function hasTournamentStarted(Tournament $tournament): bool
-    {
-        return $tournament->started_at->lte(now());
     }
 
     private function hasFinalStarted(Tournament $tournament): bool

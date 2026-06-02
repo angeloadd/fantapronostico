@@ -1,7 +1,7 @@
 <x-prediction::shared.layout>
     <x-prediction::shared.game-bar :games="$games" :game="$game"/>
     <div class="flex justify-center items-center px-2 text-center text-neutral">
-        <div role="alert" class="alert alert-warning flex flex-col justify-center items-center shadow-lg text-lg">
+        <div role="alert" class="alert border-accent flex flex-col justify-center items-center shadow-lg text-lg">
             <h3 class="text-neutral">
                 Partita pronosticabile dal <strong>
                     {{str($game->predictable_from->isoFormat('D MMMM YYYY \a\l\l\e HH:mm'))->title()->replace('Alle','alle')}}

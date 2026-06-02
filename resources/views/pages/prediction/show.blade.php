@@ -12,7 +12,7 @@
                 key=""
             />
         </x-prediction::shared.table>
-        <a href="{{route('prediction.edit', ['prediction'=> $prediction])}}" class="btn btn-warning text-base-100 w-full mt-2 sm:mt-8">
+        <a href="{{route('prediction.edit', ['prediction'=> $prediction])}}" class="btn btn-primary text-base-100 w-full mt-2 sm:mt-8">
             Modifica Pronostico
         </a>
     </x-prediction::shared.card>

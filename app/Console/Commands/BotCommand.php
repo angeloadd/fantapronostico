@@ -61,7 +61,7 @@ final class BotCommand extends Command
                 $game->id,
                 $game->home_team->name ?? '',
                 $game->away_team->name ?? '',
-                (string) str($game->started_at->isoFormat('\e\n\t\r\o \i\l D MMMM YYYY \a\l\l\e HH:mm'))->title()
+                (string) str($game->started_at->avoidMutation()->timezone('Europe/Berlin')->isoFormat('\e\n\t\r\o \i\l D MMMM YYYY \a\l\l\e HH:mm'))->title()
             )
         )->toArray();
 

@@ -1,6 +1,6 @@
-<div class="text-neutral/50 text-center">
+<div class="text-primary/70 text-center">
     <p class="font-bold">
-        {{str($date->isoFormat('D MMMM YYYY'))->title()}}
+        {{str($date->timezone('Europe/Rome')->isoFormat('D MMMM YYYY'))->title()}}
     </p>
     <p class="text-4xl">
         {{$date->format('H:i')}}

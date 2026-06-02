@@ -3,7 +3,7 @@
         <x-champion::shared.card-header :$tournamentLogo :$tournamentName :$firstMatchDate text="Modifica"/>
         <x-champion::shared.form
             btnText="Modifica il Pronostico"
-            btnBg="bg-warning"
+            btnBg="bg-primary"
             method="POST"
             action="{{route('champion.update', compact('champion'))}}"
             :$teams

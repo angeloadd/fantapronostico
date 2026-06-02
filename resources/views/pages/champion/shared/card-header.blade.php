@@ -8,6 +8,6 @@
                 alt="{{$tournamentName}} Logo"
             >
         </div>
-        <x-partials.countdown.main bgColor="{{$countdownBg ?? 'bg-secondary/40'}}" date="{{$firstMatchDate}}"/>
+        <x-partials.countdown.main bgColor="{{$countdownBg ?? 'bg-primary/80'}}" :date="$firstMatchDate"/>
     </div>
 </div>

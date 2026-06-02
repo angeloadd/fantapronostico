@@ -8,7 +8,7 @@
         />
         <x-champion::shared.form
             btnText="Pronostica"
-            btnBg="bg-secondary"
+            btnBg="bg-accent"
             method="POST"
             action="{{route('champion.store')}}"
             :$teams

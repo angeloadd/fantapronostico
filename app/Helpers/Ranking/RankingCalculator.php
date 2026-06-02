@@ -109,9 +109,7 @@ final readonly class RankingCalculator implements RankingCalculatorInterface
 
         $rank = $this->calculatePredictionScores($user, $league, $rank);
 
-//        $userRank = $this->addWinnerAndTopScorerScores($user, $league, $rank);
-
-        return $rank;
+        return $this->addWinnerAndTopScorerScores($user, $league, $rank);
     }
 
     private function calculatePredictionScores(User $user, League $league, UserRank $rank): UserRank
@@ -169,8 +167,9 @@ final readonly class RankingCalculator implements RankingCalculatorInterface
 
     private function addWinnerAndTopScorerScores(User $user, League $league, UserRank $rank): UserRank
     {
-        $winner = Team::find(9);
-        if (!$winner instanceof Team) {
+        $tournament = $league->tournament;
+
+        if (null === $tournament->final_started_at || $tournament->final_started_at->isFuture()) {
             return $rank;
         }
 
@@ -179,14 +178,16 @@ final readonly class RankingCalculator implements RankingCalculatorInterface
             return $rank;
         }
 
-        if (4 === $champion->team_id) {
+        $winnerTeam = $tournament->teams()->wherePivot('is_winner', true)->first();
+        if ($winnerTeam instanceof Team && $winnerTeam->id === $champion->team_id) {
             $rank->winner = true;
-            $rank->total += 15;
+            $rank->total += 20;
         }
 
-        if (in_array($champion->player_id, [184, 180496, 1323, 247, 181812, 15328])) {
+        $topScorerIds = $tournament->players()->wherePivot('is_top_scorer', true)->pluck('id');
+        if ($topScorerIds->contains($champion->player_id)) {
             $rank->topScorer = true;
-            $rank->total += 10;
+            $rank->total += 15;
         }
 
         return $rank;

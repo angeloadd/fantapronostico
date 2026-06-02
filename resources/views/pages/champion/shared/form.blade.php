@@ -1,7 +1,7 @@
 <form class="w-full flex flex-col justify-center items-center space-y-6" action="{{$action}}" method="POST">
     @csrf
     @method($method)
-    <div class="form-control w-full">
+    <div class="w-full flex flex-col space-y-2 p-3">
         <label for="winner" class="label">
             Inserisci un pronostico per la squadra vincente dell'Europeo
         </label>
@@ -10,7 +10,7 @@
         @enderror
         <select name="winner"
                 id="winner"
-                class="select select-bordered bg-white @error('winner') border-error @enderror"
+                class="select w-full bg-white @error('winner') border-error @enderror"
         >
             <option
                 value=""
@@ -23,14 +23,14 @@
             @endforeach
         </select>
     </div>
-    <div class="form-control w-full">
+    <div class="w-full flex flex-col space-y-2 p-3">
         <label for="topScorer" class="label">Inserisci un pronostico per il Capocannoniere dell'Europeo</label>
         @error('topScorer')
         <span class="text-error text-sm">Campo richiesto</span>
         @enderror
         <select name="topScorer"
                 id="topScorer"
-                class="select select-bordered bg-white  @error('topScorer') border-error @enderror"
+                class="select w-full bg-white  @error('topScorer') border-error @enderror"
         >
             <option value="" @selected(null === old('topScorer', ($prediction ?? null)?->player))>-- Seleziona Capocannoniere --</option>
             @foreach($players as $player)

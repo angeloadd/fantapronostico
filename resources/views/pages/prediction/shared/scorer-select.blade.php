@@ -3,7 +3,7 @@
     <select
         name="{{$label}}"
         id="{{$label}}"
-        class="select select-md select-bordered w-full bg-white text-lg @error($label) border-error @enderror"
+        class="select select-md w-full bg-white text-lg @error($label) border-error @enderror"
     >
         <option
             value=""
