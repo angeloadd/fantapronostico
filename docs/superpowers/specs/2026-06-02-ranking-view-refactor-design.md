@@ -98,31 +98,56 @@ Row presence is the state — absence means not yet computed, presence means eva
 
 ### `ranking_view` (materialized view)
 
-Anchored on `league_user` so users with zero predictions appear in the ranking. `cr.total` is `NOT NULL` in `champion_rank`, so referenced directly — `COALESCE` only needed for the LEFT JOIN case where no champion row exists yet.
+Anchored on `league_user` so users with zero predictions appear in the ranking. Sorting logic lives here via `ROW_NUMBER() OVER (PARTITION BY league_id ...)` — all ranking rules in one place, PHP just reads rows. Requires a `users` join for the username tiebreaker. A CTE separates aggregation from window function.
+
+`cr.total` is `NOT NULL` in `champion_rank`; `COALESCE` is only needed on the LEFT JOIN output (absent row → NULL).
 
 ```sql
 CREATE MATERIALIZED VIEW ranking_view AS
+WITH scores AS (
+    SELECT
+        lu.user_id,
+        lu.league_id,
+        COALESCE(SUM(pr.total), 0) + COALESCE(cr.total, 0)               AS total,
+        COALESCE(SUM(pr.is_exact::int), 0)                                AS results,
+        COALESCE(SUM(pr.is_sign::int), 0)                                 AS signs,
+        COALESCE(SUM(pr.is_home_scorer::int + pr.is_away_scorer::int), 0) AS scorers,
+        COALESCE(MAX(CASE WHEN pr.is_final THEN pr.total END), 0)         AS final_total,
+        MIN(CASE WHEN pr.is_final THEN pr.predicted_at END)               AS final_timestamp,
+        COALESCE(cr.winner, false)                                        AS winner,
+        COALESCE(cr.top_scorer, false)                                    AS top_scorer
+    FROM league_user lu
+    LEFT JOIN prediction_rank pr ON pr.user_id = lu.user_id AND pr.league_id = lu.league_id
+    LEFT JOIN champion_rank cr   ON cr.user_id = lu.user_id AND cr.league_id = lu.league_id
+    WHERE lu.status = 'accepted'
+    GROUP BY lu.user_id, lu.league_id, cr.total, cr.winner, cr.top_scorer
+)
 SELECT
-    lu.user_id,
-    lu.league_id,
-    COALESCE(SUM(pr.total), 0) + COALESCE(cr.total, 0)               AS total,
-    COALESCE(SUM(pr.is_exact::int), 0)                                AS results,
-    COALESCE(SUM(pr.is_sign::int), 0)                                 AS signs,
-    COALESCE(SUM(pr.is_home_scorer::int + pr.is_away_scorer::int), 0) AS scorers,
-    COALESCE(MAX(CASE WHEN pr.is_final THEN pr.total END), 0)         AS final_total,
-    MIN(CASE WHEN pr.is_final THEN pr.predicted_at END)               AS final_timestamp,
-    COALESCE(cr.winner, false)                                        AS winner,
-    COALESCE(cr.top_scorer, false)                                    AS top_scorer
-FROM league_user lu
-LEFT JOIN prediction_rank pr ON pr.user_id = lu.user_id AND pr.league_id = lu.league_id
-LEFT JOIN champion_rank cr   ON cr.user_id = lu.user_id AND cr.league_id = lu.league_id
-WHERE lu.status = 'accepted'
-GROUP BY
-    lu.user_id, lu.league_id,
-    cr.total, cr.winner, cr.top_scorer, cr.value_winner, cr.value_top_scorer;
+    ROW_NUMBER() OVER (
+        PARTITION BY s.league_id
+        ORDER BY
+            s.total        DESC,
+            s.results      DESC,
+            s.scorers      DESC,
+            s.signs        DESC,
+            s.final_total  DESC,
+            s.final_timestamp ASC NULLS LAST,
+            u.name         ASC
+    )                     AS position,
+    s.user_id,
+    s.league_id,
+    u.name                AS user_name,
+    s.total,
+    s.results,
+    s.signs,
+    s.scorers,
+    s.final_total,
+    s.final_timestamp,
+    s.winner,
+    s.top_scorer
+FROM scores s
+JOIN users u ON u.id = s.user_id;
 ```
-
----
 
 ## PHP Layer — Phase 2
 
@@ -148,9 +173,10 @@ TOP_SCORER = 15
 3. After all users: `DB::statement('REFRESH MATERIALIZED VIEW ranking_view')`
 
 **`scorePredictions(User $user, League $league): void`** (private)
-- Load all predictions for `$league->id` where game status is finished
-- For each prediction: run `PredictionScoreFactory::create()`, upsert into `prediction_rank`
-- Upsert key: `(user_id, prediction_id)` — safe to re-run
+- Load `prediction_id`s already present in `prediction_rank` for `(user_id, league_id)`
+- Load finished predictions for the league, excluding already-scored ones
+- For each unseen prediction: run `PredictionScoreFactory::create()`, insert into `prediction_rank`
+- Re-runs only process new games — previously scored predictions are skipped entirely
 
 **`scoreChampion(User $user, League $league): void`** (private)
 - Guard: `$league->tournament->final_started_at` must be set and in the past
@@ -207,6 +233,6 @@ Expected differences: winner/top scorer points only (existing calculator has the
 1. Add `league_id` to `champions` (FK leagues, NOT NULL — requires backfill if existing rows)
 
 ### Phase 2
-2. Create `prediction_rank` table
-3. Create `champion_rank` table
-4. Create `ranking_view` materialized view
+1. Create `prediction_rank` table
+2. Create `champion_rank` table
+3. Create `ranking_view` materialized view
