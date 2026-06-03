@@ -36,6 +36,7 @@ use Illuminate\Support\Carbon;
  * @property-read Player $player
  * @property-read Team $team
  * @property-read User $user
+ * @property-read League|null $league
  *
  * @mixin Eloquent
  */
