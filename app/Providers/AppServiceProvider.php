@@ -6,10 +6,7 @@ namespace App\Providers;
 
 use App\Console\Commands\CalculateRanking;
 use App\Events\GameGoalsUpdated;
-use App\Helpers\Ranking\RankingCalculator;
 use App\Helpers\Ranking\RankingCalculatorInterface;
-use App\Helpers\Ranking\Sorter;
-use App\Helpers\Ranking\SorterInterface;
 use App\Helpers\Ranking\ViewRankingCalculator;
 use App\Modules\ApiSport\Repository\ApiSportGameRepositoryInterface;
 use App\Modules\ApiSport\Repository\ApiSportPlayerRepositoryInterface;

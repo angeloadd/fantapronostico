@@ -37,6 +37,9 @@ use Illuminate\Support\Carbon;
  * @property-read Team $team
  * @property-read User $user
  * @property-read League|null $league
+ * @property int $league_id
+ *
+ * @method static Builder<static>|Champion whereLeagueId($value)
  *
  * @mixin Eloquent
  */
