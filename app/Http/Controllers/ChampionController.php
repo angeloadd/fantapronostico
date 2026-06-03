@@ -8,6 +8,7 @@ use App\Http\Requests\ChampionRequest;
 use App\Models\Champion;
 use App\Models\Player;
 use App\Models\Tournament;
+use App\Modules\Auth\Models\User;
 use App\Modules\Tournament\Models\Team;
 use Carbon\Carbon;
 use Illuminate\Contracts\Support\Renderable;
@@ -60,14 +61,25 @@ final class ChampionController extends Controller
                 );
         }
 
-        $champion = Auth::user()->champion;
-        if ($champion) {
-            return redirect(route('champion.show'), compact('champion'));
+        $user = Auth::user();
+        if (!$user instanceof User) {
+            abort(404);
         }
 
-        $champion = Auth::user()?->champion()->create([
+        $leagueId = $user->selected_league_id;
+
+        $champion = Champion::where('user_id', $user->id)
+            ->where('league_id', $leagueId)
+            ->first();
+
+        if ($champion) {
+            return redirect(route('champion.show', compact('champion')));
+        }
+
+        $champion = $user->champion()->create([
             'team_id' => $request->input('winner'),
             'player_id' => $request->input('topScorer'),
+            'league_id' => $leagueId,
         ]);
 
         return redirect(route('champion.show', compact('champion')))

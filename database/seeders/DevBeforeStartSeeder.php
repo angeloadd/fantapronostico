@@ -38,7 +38,7 @@ final class DevBeforeStartSeeder extends DevBaseSeeder
             );
         }
 
-        $this->createChampions($users, $teams, $skipEmails);
+        $this->createChampions($users, $teams, $league, $skipEmails);
         // No predictions, goals, or ranks — tournament has not started
     }
 }

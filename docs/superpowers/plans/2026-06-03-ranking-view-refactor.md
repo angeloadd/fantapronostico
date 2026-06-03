@@ -6,7 +6,7 @@
 
 **Architecture:** Phase 1 adds `league_id` to `champions`, changes the unique constraint from `(user_id)` to `(user_id, league_id)`, and threads the league through the creation flow. Phase 2 creates new tables, the materialized view, a standalone `ViewRankingCalculator`, and a new command — all additions, nothing removed from the existing system. Scoring values (4/1/3/15/15) are stored in each row for historical auditability.
 
-**Tech Stack:** PHP 8.3, Laravel 11, PostgreSQL 15, Eloquent ORM
+**Tech Stack:** PHP 8.5, Laravel 13, PostgreSQL 17, Eloquent ORM
 
 ---
 
@@ -31,9 +31,9 @@
 ---
 
 ## File Map
-
+The app is not in prod so you can directly modify the champion migration
 **Phase 1:**
-- Create: `database/migrations/2026_06_03_000001_add_league_id_to_champions_table.php`
+- Modify: `database/migrations/2023_12_11_105514_create_champions_table.php`
 - Modify: `app/Models/Champion.php`
 - Modify: `app/Http/Controllers/ChampionController.php`
 - Modify: `database/seeders/DevBaseSeeder.php`
@@ -52,71 +52,52 @@
 ## Task 1 (Phase 1): Add league_id to champions
 
 **Files:**
-- Create: `database/migrations/2026_06_03_000001_add_league_id_to_champions_table.php`
+- Modify: `database/migrations/2023_12_11_105514_create_champions_table.php`
 - Modify: `app/Models/Champion.php`
 - Modify: `app/Http/Controllers/ChampionController.php`
 - Modify: `database/seeders/DevBaseSeeder.php`
 
-- [ ] **Step 1: Create migration**
+- [ ] **Step 1: Modify existing champions migration**
+
+Replace the full contents of `database/migrations/2023_12_11_105514_create_champions_table.php`:
 
 ```php
 <?php
-// database/migrations/2026_06_03_000001_add_league_id_to_champions_table.php
 
 declare(strict_types=1);
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class() extends Migration
 {
+    private const TABLE_NAME = 'champions';
+
     public function up(): void
     {
-        Schema::table('champions', static function (Blueprint $table): void {
-            $table->foreignId('league_id')
-                ->nullable()
-                ->after('player_id')
-                ->constrained()
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
-        });
-
-        DB::table('champions')->update([
-            'league_id' => DB::table('leagues')->value('id'),
-        ]);
-
-        Schema::table('champions', static function (Blueprint $table): void {
-            $table->foreignId('league_id')->nullable(false)->change();
-        });
-
-        Schema::table('champions', static function (Blueprint $table): void {
-            $table->dropUnique('champions_user_id_unique');
-            $table->unique(['user_id', 'league_id']);
-        });
+        Schema::create(
+            self::TABLE_NAME,
+            static function (Blueprint $table): void {
+                $table->id();
+                $table->foreignId('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+                $table->foreignId('team_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+                $table->foreignId('player_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+                $table->foreignId('league_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+                $table->timestamps(6);
+                $table->unique(['user_id', 'league_id']);
+            }
+        );
     }
 
     public function down(): void
     {
-        Schema::table('champions', static function (Blueprint $table): void {
-            $table->dropUnique(['user_id', 'league_id']);
-            $table->unique(['user_id']);
-            $table->dropConstrainedForeignId('league_id');
-        });
+        Schema::dropIfExists(self::TABLE_NAME);
     }
 };
 ```
 
-- [ ] **Step 2: Run migration**
-
-```bash
-php artisan migrate
-```
-
-Expected: `Migrating: 2026_06_03_000001_add_league_id_to_champions_table ... Done`
-
-- [ ] **Step 3: Update Champion model**
+- [ ] **Step 2: Update Champion model**
 
 In `app/Models/Champion.php`, add `'league_id'` to `$fillable` and add the `league()` relation. Add imports `use App\Modules\League\Models\League;` and `use Illuminate\Database\Eloquent\Relations\BelongsTo;`.
 
@@ -137,7 +118,7 @@ public function league(): BelongsTo
 }
 ```
 
-- [ ] **Step 4: Update ChampionController::store()**
+- [ ] **Step 3: Update ChampionController::store()**
 
 Replace the `store()` method in `app/Http/Controllers/ChampionController.php`:
 
@@ -173,7 +154,7 @@ public function store(ChampionRequest $request): RedirectResponse
 }
 ```
 
-- [ ] **Step 5: Update DevBaseSeeder::createChampions()**
+- [ ] **Step 4: Update DevBaseSeeder::createChampions()**
 
 In `database/seeders/DevBaseSeeder.php`, update the signature to accept a `League` and include `league_id` in the create call. Add `use App\Modules\League\Models\League;` if not present.
 
@@ -201,18 +182,11 @@ protected function createChampions(Collection $users, Collection $teams, League 
 
 Find every call to `$this->createChampions(...)` in `DevBaseSeeder.php` and add the `$league` argument as the third parameter.
 
-- [ ] **Step 6: Run seeder to verify**
+- [ ] **Step 5: Apply and commit**
 
 ```bash
 php artisan migrate:fresh --seed
-```
-
-Expected: completes without errors. Verify: `select id, user_id, league_id from champions limit 5;` shows non-null `league_id`.
-
-- [ ] **Step 7: Commit Phase 1**
-
-```bash
-git add database/migrations/2026_06_03_000001_add_league_id_to_champions_table.php \
+git add database/migrations/2023_12_11_105514_create_champions_table.php \
         app/Models/Champion.php \
         app/Http/Controllers/ChampionController.php \
         database/seeders/DevBaseSeeder.php
@@ -308,7 +282,7 @@ return new class() extends Migration
 ```
 
 - [ ] **Step 2: Run migration**
-
+avoid running the migration,
 ```bash
 php artisan migrate
 ```
@@ -371,7 +345,7 @@ return new class() extends Migration
 ```
 
 - [ ] **Step 2: Run migration**
-
+avoid running the migration
 ```bash
 php artisan migrate
 ```
@@ -464,7 +438,7 @@ return new class() extends Migration
 ```
 
 - [ ] **Step 2: Run migration**
-
+avoid running the migration
 ```bash
 php artisan migrate
 ```
@@ -899,49 +873,9 @@ final class ViewRankingCalculatorTest extends TestCase
 }
 ```
 
-- [ ] **Step 2: Run tests**
-
-```bash
-php artisan test tests/Feature/Helpers/Ranking/ViewRankingCalculatorTest.php --verbose
-```
-
-Expected: all 6 tests pass. If a factory (`League::factory()` or `Tournament::factory()`) does not exist, create it following the pattern in `database/factories/` — use `User::factory()` as reference.
-
-- [ ] **Step 3: Commit**
+- [ ] **Step 2: Commit**
 
 ```bash
 git add tests/Feature/Helpers/Ranking/ViewRankingCalculatorTest.php
 git commit -m "test: feature tests for ViewRankingCalculator"
 ```
-
----
-
-## Validation: Compare both commands
-
-After all tasks are complete, run both commands and compare output.
-
-- [ ] **Step 1: Seed and run both commands**
-
-```bash
-php artisan migrate:fresh --seed
-php artisan fp:ranking:calculate
-php artisan fp:ranking:calculate-view
-```
-
-- [ ] **Step 2: Run comparison query in psql**
-
-```sql
-SELECT
-    r.user_id,
-    u.name,
-    r.total      AS old_total,
-    rv.total     AS new_total,
-    r.total - rv.total AS diff
-FROM ranks r
-JOIN ranking_view rv USING (user_id, league_id)
-JOIN users u ON u.id = r.user_id
-WHERE r.total != rv.total
-ORDER BY ABS(r.total - rv.total) DESC;
-```
-
-Expected: zero rows, or only rows where `diff` matches the known double-count in `ranks` (winner/top scorer applied multiple times by the old calculator). All prediction-based totals must match exactly.

@@ -16,10 +16,12 @@ return new class() extends Migration
             self::TABLE_NAME,
             static function (Blueprint $table): void {
                 $table->id();
-                $table->foreignId('user_id')->unique()->constrained();
-                $table->foreignId('team_id')->constrained();
-                $table->foreignId('player_id')->constrained();
+                $table->foreignId('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+                $table->foreignId('team_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+                $table->foreignId('player_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+                $table->foreignId('league_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
                 $table->timestamps(6);
+                $table->unique(['user_id', 'league_id']);
             }
         );
     }

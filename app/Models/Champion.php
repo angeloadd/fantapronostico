@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Modules\Auth\Models\User;
+use App\Modules\League\Models\League;
 use App\Modules\Tournament\Models\Team;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
@@ -43,8 +44,10 @@ final class Champion extends Model
     protected $dateFormat = 'Y-m-d H:i:s.u';
 
     protected $fillable = [
+        'user_id',
         'team_id',
         'player_id',
+        'league_id',
         'created_at',
         'updated_at',
     ];
@@ -71,5 +74,13 @@ final class Champion extends Model
     public function player(): BelongsTo
     {
         return $this->belongsTo(Player::class);
+    }
+
+    /**
+     * @return BelongsTo<League, $this>
+     */
+    public function league(): BelongsTo
+    {
+        return $this->belongsTo(League::class);
     }
 }

@@ -376,11 +376,11 @@ abstract class DevBaseSeeder extends Seeder
         });
     }
 
-    protected function createChampions(Collection $users, Collection $teams, array $skipEmails = []): void
+    protected function createChampions(Collection $users, Collection $teams, League $league, array $skipEmails = []): void
     {
         $now = now();
 
-        $users->each(function (User $user) use ($teams, $skipEmails, $now): void {
+        $users->each(function (User $user) use ($teams, $league, $skipEmails, $now): void {
             if (in_array($user->email, $skipEmails, true)) {
                 return;
             }
@@ -389,6 +389,7 @@ abstract class DevBaseSeeder extends Seeder
                 'user_id' => $user->id,
                 'team_id' => $team->id,
                 'player_id' => $team->players->random()->id,
+                'league_id' => $league->id,
                 'created_at' => $now,
                 'updated_at' => $now,
             ]);

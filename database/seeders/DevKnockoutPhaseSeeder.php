@@ -22,7 +22,7 @@ final class DevKnockoutPhaseSeeder extends DevBaseSeeder
         $teams = $this->createTeamsAndPlayers($tournament);
         $users = $this->createUsers($league);
 
-        $this->createChampions($users, $teams);
+        $this->createChampions($users, $teams, $league);
 
         foreach (self::SCHEDULE as $i => $slot) {
             $homeTeam = $teams[$slot['home']];
