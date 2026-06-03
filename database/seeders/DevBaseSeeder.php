@@ -132,78 +132,78 @@ abstract class DevBaseSeeder extends Seeder
     // Spain (index 4) wins; Yamal (Spain player 0) is top scorer
     protected const SCHEDULE = [
         // Group A MD1
-        ['stage' => 'Group A',      'home' => 0,  'away' => 1],
-        ['stage' => 'Group A',      'home' => 2,  'away' => 3],
+        ['stage' => 'group',      'home' => 0,  'away' => 1],
+        ['stage' => 'group',      'home' => 2,  'away' => 3],
         // Group B MD1
-        ['stage' => 'Group B',      'home' => 4,  'away' => 5],
-        ['stage' => 'Group B',      'home' => 6,  'away' => 7],
+        ['stage' => 'group',      'home' => 4,  'away' => 5],
+        ['stage' => 'group',      'home' => 6,  'away' => 7],
         // Group C MD1
-        ['stage' => 'Group C',      'home' => 8,  'away' => 9],
-        ['stage' => 'Group C',      'home' => 10, 'away' => 11],
+        ['stage' => 'group',      'home' => 8,  'away' => 9],
+        ['stage' => 'group',      'home' => 10, 'away' => 11],
         // Group D MD1
-        ['stage' => 'Group D',      'home' => 12, 'away' => 13],
-        ['stage' => 'Group D',      'home' => 14, 'away' => 15],
+        ['stage' => 'group',      'home' => 12, 'away' => 13],
+        ['stage' => 'group',      'home' => 14, 'away' => 15],
         // Group E MD1
-        ['stage' => 'Group E',      'home' => 16, 'away' => 17],
-        ['stage' => 'Group E',      'home' => 18, 'away' => 19],
+        ['stage' => 'group',      'home' => 16, 'away' => 17],
+        ['stage' => 'group',      'home' => 18, 'away' => 19],
         // Group F MD1
-        ['stage' => 'Group F',      'home' => 20, 'away' => 21],
-        ['stage' => 'Group F',      'home' => 22, 'away' => 23],
+        ['stage' => 'group',      'home' => 20, 'away' => 21],
+        ['stage' => 'group',      'home' => 22, 'away' => 23],
         // Group A MD2
-        ['stage' => 'Group A',      'home' => 0,  'away' => 2],
-        ['stage' => 'Group A',      'home' => 1,  'away' => 3],
+        ['stage' => 'group',      'home' => 0,  'away' => 2],
+        ['stage' => 'group',      'home' => 1,  'away' => 3],
         // Group B MD2
-        ['stage' => 'Group B',      'home' => 4,  'away' => 6],
-        ['stage' => 'Group B',      'home' => 5,  'away' => 7],
+        ['stage' => 'group',      'home' => 4,  'away' => 6],
+        ['stage' => 'group',      'home' => 5,  'away' => 7],
         // Group C MD2
-        ['stage' => 'Group C',      'home' => 8,  'away' => 10],
-        ['stage' => 'Group C',      'home' => 9,  'away' => 11],
+        ['stage' => 'group',      'home' => 8,  'away' => 10],
+        ['stage' => 'group',      'home' => 9,  'away' => 11],
         // Group D MD2
-        ['stage' => 'Group D',      'home' => 12, 'away' => 14],
-        ['stage' => 'Group D',      'home' => 13, 'away' => 15],
+        ['stage' => 'group',      'home' => 12, 'away' => 14],
+        ['stage' => 'group',      'home' => 13, 'away' => 15],
         // Group E MD2
-        ['stage' => 'Group E',      'home' => 16, 'away' => 18],
-        ['stage' => 'Group E',      'home' => 17, 'away' => 19],
+        ['stage' => 'group',      'home' => 16, 'away' => 18],
+        ['stage' => 'group',      'home' => 17, 'away' => 19],
         // Group F MD2
-        ['stage' => 'Group F',      'home' => 20, 'away' => 22],
-        ['stage' => 'Group F',      'home' => 21, 'away' => 23],
+        ['stage' => 'group',      'home' => 20, 'away' => 22],
+        ['stage' => 'group',      'home' => 21, 'away' => 23],
         // Group A MD3
-        ['stage' => 'Group A',      'home' => 0,  'away' => 3],
-        ['stage' => 'Group A',      'home' => 1,  'away' => 2],
+        ['stage' => 'group',      'home' => 0,  'away' => 3],
+        ['stage' => 'group',      'home' => 1,  'away' => 2],
         // Group B MD3
-        ['stage' => 'Group B',      'home' => 4,  'away' => 7],
-        ['stage' => 'Group B',      'home' => 5,  'away' => 6],
+        ['stage' => 'group',      'home' => 4,  'away' => 7],
+        ['stage' => 'group',      'home' => 5,  'away' => 6],
         // Group C MD3
-        ['stage' => 'Group C',      'home' => 8,  'away' => 11],
-        ['stage' => 'Group C',      'home' => 9,  'away' => 10],
+        ['stage' => 'group',      'home' => 8,  'away' => 11],
+        ['stage' => 'group',      'home' => 9,  'away' => 10],
         // Group D MD3
-        ['stage' => 'Group D',      'home' => 12, 'away' => 15],
-        ['stage' => 'Group D',      'home' => 13, 'away' => 14],
+        ['stage' => 'group',      'home' => 12, 'away' => 15],
+        ['stage' => 'group',      'home' => 13, 'away' => 14],
         // Group E MD3
-        ['stage' => 'Group E',      'home' => 16, 'away' => 19],
-        ['stage' => 'Group E',      'home' => 17, 'away' => 18],
+        ['stage' => 'group',      'home' => 16, 'away' => 19],
+        ['stage' => 'group',      'home' => 17, 'away' => 18],
         // Group F MD3
-        ['stage' => 'Group F',      'home' => 20, 'away' => 23],
-        ['stage' => 'Group F',      'home' => 21, 'away' => 22],
+        ['stage' => 'group',      'home' => 20, 'away' => 23],
+        ['stage' => 'group',      'home' => 21, 'away' => 22],
         // Round of 16 (indices 36-43)
-        ['stage' => 'Round of 16',  'home' => 4,  'away' => 5],
-        ['stage' => 'Round of 16',  'home' => 0,  'away' => 10],
-        ['stage' => 'Round of 16',  'home' => 12, 'away' => 16],
-        ['stage' => 'Round of 16',  'home' => 22, 'away' => 11],
-        ['stage' => 'Round of 16',  'home' => 8,  'away' => 17],
-        ['stage' => 'Round of 16',  'home' => 3,  'away' => 6],
-        ['stage' => 'Round of 16',  'home' => 14, 'away' => 18],
-        ['stage' => 'Round of 16',  'home' => 20, 'away' => 13],
+        ['stage' => 'round',  'home' => 4,  'away' => 5],
+        ['stage' => 'round',  'home' => 0,  'away' => 10],
+        ['stage' => 'round',  'home' => 12, 'away' => 16],
+        ['stage' => 'round',  'home' => 22, 'away' => 11],
+        ['stage' => 'round',  'home' => 8,  'away' => 17],
+        ['stage' => 'round',  'home' => 3,  'away' => 6],
+        ['stage' => 'round',  'home' => 14, 'away' => 18],
+        ['stage' => 'round',  'home' => 20, 'away' => 13],
         // Quarter-Finals (indices 44-47)
-        ['stage' => 'Quarter-Final', 'home' => 4,  'away' => 0],
-        ['stage' => 'Quarter-Final', 'home' => 12, 'away' => 22],
-        ['stage' => 'Quarter-Final', 'home' => 8,  'away' => 3],
-        ['stage' => 'Quarter-Final', 'home' => 14, 'away' => 20],
+        ['stage' => 'round', 'home' => 4,  'away' => 0],
+        ['stage' => 'round', 'home' => 12, 'away' => 22],
+        ['stage' => 'round', 'home' => 8,  'away' => 3],
+        ['stage' => 'round', 'home' => 14, 'away' => 20],
         // Semi-Finals (indices 48-49)
-        ['stage' => 'Semi-Final',   'home' => 4,  'away' => 12],
-        ['stage' => 'Semi-Final',   'home' => 8,  'away' => 14],
+        ['stage' => 'round',   'home' => 4,  'away' => 12],
+        ['stage' => 'round',   'home' => 8,  'away' => 14],
         // Final 3/4 (index 50)
-        ['stage' => 'Final 3/4',    'home' => 12, 'away' => 14],
+        ['stage' => 'round',    'home' => 12, 'away' => 14],
         // Final (index 51) — Spain wins
         ['stage' => 'Final',        'home' => 4,  'away' => 8],
     ];

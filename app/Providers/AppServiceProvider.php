@@ -10,6 +10,7 @@ use App\Helpers\Ranking\RankingCalculator;
 use App\Helpers\Ranking\RankingCalculatorInterface;
 use App\Helpers\Ranking\Sorter;
 use App\Helpers\Ranking\SorterInterface;
+use App\Helpers\Ranking\ViewRankingCalculator;
 use App\Modules\ApiSport\Repository\ApiSportGameRepositoryInterface;
 use App\Modules\ApiSport\Repository\ApiSportPlayerRepositoryInterface;
 use App\Modules\ApiSport\Repository\ApiSportTeamRepositoryInterface;
@@ -44,14 +45,9 @@ final class AppServiceProvider extends ServiceProvider
         $this->app->bind(ApiSportGameRepositoryInterface::class, GameRepository::class);
         $this->app->bind(
             RankingCalculatorInterface::class,
-            static fn (Application $app) => new RankingCalculator(
-                $app->make(SorterInterface::class),
+            static fn (Application $app) => new ViewRankingCalculator(
                 Log::channel('worker')
             )
-        );
-        $this->app->bind(
-            SorterInterface::class,
-            static fn () => new Sorter('total', 'numberOfResults', 'numberOfScorers', 'numberOfSigns', 'finalBetTotal', 'finalBetTimestamp', 'userName')
         );
         $this->app->bind(ApiSportTeamRepositoryInterface::class, TeamRepository::class);
         $this->app->bind(ApiSportPlayerRepositoryInterface::class, PlayerRepository::class);

@@ -36,7 +36,7 @@ final class TournamentFactory extends Factory
             'season' => $this->faker->year,
             'api_id' => $this->faker->randomNumber(),
             'started_at' => $dateTime,
-            'final_started_at' => $dateTime->add(new DateInterval('P30D')),
+            'final_started_at' => (clone $dateTime)->add(new DateInterval('P30D')),
             'name' => $tournament['name'],
             'country' => $tournament['country'],
             'is_cup' => 'Serie A' !== $tournament['name'],

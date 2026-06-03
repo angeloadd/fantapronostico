@@ -10,7 +10,7 @@ final readonly class PredictionScore
 
     private const SIGN_POINTS = 1;
 
-    private const SCORER_POINTS = 2;
+    private const SCORER_POINTS = 3;
 
     public function __construct(
         public bool $sign,
