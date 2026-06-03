@@ -49,15 +49,9 @@ final class AppServiceProvider extends ServiceProvider
         $this->app->bind(ApiSportTeamRepositoryInterface::class, TeamRepository::class);
         $this->app->bind(ApiSportPlayerRepositoryInterface::class, PlayerRepository::class);
 
-        $this->app->bindMethod(
-            [CalculateRanking::class, 'handle'],
-            static fn (CalculateRanking $command, Application $app) => $command->handle(
-                Log::channel('worker'),
-                $app->make(RankingCalculatorInterface::class)
-            )
-        );
-
-        $this->app->bind(TelegramServiceInterface::class, TelegramService::class);
+        $this->app->bind(TelegramServiceInterface::class, static fn (Application $app) => new TelegramService(
+            Log::channel('worker')
+        ));
         $this->app->bind(RequestProviderServiceInterface::class, RequestProviderService::class);
     }
 

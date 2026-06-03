@@ -82,9 +82,9 @@ final class BotCommand extends Command
     private function getRoundPhaseReminderTimes(): array
     {
         return [
-            Carbon::parse('2024-06-27 21:00:00'),
-            Carbon::parse('2024-06-28 09:00:00'),
-            Carbon::parse('2024-06-29 09:00:00'),
+            Carbon::parse('2026-06-26 21:00:00'), // 2 eves before R32 (starts Jun 28)
+            Carbon::parse('2026-06-27 21:00:00'), // 1 eve before R32
+            Carbon::parse('2026-06-28 09:00:00'), // morning of R32 start
         ];
 
     }

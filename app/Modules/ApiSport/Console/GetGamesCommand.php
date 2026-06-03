@@ -7,6 +7,7 @@ namespace App\Modules\ApiSport\Console;
 use App\Modules\ApiSport\Repository\ApiSportGameRepositoryInterface;
 use App\Modules\ApiSport\Request\GetGamesRequest;
 use App\Modules\ApiSport\Service\ApiSportServiceInterface;
+use App\Modules\League\Models\League;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Psr\Log\LoggerInterface;
@@ -33,7 +34,15 @@ final class GetGamesCommand extends Command
      */
     public function handle(ApiSportServiceInterface $apiSportService, LoggerInterface $logger, ApiSportGameRepositoryInterface $gameRepository): int
     {
-        $gamesDto = $apiSportService->getGamesBySeasonAndLeague(new GetGamesRequest(4, 2024));
+        $league = League::first();
+
+        if (null === $league) {
+            $logger->error('No league found');
+
+            return 1;
+        }
+
+        $gamesDto = $apiSportService->getGamesBySeasonAndLeague(new GetGamesRequest($league->tournament->api_id, $league->tournament->season));
 
         DB::beginTransaction();
         try {

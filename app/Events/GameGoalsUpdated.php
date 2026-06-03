@@ -23,7 +23,7 @@ final class GameGoalsUpdated implements ShouldQueue
 
     public function handle(GameGoalsUpdated $event): void
     {
-        Artisan::call('fp:ranking:calculate', ['--leagueId' => $event->league->id]);
+        Artisan::call('fp:ranking:calculate-view', ['--leagueId' => $event->league->id]);
 
         Log::channel('worker')->info('ranking for league '.$event->league->name.'[id='.$event->league->id.'] updated');
     }

@@ -39,7 +39,10 @@ final class GetGameGoalsCommand extends Command
 
         $ongoingGames = Game::whereTournamentId($league->tournament->id)
             ->whereStatus(GameStatus::ONGOING)
+            ->where('started_at', '<', now()->subMinutes(90))
             ->get();
+
+        $updatedGames = 0;
 
         foreach ($ongoingGames as $game) {
             try {
@@ -58,6 +61,7 @@ final class GetGameGoalsCommand extends Command
                 ]);
 
                 $logger->info('Updated game goals: '.$game->home_team?->name.' vs '.$game->away_team?->name);
+                $updatedGames++;
             } catch (Throwable $e) {
                 $logger->error('Error updating game goals: '.$e->getMessage(), ['trace' => $e->getTraceAsString()]);
                 $this->error('Error updating game goals: '.$e->getMessage());
@@ -66,7 +70,7 @@ final class GetGameGoalsCommand extends Command
             }
         }
 
-        if ($ongoingGames->count() > 0) {
+        if ($updatedGames > 0) {
             GameGoalsUpdated::dispatch($league);
         }
 

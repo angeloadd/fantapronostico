@@ -28,8 +28,8 @@ final class AddTournamentCommand extends Command
             'is_cup' => true,
             'season' => 2026,
             'api_id' => 1,
-            'started_at' => new DateTimeImmutable('2024-06-14 21:00:00'),
-            'final_started_at' => new DateTimeImmutable('2024-07-14 21:00:00'),
+            'started_at' => new DateTimeImmutable('2026-06-11 19:00:00'),
+            'final_started_at' => new DateTimeImmutable('2026-07-19 19:00:00'),
         ]);
 
         $tournament->leagues()->createOrFirst([

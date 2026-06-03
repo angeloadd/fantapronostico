@@ -42,7 +42,8 @@ final class DumpProductionDbCommand extends Command
             'game_goals',
             'champions',
             'predictions',
-            'ranks',
+            'prediction_rank',
+            'champion_rank',
         ];
         foreach ($tables as $table) {
             $tableEntries = DB::connection('pgsql_dump')->table($table)->get();

@@ -8,6 +8,7 @@ use App\Modules\ApiSport\Exceptions\InvalidApisportTokenException;
 use App\Modules\ApiSport\Repository\ApiSportTeamRepositoryInterface;
 use App\Modules\ApiSport\Request\GetTeamsRequest;
 use App\Modules\ApiSport\Service\ApiSportServiceInterface;
+use App\Modules\League\Models\League;
 use ErrorException;
 use Illuminate\Console\Command;
 use Illuminate\Http\Client\ConnectionException;
@@ -40,7 +41,15 @@ final class GetTeamsCommand extends Command
         LoggerInterface $logger,
         ApiSportTeamRepositoryInterface $teamRepository
     ): int {
-        $teamsDto = $apiSportService->getTeamsBySeasonAndLeague(new GetTeamsRequest(4, 2024));
+        $league = League::first();
+
+        if (null === $league) {
+            $logger->error('No league found');
+
+            return 1;
+        }
+
+        $teamsDto = $apiSportService->getTeamsBySeasonAndLeague(new GetTeamsRequest($league->tournament->api_id, $league->tournament->season));
 
         DB::beginTransaction();
 
