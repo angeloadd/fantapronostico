@@ -101,13 +101,12 @@ return [
 
     'bar' => [
         'games_list' => 'Lista Incontri',
-        'games_played' => 'Incontri Disputati',
+        'games_upcoming' => 'PROSSIMI INCONTRI',
+        'games_played' => 'INCONTRI DISPUTATI',
     ],
 
     'accessibility' => [
         'close_sidebar' => 'close sidebar',
-        'backward_arrow' => 'Backward Arrow',
-        'forward_arrow' => 'Forward Arrow',
     ],
 
 ];

@@ -1,16 +1,13 @@
-@if($condition)
-    <a
-            @switch($side)
-                @case('left') @keyup.left.window="window.location.assign('{{$link}}')" @break
-                @case('right') @keyup.right.window="window.location.assign('{{$link}}')" @break
-            @endswitch
-            @class([
-                'btn-primary btn rounded-full',
-                'rounded-r-none' => $side === 'left',
-                'rounded-l-none' => $side === 'right',
-            ])
-            href="{{$link}}"
-    >
-        <img width="18px" src="{{Vite::asset('resources/assets/images/'.$img)}}" alt="{{$alt}}">
-    </a>
-@endif
+<a
+        @switch($svg)
+            @case('previous') @keyup.left.window="window.location.assign('{{$link}}')" @break
+            @case('next') @keyup.right.window="window.location.assign('{{$link}}')" @break
+        @endswitch
+        @class([
+            'text-base-content/30 disabled pointer-events-none cursor-default text-decoration-none' => $disabled,
+            'text-base-content' => !$disabled,
+        ])
+        href="{{$link}}"
+>
+    <x-dynamic-component :component="'partials.svgs.'.$svg"></x-dynamic-component>
+</a>

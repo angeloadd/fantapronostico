@@ -1,15 +1,16 @@
 @foreach($games as $gameInBar)
-    <li @class([
-        'hidden' => $gameInBar->started_at->{$hiddenOn}() || !isset($gameInBar->home_team, $gameInBar->away_team),
-        'w-full'
-    ])>
+    @if(isset($gameInBar->home_team, $gameInBar->away_team))
         <a
             @class([
-                'text-accent-content bg-accent' => $game?->id === $gameInBar?->id,
+                'flex items-center justify-center py-3 w-full text-sm border-b border-base-300',
+                'px-3' => !($disabled ?? false),
+                'px-1 text-base-content/50' => $disabled ?? false,
+                'bg-accent/30' => $game?->id === $gameInBar->id,
+                'hover:bg-base-300/60' => $game?->id !== $gameInBar->id,
             ])
-            href="{{route('prediction.index', ['game' => $gameInBar])}}"
+            href="{{ route('prediction.index', ['game' => $gameInBar]) }}"
         >
-            {{__($gameInBar->home_team->name)}} - {{__($gameInBar->away_team->name)}}
+            {{ __($gameInBar->home_team->name) }} {{ \App\Helpers\FunWithFlags::getFlag($gameInBar->home_team->code) }} vs {{ \App\Helpers\FunWithFlags::getFlag($gameInBar->away_team->code) }} {{ __($gameInBar->away_team->name) }}
         </a>
-    </li>
+    @endif
 @endforeach

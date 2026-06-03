@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Database\Seeders;
 
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Artisan;
 
 final class DevGroupPhaseSeeder extends DevBaseSeeder
 {
@@ -38,6 +39,7 @@ final class DevGroupPhaseSeeder extends DevBaseSeeder
             }
         }
 
-        $this->createRanks($users, $league, self::FINISHED_COUNT);
+        Artisan::call('fp:ranking:calculate-view', ['--leagueId' => $league->id]);
+//        $this->createRanks($users, $league, self::FINISHED_COUNT);
     }
 }

@@ -12,7 +12,7 @@ use Throwable;
 
 final class CalculateRankingView extends Command
 {
-    protected $signature = 'fp:ranking:calculate-view {--leagueId=} {--refresh}';
+    protected $signature = 'fp:ranking:calculate-view {--leagueId=} {--refresh=false}';
 
     protected $description = 'Recalculate ranking_view (parallel run — compare with fp:ranking:calculate)';
 
