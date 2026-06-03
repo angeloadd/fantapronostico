@@ -9,7 +9,7 @@
             <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
             <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
         </svg>
-        Tempo Scaduto
+        {{ __('messages.countdown.expired') }}
     @else
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4">
             <circle cx="12" cy="12" r="10"/>
@@ -38,7 +38,7 @@
             }"
                 class="countdown"
         >
-            {{$isOpen ?? true ? 'Chiude' : 'Apre'}}&nbsp;in&nbsp;
+            {{$isOpen ?? true ? __('messages.countdown.closes') : __('messages.countdown.opens')}}&nbsp;{{ __('messages.countdown.in') }}&nbsp;
             <span x-bind:style="{ '--value': days }" aria-live="polite" x-bind:aria-label="days"></span>g&nbsp;
             <span x-bind:style="{ '--value': hours }" aria-live="polite" x-bind:aria-label="hours"></span>o&nbsp;
             <span x-bind:style="{ '--value': minutes }" aria-live="polite" x-bind:aria-label="minutes"></span>m&nbsp;

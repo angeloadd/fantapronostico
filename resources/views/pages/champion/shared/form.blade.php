@@ -3,10 +3,10 @@
     @method($method)
     <div class="w-full flex flex-col space-y-2 p-3">
         <label for="winner" class="label">
-            Inserisci un pronostico per la squadra vincente dell'Europeo
+            {{ __('messages.champion.winner_label') }}
         </label>
         @error('winner')
-        <span class="text-error text-sm">Campo richiesto</span>
+        <span class="text-error text-sm">{{ __('messages.common.required') }}</span>
         @enderror
         <select name="winner"
                 id="winner"
@@ -15,7 +15,7 @@
             <option
                 value=""
                 @selected(null === old('winner', ($prediction ?? null)?->team->id))
-            >-- Seleziona Squadra Vincente --</option>
+            >{{ __('messages.champion.select_winner') }}</option>
             @foreach($teams as $team)
                 <option
                     value="{{$team->id}}"
@@ -24,15 +24,15 @@
         </select>
     </div>
     <div class="w-full flex flex-col space-y-2 p-3">
-        <label for="topScorer" class="label">Inserisci un pronostico per il Capocannoniere dell'Europeo</label>
+        <label for="topScorer" class="label">{{ __('messages.champion.scorer_label') }}</label>
         @error('topScorer')
-        <span class="text-error text-sm">Campo richiesto</span>
+        <span class="text-error text-sm">{{ __('messages.common.required') }}</span>
         @enderror
         <select name="topScorer"
                 id="topScorer"
                 class="select w-full bg-white  @error('topScorer') border-error @enderror"
         >
-            <option value="" @selected(null === old('topScorer', ($prediction ?? null)?->player))>-- Seleziona Capocannoniere --</option>
+            <option value="" @selected(null === old('topScorer', ($prediction ?? null)?->player))>{{ __('messages.champion.select_scorer') }}</option>
             @foreach($players as $player)
                 <option value="{{$player['id']}}" @selected(old('topScorer', ($prediction ?? null)?->player->id) === $player->id)>
                     {{$player->displayed_name}} -
@@ -41,5 +41,5 @@
             @endforeach
         </select>
     </div>
-    <button type="submit" class="btn {{$btnBg}} text-base-100 fp2024-title w-full">{{$btnText}}</button>
+    <button type="submit" class="btn {{$btnBg}} text-base-100 fp2024-title w-full">{{ $btnText }}</button>
 </form>

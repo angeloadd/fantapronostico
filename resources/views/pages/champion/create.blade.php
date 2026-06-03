@@ -4,10 +4,10 @@
             :$tournamentLogo
             :$tournamentName
             :$firstMatchDate
-            text="Inserici il pronostico entro la data di inizio dell'Europeo"
+            text="{{ __('messages.champion.deadline_hint') }}"
         />
         <x-champion::shared.form
-            btnText="Pronostica"
+            btnText="{{ __('messages.common.predict') }}"
             btnBg="bg-accent"
             method="POST"
             action="{{route('champion.store')}}"

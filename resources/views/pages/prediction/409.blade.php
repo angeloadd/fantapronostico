@@ -13,7 +13,7 @@
                     :isCountdownOpen="false"
             />
             <p class="mt-2">
-                Partita pronosticabile dal <strong>
+                {{ __('messages.prediction.available_from') }} <strong>
                     {{str($game->predictable_from->avoidMutation()->timezone('Europe/Rome')->isoFormat('D MMMM YYYY \a\l\l\e HH:mm'))->title()->replace('Alle','alle')}}
                 </strong>
             </p>

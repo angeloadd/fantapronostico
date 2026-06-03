@@ -1,6 +1,6 @@
 <div class="sticky z-10 top-0 md:static w-full navbar bg-base-100 flex justify-between items-center shadow-lg h-14">
     <div class="navbar-start md:hidden">
-        <label for="sidebarBtn" aria-label="close sidebar" class="btn btn-square btn-ghost">
+        <label for="sidebarBtn" aria-label="{{ __('messages.accessibility.close_sidebar') }}" class="btn btn-square btn-ghost">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-5">
                 <rect width="18" height="18" x="3" y="3" rx="2"/>
                 <path d="M9 3v18"/>
@@ -12,7 +12,7 @@
     </div>
     <div class="navbar-end md:ml-auto gap-6">
         <span class="hidden md:inline text-base-content/65">
-            {{Auth::user()->name ?? 'Ciao'}}
+            {{Auth::user()->name ?? __('messages.common.hello')}}
         </span>
 
         <button class="text-primary mr-4" type="button" onclick="logOutModal.showModal()">

@@ -1,5 +1,5 @@
 <div class="flex flex-col gap-2">
-    <x-shared.card-title>Ultimi Risultati</x-shared.card-title>
+    <x-shared.card-title>{{ __('messages.home.last_results_title') }}</x-shared.card-title>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         @foreach($lastResults->take(3) as $result)
             <a href="{{ route('prediction.index', ['game' => $result]) }}"

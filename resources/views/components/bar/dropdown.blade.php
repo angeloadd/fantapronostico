@@ -1,7 +1,7 @@
 <details class="dropdown text-sm" @click.outside="$el.removeAttribute('open')">
     <summary class="btn {{$btnClasses}} flex-nowrap">
         <span class="text-sm">
-            Lista Incontri
+            {{ __('messages.bar.games_list') }}
         </span>
         <svg
             class="size-4"
@@ -13,7 +13,7 @@
     <ul class="shadow menu z-1 dropdown-content menu-horizontal @if($right ?? false) right-0 bottom-12 @else left-0 top-12 @endif bg-base-100 overflow-auto w-64 max-h-64 rounded-box">
         <x-bar.games :$games :$game hiddenOn="isPast"/>
         <li class="w-full">
-            <div class="font-bold">Incontri Disputati</div>
+            <div class="font-bold">{{ __('messages.bar.games_played') }}</div>
             <ul>
                 <x-bar.games :$games :$game hiddenOn="isFuture" />
             </ul>

@@ -8,7 +8,7 @@
         <option
             value=""
             @selected(null === old($label, $prediction?->{$label}))
-        >-- Seleziona Gol {{__($teamName)}} --</option>
+        >{{ __('messages.prediction.select_scorer') }} {{__($teamName)}} --</option>
         @foreach($players as $id => $player)
             <option
                 value="{{$id}}"

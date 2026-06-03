@@ -3,7 +3,7 @@
         <x-bar.link
                 link="{{route('prediction.previous-from-ref', compact('game'))}}"
                 img="previous.svg"
-                alt="Backward Arrow"
+                alt="{{ __('messages.accessibility.backward_arrow') }}"
                 side="left"
                 condition="{{!$game->isFirstGame()}}"
         />
@@ -11,7 +11,7 @@
         <x-bar.link
                 link="{{route('prediction.next-from-ref', compact('game'))}}"
                 img="next.svg"
-                alt="Forward Arrow"
+                alt="{{ __('messages.accessibility.forward_arrow') }}"
                 side="right"
                 condition="{{!$game->isFinal()}}"
         />

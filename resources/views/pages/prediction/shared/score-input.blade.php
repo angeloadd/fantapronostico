@@ -2,7 +2,7 @@
     'label',
     'order-last' => $label === 'away_score',
 ])>
-    Risultato {{__($teamName)}}
+    {{ __('messages.prediction.result') }} {{__($teamName)}}
 </label>
 <input
     type="number"

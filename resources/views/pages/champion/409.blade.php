@@ -4,7 +4,7 @@
                 :$tournamentLogo
                 :$tournamentName
                 :$firstMatchDate
-                text="Il Pronostico Vincitore e Capocannoniere non è ancora aperto"
+                text="{{ __('messages.champion.not_open') }}"
                 :$championSettableFrom
         />
     </x-champion::shared.card>

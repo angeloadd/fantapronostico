@@ -4,17 +4,17 @@
     $isOpenForPrediction = $tournamentStartedAt->isFuture() && $openingDate->isPast();
 @endphp
 
-<x-home::shared.card :grayed="$isPastPredictionDateOrStillNotOpen" title="Pronostico Vincente">
+<x-home::shared.card :grayed="$isPastPredictionDateOrStillNotOpen" title="{{ __('messages.home.champion_title') }}">
     <div class="my-auto gap-4 flex flex-col">
         @if(null !== $champion)
-            <x-home::shared.info-tile label="Vincitore" :value="__($champion->team->name)" :isPredictionSuccessful="$isChampionPredictionSuccessful ?? false">
+            <x-home::shared.info-tile label="{{ __('messages.common.winner') }}" :value="__($champion->team->name)" :isPredictionSuccessful="$isChampionPredictionSuccessful ?? false">
                 <x-partials.svgs.rank/>
             </x-home::shared.info-tile>
-            <x-home::shared.info-tile label="Capocannoniere" :value="$champion->player->displayed_name" :isPredictionSuccessful="$isTopScorerPredictionSuccessful ?? false">
+            <x-home::shared.info-tile label="{{ __('messages.common.top_scorer') }}" :value="$champion->player->displayed_name" :isPredictionSuccessful="$isTopScorerPredictionSuccessful ?? false">
                 <x-partials.svgs.boot/>
             </x-home::shared.info-tile>
             @if($isOpenForPrediction)
-                <a href="{{ route('champion.index') }}" class="btn btn-primary btn-lg rounded-2xl w-full mt-auto shrink-0">Modifica Pronostico</a>
+                <a href="{{ route('champion.index') }}" class="btn btn-primary btn-lg rounded-2xl w-full mt-auto shrink-0">{{ __('messages.prediction.edit') }}</a>
             @endif
         @else
             @if($isOpenForPrediction)
@@ -26,8 +26,8 @@
                         <x-partials.svgs.rank/>
                         <x-partials.svgs.boot/>
                     </div>
-                    <span class="font-bold text-base-content/60">Selezione Vincente e Capocannoniere</span>
-                    <a href="{{ route('champion.index') }}" class="btn btn-primary btn-lg rounded-2xl w-full mt-auto shrink-0">Crea Pronostico</a>
+                    <span class="font-bold text-base-content/60">{{ __('messages.champion.selection_pending') }}</span>
+                    <a href="{{ route('champion.index') }}" class="btn btn-primary btn-lg rounded-2xl w-full mt-auto shrink-0">{{ __('messages.prediction.create') }}</a>
                 </div>
             @elseif($tournamentStartedAt->isPast())
                 <div class="ml-auto">
@@ -40,8 +40,8 @@
                             <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
                         </svg>
                     </div>
-                    <span class="font-bold text-base-content/60">Vincente e Capocannoniere non selezionati</span>
-                    <span class="text-center">Impossibile selezionare pronostico vincente e capocannoniere dopo l'inizio del torneo</span>
+                    <span class="font-bold text-base-content/60">{{ __('messages.champion.not_selected') }}</span>
+                    <span class="text-center">{{ __('messages.champion.too_late') }}</span>
                 </div>
             @else
                 <div class="ml-auto">
@@ -54,8 +54,8 @@
                             <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
                         </svg>
                     </div>
-                    <span class="font-bold text-base-content/60">Vincente e Capocannoniere non selezionati</span>
-                    <span class="text-center">Il pronostico Vincente e Capocannoniere non è ancora aperto</span>
+                    <span class="font-bold text-base-content/60">{{ __('messages.champion.not_selected') }}</span>
+                    <span class="text-center">{{ __('messages.champion.not_open') }}</span>
                 </div>
             @endif
         @endif

@@ -6,7 +6,7 @@
         :$prediction
     />
     <x-prediction::shared.sign-radio
-        teamName="Pareggio"
+        teamName="{{ __('messages.common.draw') }}"
         value="x"
         label="draw"
         :$prediction

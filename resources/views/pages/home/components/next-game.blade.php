@@ -1,4 +1,4 @@
-    <x-home::shared.card title="Prossimo Incontro">
+    <x-home::shared.card title="{{ __('messages.home.next_game_title') }}">
         @if(null !== $game && !$hasFinalStarted)
             <div class="ml-auto">
                 <x-partials.countdown.main :isOpen="true" :date="$game->started_at"/>
@@ -14,7 +14,7 @@
                 <div class="flex flex-col items-center gap-3">
                     <x-home::shared.game-date :date="$game->started_at"/>
                     <a href="{{ route('prediction.create', ['game' => $game]) }}" class="btn bg-accent btn-lg rounded-2xl">
-                        Pronostica
+                        {{ __('messages.common.predict') }}
                     </a>
                 </div>
                 <x-home::shared.team-display :teamCode="$game->away_team->code" :teamName="$game->away_team->name"/>
@@ -31,10 +31,10 @@
                             </svg>
                         </div>
                         @if($hasFinalStarted)
-                            <span class="font-bold text-base-content/60">Finale in corso</span>
-                            <span class="text-center">Attendi il risultato finale!</span>
+                            <span class="font-bold text-base-content/60">{{ __('messages.prediction.final_in_progress') }}</span>
+                            <span class="text-center">{{ __('messages.prediction.wait_final') }}</span>
                         @else
-                            <span class="font-bold text-base-content/60">Il Prossimo incontro non è disponibile!</span>
+                            <span class="font-bold text-base-content/60">{{ __('messages.prediction.no_next_game') }}</span>
                         @endif
                     </div>
                 </div>
