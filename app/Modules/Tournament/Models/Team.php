@@ -8,6 +8,7 @@ use App\Models\Game;
 use App\Models\Player;
 use App\Models\Tournament;
 use App\Modules\ApiSport\Dto\TeamsDto;
+use App\Modules\ApiSport\Dto\WinnerDto;
 use App\Modules\Tournament\Database\Factory\TeamFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
@@ -68,6 +69,18 @@ final class Team extends Model
     public static function newFactory(): TeamFactory
     {
         return TeamFactory::new();
+    }
+
+    public static function setWinner(WinnerDto $dto, Tournament $tournament): void
+    {
+        if (null === $dto->teamApiId) {
+            return;
+        }
+
+        $team = self::whereApiId($dto->teamApiId)->first();
+        if ($team instanceof self) {
+            $tournament->teams()->updateExistingPivot($team->id, ['is_winner' => true]);
+        }
     }
 
     public static function upsertTeamsDto(TeamsDto $teamsDto): void

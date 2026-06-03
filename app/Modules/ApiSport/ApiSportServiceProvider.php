@@ -10,6 +10,7 @@ use App\Modules\ApiSport\Console\GetGameGoalsCommand;
 use App\Modules\ApiSport\Console\GetGamesCommand;
 use App\Modules\ApiSport\Console\GetPlayersByTeamCommand;
 use App\Modules\ApiSport\Console\GetTeamsCommand;
+use App\Modules\ApiSport\Console\GetWinnerCommand;
 use App\Modules\ApiSport\Console\SetGameOngoingCommand;
 use App\Modules\ApiSport\Mapper\ApiSportMapper;
 use App\Modules\ApiSport\Mapper\MapperInterface;
@@ -20,6 +21,7 @@ use App\Modules\ApiSport\Mapper\Strategy\GameStatusMapperStrategy;
 use App\Modules\ApiSport\Mapper\Strategy\NationalsMapperStrategy;
 use App\Modules\ApiSport\Mapper\Strategy\TeamsMapperStrategy;
 use App\Modules\ApiSport\Mapper\Strategy\TopScorersMapperStrategy;
+use App\Modules\ApiSport\Mapper\Strategy\WinnerMapperStrategy;
 use App\Modules\ApiSport\Repository\ApiSportGameRepositoryInterface;
 use App\Modules\ApiSport\Repository\ApiSportPlayerRepositoryInterface;
 use App\Modules\ApiSport\Repository\ApiSportTeamRepositoryInterface;
@@ -46,6 +48,7 @@ final class ApiSportServiceProvider extends ServiceProvider
 
         $this->app->bind(ApiSportServiceInterface::class, ApiSportService::class);
         $this->app->bind(MapperInterface::class, static fn (Application $app) => new ApiSportMapper(
+            new WinnerMapperStrategy(),
             new GamesMapperStrategy(),
             new TeamsMapperStrategy(),
             new NationalsMapperStrategy(),
@@ -100,6 +103,13 @@ final class ApiSportServiceProvider extends ServiceProvider
             [SetGameOngoingCommand::class, 'handle'],
             static fn (SetGameOngoingCommand $command, Application $app) => $command->handle(
                 Log::channel('schedule')
+            )
+        );
+        $this->app->bindMethod(
+            [GetWinnerCommand::class, 'handle'],
+            static fn (GetWinnerCommand $command, Application $app) => $command->handle(
+                $app->make(ApiSportServiceInterface::class),
+                Log::channel('schedule'),
             )
         );
 

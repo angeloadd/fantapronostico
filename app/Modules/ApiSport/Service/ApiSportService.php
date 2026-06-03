@@ -11,6 +11,7 @@ use App\Modules\ApiSport\Dto\GameStatusDto;
 use App\Modules\ApiSport\Dto\NationalDto;
 use App\Modules\ApiSport\Dto\NationalsDto;
 use App\Modules\ApiSport\Dto\PlayersDto;
+use App\Modules\ApiSport\Dto\WinnerDto;
 use App\Modules\ApiSport\Dto\TeamsDto;
 use App\Modules\ApiSport\Exceptions\InvalidApisportTokenException;
 use App\Modules\ApiSport\Exceptions\InvalidMappingException;
@@ -21,6 +22,7 @@ use App\Modules\ApiSport\Request\GetGameStatusRequest;
 use App\Modules\ApiSport\Request\GetPlayersByNationalRequest;
 use App\Modules\ApiSport\Request\GetTeamsRequest;
 use App\Modules\ApiSport\Request\GetTopScorersRequest;
+use App\Modules\ApiSport\Request\GetWinnerRequest;
 use ErrorException;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Sleep;
@@ -136,6 +138,22 @@ final readonly class ApiSportService implements ApiSportServiceInterface
 
         if (!$mapping instanceof PlayersDto) {
             throw InvalidMappingException::create($mapping::class, PlayersDto::class);
+        }
+
+        return $mapping;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getWinner(GetWinnerRequest $request): WinnerDto
+    {
+        $externalResponse = $this->apiSportClient->get($request::ENDPOINT, $request->toQuery());
+
+        $mapping = $this->mapper->map($externalResponse);
+
+        if (!$mapping instanceof WinnerDto) {
+            throw InvalidMappingException::create($mapping::class, WinnerDto::class);
         }
 
         return $mapping;
