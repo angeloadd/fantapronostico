@@ -79,7 +79,7 @@ final class Player extends Model
         /** @var Collection<int, Player> */
         return Cache::remember(
             'playersList',
-            Carbon::create('tomorrow at 5:00'),
+            Carbon::create('tomorrow at 9:30'),
             static fn (): Collection => Player::all()->sortBy($sortBy)
         );
     }

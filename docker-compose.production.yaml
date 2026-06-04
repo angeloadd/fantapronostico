@@ -1,0 +1,56 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      SERVER_NAME: ${SERVER_NAME}
+    secrets:
+      - origin_cert
+      - origin_key
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - storage:/app/storage/app
+
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME} -d ${DB_DATABASE}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  dozzle:
+    image: amir20/dozzle:latest
+    restart: unless-stopped
+    environment:
+      DOZZLE_USERNAME: ${DOZZLE_USERNAME}
+      DOZZLE_PASSWORD: ${DOZZLE_PASSWORD}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    ports:
+      - "8888:8080"
+
+volumes:
+  db_data:
+  storage:
+
+secrets:
+  origin_cert:
+    file: ./secrets/origin.pem
+  origin_key:
+    file: ./secrets/origin.key

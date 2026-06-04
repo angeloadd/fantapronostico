@@ -48,7 +48,6 @@ final class LeaguesWidget extends BaseWidget
                             $user->leagues()->updateExistingPivot($league->id, ['status' => 'accepted']);
                             $user->save();
 
-                            Cache::forget('league-'.$league->id.'-rank');
                             app(RankingCalculatorInterface::class)->calculate($league);
                         }
                     ),
