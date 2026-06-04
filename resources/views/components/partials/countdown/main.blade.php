@@ -17,25 +17,7 @@
         </svg>
         <div
                 x-cloak
-                x-data="{
-                startDate: new Date('{{ $date->avoidMutation()->timezone('Europe/Berlin') }}'.replace(' ', 'T')).getTime(),
-                countdown: 0,
-                days: 0, hours: 0, minutes: 0, seconds: 0,
-                setDiff() {
-                    this.countdown = this.startDate - new Date().getTime()
-                    this.days    = Math.floor(this.countdown / (1000 * 60 * 60 * 24))
-                    this.hours   = Math.floor((this.countdown % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
-                    this.minutes = Math.floor((this.countdown % (1000 * 60 * 60)) / (1000 * 60))
-                    this.seconds = Math.floor((this.countdown % (1000 * 60)) / 1000)
-                },
-                init() {
-                    this.setDiff()
-                    let x = setInterval(() => {
-                        this.setDiff()
-                        if (this.countdown < 0) { clearInterval(x); this.countdown = 0 }
-                    }, 1000)
-                }
-            }"
+                x-data="countdown({{$date->avoidMutation()->timezone('Europe/Berlin')->timestamp * 1000}})"
                 class="countdown"
         >
             {{$isOpen ?? true ? __('messages.countdown.closes') : __('messages.countdown.opens')}}&nbsp;{{ __('messages.countdown.in') }}&nbsp;
