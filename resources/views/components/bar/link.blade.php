@@ -4,7 +4,7 @@
             @case('next') @keyup.right.window="window.location.assign('{{$link}}')" @break
         @endswitch
         @class([
-            'text-base-content/30 disabled pointer-events-none cursor-default text-decoration-none' => $disabled,
+            'text-base-content/30 disabled' => $disabled,
             'text-base-content' => !$disabled,
         ])
         href="{{$link}}"

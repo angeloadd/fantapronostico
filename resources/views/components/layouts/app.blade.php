@@ -35,10 +35,6 @@
         <meta name="msapplication-TileImage" content="{{Vite::asset('resources/assets/favicon/ms-icon-144x144.png')}}">
         <meta name="theme-color" content="#ffffff">
 
-        <!-- Fonts -->
-        <link rel="stylesheet" href="{{ asset('fonts/Inter-4.1/web/inter.css') }}">
-        <link rel="stylesheet" href="{{ asset('fonts/BebasNeue_Complete/Fonts/WEB/css/bebas-neue.css') }}">
-
         <!-- Styles -->
         @vite(['resources/scss/app.scss', 'resources/js/app.js'])
         @if(($style ?? null)?->isNotEmpty())

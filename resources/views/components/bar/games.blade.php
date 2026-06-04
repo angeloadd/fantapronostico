@@ -10,7 +10,7 @@
             ])
             href="{{ route('prediction.index', ['game' => $gameInBar]) }}"
         >
-            {{ __($gameInBar->home_team->name) }} {{ \App\Helpers\FunWithFlags::getFlag($gameInBar->home_team->code) }} vs {{ \App\Helpers\FunWithFlags::getFlag($gameInBar->away_team->code) }} {{ __($gameInBar->away_team->name) }}
+            {{ __($gameInBar->home_team->name) }} {{ flagEmoji($gameInBar->home_team->code) }} vs {{ flagEmoji($gameInBar->away_team->code) }} {{ __($gameInBar->away_team->name) }}
         </a>
     @endif
 @endforeach

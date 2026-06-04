@@ -7,6 +7,8 @@ namespace App\Models;
 use App\Enums\GameStatus;
 use App\Modules\ApiSport\Dto\GameGoalsDto;
 use App\Modules\ApiSport\Dto\GamesDto;
+use App\Modules\Auth\Models\User;
+use App\Modules\League\Models\PredictionRank;
 use App\Modules\Tournament\Models\Team;
 use Database\Factories\GameFactory;
 use DateTimeInterface;
@@ -389,6 +391,18 @@ final class Game extends Model
     public function isNotPredictableYet(): bool
     {
         return $this->predictable_from->isFuture();
+    }
+
+    public function getUpliftForUser(?User $user): int
+    {
+        if (null === $user) {
+            return 0;
+        }
+
+        return PredictionRank::whereGameId($this->id)
+            ->whereUserId($user->id)
+            ->first()
+            ?->total ?? 0;
     }
 
     protected static function booted(): void

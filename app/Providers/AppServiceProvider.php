@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use App\Console\Commands\CalculateRanking;
 use App\Events\GameGoalsUpdated;
 use App\Helpers\Ranking\RankingCalculatorInterface;
 use App\Helpers\Ranking\ViewRankingCalculator;

@@ -1,3 +1,6 @@
+@import "../assets/fonts/Inter-4.1/web/inter.css";
+@import "../assets/fonts/BebasNeue_Complete/Fonts/WEB/css/bebas-neue.css";
+
 @import "tailwindcss";
 
 @plugin "daisyui" {
@@ -69,10 +72,6 @@
 // my style
 @import 'fireworks';
 
-$titleFont: 'Beba ';
-$bodyFont: 'Inter';
-$italicFont: 'Crimson Text';
-
 *,
 *::before,
 *::after {
@@ -97,25 +96,20 @@ h6 {
     font-family: var(--font-title), sans-serif;
 }
 
-.fp2024 {
-    &-title {
-        font-family: var(--font-title), sans-serif;
-    }
+.text-title {
+    font-family: var(--font-title), sans-serif;
 
-    &-italic {
+    &-bold {
         font-style: italic;
-        font-weight: 400;
-
-        &-bold {
-            font-style: italic;
-            font-weight: 600;
-        }
+        font-weight: 600;
     }
 }
+
 
 a.disabled {
     pointer-events: none;
     cursor: pointer;
+    text-decoration: none;
 }
 
 /* Needed to enable cloak alpine attribute see https://alpinejs.dev/directives/cloak */

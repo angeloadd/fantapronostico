@@ -40,6 +40,6 @@ final class DevGroupPhaseSeeder extends DevBaseSeeder
         }
 
         Artisan::call('fp:ranking:calculate-view', ['--leagueId' => $league->id]);
-//        $this->createRanks($users, $league, self::FINISHED_COUNT);
+        //        $this->createRanks($users, $league, self::FINISHED_COUNT);
     }
 }

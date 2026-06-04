@@ -20,15 +20,15 @@ use stdClass;
 
 final readonly class ViewRankingCalculator implements RankingCalculatorInterface
 {
-    public function __construct(private readonly LoggerInterface $logger) {}
+    public function __construct(private LoggerInterface $logger) {}
 
-    public function calculate(League $league): void
+    public function calculate(League $league, bool $refresh = false): void
     {
         $league->users
             ->filter(static fn (User $user) => 'accepted' === $user->pivot->status)
-            ->each(function (User $user) use ($league): void {
-                $this->scorePredictions($user, $league);
-                $this->scoreChampion($user, $league);
+            ->each(function (User $user) use ($league, $refresh): void {
+                $this->scorePredictions($user, $league, $refresh);
+                $this->scoreChampion($user, $league, $refresh);
             });
 
         DB::statement('REFRESH MATERIALIZED VIEW ranking_view');
@@ -66,19 +66,22 @@ final readonly class ViewRankingCalculator implements RankingCalculatorInterface
         return $ranking->sortBy('position')->values();
     }
 
-    private function scorePredictions(User $user, League $league): void
+    private function scorePredictions(User $user, League $league, bool $refresh = false): void
     {
-        $scoredIds = PredictionRank::where('user_id', $user->id)
-            ->where('league_id', $league->id)
-            ->pluck('prediction_id');
+        if ($refresh) {
+            $scoredIds = collect();
+        } else {
+            $scoredIds = PredictionRank::where('user_id', $user->id)
+                ->where('league_id', $league->id)
+                ->pluck('prediction_id');
+        }
 
-        $rows = $user->predictions
+        $user->predictions
             ->whereStrict('league_id', $league->id)
             ->filter(fn (Prediction $prediction) => GameStatus::FINISHED === $prediction->game->status)
             ->reject(fn (Prediction $prediction) => $scoredIds->contains($prediction->id))
-            ->map(function (Prediction $prediction) use ($user, $league): array {
+            ->map(function (Prediction $prediction) use ($user, $league): void {
                 $score = PredictionScoreFactory::create($prediction);
-                $now = now();
 
                 $total = ($score->result ? ScoringValues::EXACT : 0)
                     + ($score->sign ? ScoringValues::SIGN : 0)
@@ -93,31 +96,27 @@ final readonly class ViewRankingCalculator implements RankingCalculatorInterface
                     $total
                 ));
 
-                return [
-                    'user_id' => $user->id,
-                    'prediction_id' => $prediction->id,
-                    'league_id' => $league->id,
-                    'game_id' => $prediction->game_id,
-                    'is_exact' => $score->result,
-                    'is_sign' => $score->sign,
-                    'is_home_scorer' => $score->homeScorer,
-                    'is_away_scorer' => $score->awayScorer,
-                    'value_exact' => ScoringValues::EXACT,
-                    'value_sign' => ScoringValues::SIGN,
-                    'value_scorer' => ScoringValues::SCORER,
-                    'total' => $total,
-                    'is_final' => $score->isFinal,
-                    'predicted_at' => $prediction->updated_at,
-                    'created_at' => $now,
-                    'updated_at' => $now,
-                ];
-            })
-            ->values()
-            ->toArray();
-
-        if ([] !== $rows) {
-            PredictionRank::insert($rows);
-        }
+                PredictionRank::upsert(
+                    [
+                        'user_id' => $user->id,
+                        'prediction_id' => $prediction->id,
+                        'league_id' => $league->id,
+                        'game_id' => $prediction->game_id,
+                        'is_exact' => $score->result,
+                        'is_sign' => $score->sign,
+                        'is_home_scorer' => $score->homeScorer,
+                        'is_away_scorer' => $score->awayScorer,
+                        'value_exact' => ScoringValues::EXACT,
+                        'value_sign' => ScoringValues::SIGN,
+                        'value_scorer' => ScoringValues::SCORER,
+                        'total' => $total,
+                        'is_final' => $score->isFinal,
+                        'predicted_at' => $prediction->updated_at,
+                    ],
+                    ['user_id', 'prediction_id'],
+                    ['total', 'is_final', 'predicted_at', 'is_exact', 'is_sign', 'is_home_scorer', 'is_away_scorer', 'value_exact', 'value_sign', 'value_scorer']
+                );
+            });
     }
 
     private function scoreChampion(User $user, League $league): void

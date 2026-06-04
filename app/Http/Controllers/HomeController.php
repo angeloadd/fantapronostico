@@ -50,7 +50,7 @@ final class HomeController extends Controller
             'nextGame' => $nextGame,
             'champion' => $user->champion,
             'hasFinalStarted' => $this->hasFinalStarted($tournament),
-            'lastResults' => $this->gameRepository->getLastResults(now())->take(3),
+            'lastResults' => $this->gameRepository->getLastResults(now())->take(3)->reverse(),
             'isWinnerDeclared' => $this->isWinnerDeclared($tournament),
             'winnerName' => $ranking->first()?->userName() ?? '',
             'leagueName' => $league->name,

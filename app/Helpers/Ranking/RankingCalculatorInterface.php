@@ -9,7 +9,7 @@ use Illuminate\Support\Collection;
 
 interface RankingCalculatorInterface
 {
-    public function calculate(League $league): void;
+    public function calculate(League $league, bool $refresh = false): void;
 
     /**
      * @return Collection<int, UserRank>

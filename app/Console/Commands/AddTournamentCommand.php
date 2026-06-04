@@ -6,7 +6,6 @@ namespace App\Console\Commands;
 
 use App\Models\Tournament;
 use DateTimeImmutable;
-use DateTimeZone;
 use Exception;
 use Illuminate\Console\Command;
 

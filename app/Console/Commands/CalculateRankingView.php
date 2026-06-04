@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use App\Helpers\Ranking\ViewRankingCalculator;
+use App\Helpers\Ranking\RankingCalculatorInterface;
 use App\Modules\League\Models\League;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -12,11 +12,11 @@ use Throwable;
 
 final class CalculateRankingView extends Command
 {
-    protected $signature = 'fp:ranking:calculate-view {--leagueId=} {--refresh=false}';
+    protected $signature = 'fp:ranking:calculate-view {--leagueId=} {--refresh} {--force}';
 
     protected $description = 'Recalculate ranking_view (parallel run — compare with fp:ranking:calculate)';
 
-    public function handle(ViewRankingCalculator $calculator): int
+    public function handle(RankingCalculatorInterface $calculator): int
     {
         $league = is_numeric($this->option('leagueId'))
             ? League::find((int) $this->option('leagueId'))
@@ -32,7 +32,7 @@ final class CalculateRankingView extends Command
             if ($this->option('refresh') ?? false) {
                 DB::statement('REFRESH MATERIALIZED VIEW ranking_view');
             } else {
-                $calculator->calculate($league);
+                $calculator->calculate($league, $this->option('force') ?? false);
             }
         } catch (Throwable $e) {
             $this->error('Error: '.$e->getMessage());

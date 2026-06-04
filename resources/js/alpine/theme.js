@@ -7,7 +7,8 @@ export default {
 	},
 
 	toggle() {
-		this.mode = this.mode === this.themes.dark ? this.themes.light : this.themes.dark;
+		this.mode =
+			this.mode === this.themes.dark ? this.themes.light : this.themes.dark;
 	},
 
 	isDarkMode() {
@@ -19,10 +20,11 @@ export default {
 	},
 
 	init() {
-		this.mode = this.themes[
-			window.matchMedia?.("(prefers-color-scheme: dark)").matches
-				? "dark"
-				: "light"
-		];
+		this.mode =
+			this.themes[
+				window.matchMedia?.("(prefers-color-scheme: dark)").matches
+					? "dark"
+					: "light"
+			];
 	},
 };
