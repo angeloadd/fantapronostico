@@ -50,7 +50,7 @@ final class BotCommand extends Command
             }
 
             if ($games->isEmpty()) {
-                return 1;
+                return self::SUCCESS;
             }
         }
 
