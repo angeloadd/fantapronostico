@@ -15,6 +15,7 @@ services:
       db:
         condition: service_healthy
     volumes:
+      - caddy_data:/data
       - storage:/app/storage/app
 
   db:
@@ -78,6 +79,7 @@ services:
 volumes:
   db_data:
   storage:
+  caddy_data:
 
 secrets:
   origin_cert:
