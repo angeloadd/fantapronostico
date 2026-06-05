@@ -9,7 +9,7 @@ The production stack is **FrankenPHP** (Caddy-based PHP server) behind **Cloudfl
 ### Architecture
 
 ```
-Browser → Cloudflare edge (public TLS) → Hetzner server (Let's Encrypt TLS, auto-managed by Caddy) → FrankenPHP → Laravel
+Browser → Cloudflare edge (public TLS) → Hetzner server (Cloudflare Origin Certificate) → FrankenPHP → Laravel
 ```
 
 ---
@@ -19,10 +19,28 @@ Browser → Cloudflare edge (public TLS) → Hetzner server (Let's Encrypt TLS, 
 #### 1. Cloudflare SSL/TLS
 
 1. Set **SSL/TLS mode to Full (Strict)**
-2. Under **SSL/TLS → Edge Certificates** enable **Always Use HTTPS** — this redirects HTTP to HTTPS at the Cloudflare edge without breaking Let's Encrypt ACME challenges
+2. Under **SSL/TLS → Edge Certificates** enable **Always Use HTTPS** — this redirects HTTP to HTTPS at the Cloudflare edge without breaking ACME challenges
 3. Under **Rules → Redirect Rules** add a rule: if hostname equals `www.fantapronostico.com` → redirect to `https://fantapronostico.com` (301, preserve path)
 
-TLS certificates are obtained and renewed automatically by Caddy via Let's Encrypt — no manual certificate setup required.
+#### Cloudflare Origin Certificate
+
+The origin server uses a Cloudflare Origin Certificate (not Let's Encrypt) to terminate TLS between Cloudflare and the server.
+
+1. In Cloudflare dashboard go to **SSL/TLS → Origin Server → Create Certificate**
+2. Set validity to 15 years, ensure both `fantapronostico.com` and `*.fantapronostico.com` are listed as hostnames
+3. Download and place the files on the server:
+   ```
+   /path/to/project/secrets/origin.pem   # certificate
+   /path/to/project/secrets/origin.key   # private key
+   ```
+4. Verify the cert and key match before rebuilding:
+   ```bash
+   openssl x509 -noout -modulus -in secrets/origin.pem | openssl md5
+   openssl rsa -noout -modulus -in secrets/origin.key | openssl md5
+   ```
+   Both hashes must be identical.
+
+> The cert and key are mounted into the container via Docker secrets at `/run/secrets/origin_cert` and `/run/secrets/origin_key` and referenced in the Caddyfile.
 
 ---
 
