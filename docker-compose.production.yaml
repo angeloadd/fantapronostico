@@ -5,8 +5,6 @@ services:
       dockerfile: Dockerfile
     restart: unless-stopped
     env_file: .env
-    environment:
-      SERVER_NAME: ${SERVER_NAME}
     secrets:
       - origin_cert
       - origin_key
