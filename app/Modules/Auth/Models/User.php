@@ -78,6 +78,8 @@ use Illuminate\Support\Carbon;
  *
  * @method static Builder<static>|User whereTwoFactorConfirmedAt($value)
  *
+ * @property-read League|null $selected_league
+ *
  * @mixin Eloquent
  */
 final class User extends Authenticatable implements MustVerifyEmail
@@ -171,10 +173,13 @@ final class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * @return HasOne<League, $this>
+     * @return Attribute<League|null, never>
      */
-    public function selectedLeague(): HasOne
+    public function selectedLeague(): Attribute
     {
-        return $this->hasOne(League::class, 'id', 'selected_league_id');
+        return Attribute::make(
+            get: fn (): ?League => $this->leagues->firstWhere('id', $this->selected_league_id),
+            set: fn (League $league) => ['selected_league_id' => $league->id],
+        );
     }
 }

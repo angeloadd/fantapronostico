@@ -14,10 +14,17 @@ final class RedirectToLeagueMiddleware
 {
     public function handle(Request $request, Closure $next): RedirectResponse|Response
     {
-        if ($request->user()?->selectedLeague instanceof League) {
-            return redirect('/')->with('success', 'La tua richiesta è stata approvata.');
+        $league = $request->user()?->selectedLeague;
+        if (!$league instanceof League) {
+
+            return $next($request);
         }
 
-        return $next($request);
+        if ('accepted' !== $league->pivot->status) {
+            return $next($request);
+        }
+
+
+        return redirect('/');
     }
 }

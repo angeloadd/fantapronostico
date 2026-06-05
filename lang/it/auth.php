@@ -59,4 +59,7 @@ return [
         'heading' => 'La tua richiesta è stata inviata!',
         'paragraph' => 'Attendi che un moderatore accetti la tua richiesta e potrai iniziare a giocare.',
     ],
+    'subscription_accepted' => [
+        'message' => 'Iscrizione accettata',
+    ],
 ];

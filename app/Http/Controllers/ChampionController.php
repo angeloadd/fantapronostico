@@ -68,7 +68,7 @@ final class ChampionController extends Controller
 
         $leagueId = $user->selected_league_id;
 
-        $champion = Champion::where('user_id', $user->id)
+        $champion = Champion::whereUserId($user->id)
             ->where('league_id', $leagueId)
             ->first();
 

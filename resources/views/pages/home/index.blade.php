@@ -1,3 +1,5 @@
+<x-partials.notifications.toast-message sessionKey="success"/>
+
 <x-layouts.with-drawer>
     @if($isWinnerDeclared)
         <x-partials.fireworks.fireworks/>
