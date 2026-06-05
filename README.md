@@ -56,17 +56,35 @@ In the repo go to **Settings → Secrets and variables → Actions** and add:
 | `DEPLOY_HOST` | Hetzner server IP or hostname |
 | `DEPLOY_USER` | SSH user on the server |
 | `DEPLOY_SSH_KEY` | Full contents of `~/.ssh/fantapronostico_deploy` (private key) |
-| `DEPLOY_PATH` | Absolute path to the project on the server (e.g. `/home/deploy/fantapronostico`) |
+| `DEPLOY_PATH` | Absolute path to the project on the server (e.g. `/path/to/repo/fantapronostico`) |
 
 ---
 
 #### 4. Server first-time setup
 
-SSH into the server and run:
+**GitHub deploy key**
+
+The server needs read access to the repo to clone and pull. Generate a key on the server:
 
 ```bash
-git clone git@github.com:your-org/fantapronostico.git /home/deploy/fantapronostico
-cd /home/deploy/fantapronostico
+ssh-keygen -t ed25519 -C "hetzner-deploy" -f ~/.ssh/github_deploy
+cat ~/.ssh/github_deploy.pub
+```
+
+Add the public key in GitHub: **repo → Settings → Deploy keys → Add deploy key** (read-only is enough).
+
+Then add to `~/.ssh/config` on the server:
+
+```
+Host github.com
+    IdentityFile ~/.ssh/github_deploy
+```
+
+**Clone and configure**
+
+```bash
+git clone git@github.com:your-org/fantapronostico.git /path/to/repo/fantapronostico
+cd /path/to/repo/fantapronostico
 
 # Place the production env file
 cp .env.example .env
@@ -116,9 +134,14 @@ Host fantapronostico
     User your_user
     IdentityFile ~/.ssh/fantapronostico_server
     LocalForward 8888 localhost:8888
+    LocalForward 5433 localhost:5432
 ```
 
-`LocalForward` tunnels Dozzle so it's reachable at `http://localhost:8888` while the connection is open, without exposing port 8888 publicly on the server.
+`LocalForward <local_port> localhost:<remote_port>` tells SSH to forward that local port through the tunnel to the given port on the server. Both Dozzle and PostgreSQL bind only to `127.0.0.1` on the server, so they are unreachable from the internet — the tunnel is the only way in.
+
+While connected you can reach:
+- Dozzle at `http://localhost:8888`
+- PostgreSQL at `localhost:5433` (use your DB credentials from `.env`)
 
 Connect with:
 
