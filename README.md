@@ -9,25 +9,16 @@ The production stack is **FrankenPHP** (Caddy-based PHP server) behind **Cloudfl
 ### Architecture
 
 ```
-Browser → Cloudflare edge (public TLS) → Hetzner server (Origin CA TLS) → FrankenPHP → Laravel
+Browser → Cloudflare edge (public TLS) → Hetzner server (Let's Encrypt TLS, auto-managed by Caddy) → FrankenPHP → Laravel
 ```
 
 ---
 
 ### One-time setup
 
-#### 1. Cloudflare Origin Certificate
+#### 1. Cloudflare SSL/TLS
 
-1. In Cloudflare dashboard go to **SSL/TLS → Origin Server → Create Certificate**
-2. Choose RSA or ECDSA, set validity up to 15 years
-3. Download the two files and place them on the server:
-   ```
-   /path/to/project/secrets/origin.pem
-   /path/to/project/secrets/origin.key
-   ```
-4. In Cloudflare set **SSL/TLS mode to Full (Strict)**
-
-> These are mounted into the container at `/run/secrets/origin_cert` and `/run/secrets/origin_key` — absolute paths inside the container filesystem, unrelated to the project directory.
+In Cloudflare set **SSL/TLS mode to Full (Strict)**. TLS certificates are obtained and renewed automatically by Caddy via Let's Encrypt — no manual certificate setup required.
 
 ---
 
@@ -91,10 +82,6 @@ cp .env.example .env
 # Edit .env with production values, including SERVER_NAME=yourdomain.com and APP_KEY from command below
 # Generate a new APP_KEY locally and apply to .env file
 php artisan key:generate --show
-
-# Place the Cloudflare Origin certs
-mkdir -p secrets
-# copy origin.pem and origin.key into secrets/
 
 # First boot
 docker compose -f docker-compose.production.yaml up -d --build

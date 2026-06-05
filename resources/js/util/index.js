@@ -68,7 +68,7 @@ const util = {
 
 try {
 	window.FP2024Util = util;
-} catch (e) {
+} catch (_e) {
 	console.warn("Not in browser env");
 }
 

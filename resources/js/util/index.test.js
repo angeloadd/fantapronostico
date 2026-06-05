@@ -3,7 +3,7 @@ import { describe, it } from "node:test";
 import util from "./index.js";
 
 describe("FP2024Util can", () => {
-	it("recursively stringify a json", (t) => {
+	it("recursively stringify a json", (_t) => {
 		assert.equal(
 			util.stringifyJsonRecursive({
 				ciao: undefined,
