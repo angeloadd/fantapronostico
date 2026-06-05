@@ -43,7 +43,7 @@ final class ApiSportServiceProvider extends ServiceProvider
 
         $this->app->bind(
             ApiSportClientInterface::class,
-            static fn () => new ApiSportClient((string) config('api-sport.host'), (string) config('api-sport.token'))
+            static fn () => new ApiSportClient((string) config('api-sport.host'), (string) config('api-sport.token'), Log::getLogger())
         );
 
         $this->app->bind(ApiSportServiceInterface::class, ApiSportService::class);

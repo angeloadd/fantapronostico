@@ -18,7 +18,11 @@ Browser → Cloudflare edge (public TLS) → Hetzner server (Let's Encrypt TLS, 
 
 #### 1. Cloudflare SSL/TLS
 
-In Cloudflare set **SSL/TLS mode to Full (Strict)**. TLS certificates are obtained and renewed automatically by Caddy via Let's Encrypt — no manual certificate setup required.
+1. Set **SSL/TLS mode to Full (Strict)**
+2. Under **SSL/TLS → Edge Certificates** enable **Always Use HTTPS** — this redirects HTTP to HTTPS at the Cloudflare edge without breaking Let's Encrypt ACME challenges
+3. Under **Rules → Redirect Rules** add a rule: if hostname equals `www.fantapronostico.com` → redirect to `https://fantapronostico.com` (301, preserve path)
+
+TLS certificates are obtained and renewed automatically by Caddy via Let's Encrypt — no manual certificate setup required.
 
 ---
 

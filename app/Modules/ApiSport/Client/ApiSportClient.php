@@ -9,18 +9,20 @@ use App\Modules\ApiSport\Exceptions\InvalidApisportTokenException;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Http;
+use Psr\Log\LoggerInterface;
 
 final readonly class ApiSportClient implements ApiSportClientInterface
 {
-    private const API_SPORT_AUTH_HEADER = 'x-apisports-key';
+    private const string API_SPORT_AUTH_HEADER = 'x-apisports-key';
 
-    private const API_SPORT_INVALID_TOKEN_KEY = 'errors.token';
+    private const string API_SPORT_INVALID_TOKEN_KEY = 'errors.token';
 
-    private const RESPONSE_KEY = 'response';
+    private const string RESPONSE_KEY = 'response';
 
     public function __construct(
         private string $host,
-        private string $apiToken
+        private string $apiToken,
+        private LoggerInterface $logger,
     ) {}
 
     /**
@@ -38,6 +40,8 @@ final readonly class ApiSportClient implements ApiSportClientInterface
 
         /** @var array<string, array<string, int|string>> $json */
         $json = $response->json();
+
+        $this->logger->debug('ApiSport response', $json);
 
         if (Arr::has($json, self::API_SPORT_INVALID_TOKEN_KEY)) {
             throw InvalidApisportTokenException::create();
