@@ -2,7 +2,6 @@
     admin off
     frankenphp
     auto_https off
-    cert_issuer internal
 }
 
 {$SERVER_NAME} {
