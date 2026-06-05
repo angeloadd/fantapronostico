@@ -34,6 +34,32 @@ services:
       timeout: 5s
       retries: 5
 
+  scheduler:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    env_file: .env
+    command: php artisan schedule:work
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - storage:/app/storage/app
+
+  queue:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    env_file: .env
+    command: php artisan queue:work --sleep=3 --tries=3 --max-time=3600 --timeout=90
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - storage:/app/storage/app
+
   dozzle:
     image: amir20/dozzle:latest
     restart: unless-stopped

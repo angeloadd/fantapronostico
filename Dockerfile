@@ -1,9 +1,9 @@
 FROM composer:2 AS vendor
 WORKDIR /app
 COPY composer.json composer.lock ./
-RUN composer install --no-dev --optimize-autoloader --no-scripts --ignore-platform-reqs
+RUN composer install --no-dev --optimize-autoloader --no-scripts
 
-FROM node:21-alpine AS assets
+FROM node:24-alpine AS assets
 WORKDIR /app
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 RUN corepack enable && pnpm install --frozen-lockfile
@@ -14,7 +14,7 @@ FROM dunglas/frankenphp
 
 WORKDIR /app
 
-RUN install-php-extensions pdo_pgsql pcntl
+RUN install-php-extensions pdo_pgsql pcntl intl
 
 COPY . .
 COPY --from=vendor /app/vendor ./vendor
