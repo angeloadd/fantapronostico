@@ -88,7 +88,9 @@ cd /path/to/repo/fantapronostico
 
 # Place the production env file
 cp .env.example .env
-# Edit .env with production values, including SERVER_NAME=yourdomain.com
+# Edit .env with production values, including SERVER_NAME=yourdomain.com and APP_KEY from command below
+# Generate a new APP_KEY locally and apply to .env file
+php artisan key:generate --show
 
 # Place the Cloudflare Origin certs
 mkdir -p secrets
@@ -96,7 +98,6 @@ mkdir -p secrets
 
 # First boot
 docker compose -f docker-compose.production.yaml up -d --build
-docker compose -f docker-compose.production.yaml exec app php artisan key:generate --force
 docker compose -f docker-compose.production.yaml exec app php artisan migrate --force
 docker compose -f docker-compose.production.yaml exec app php artisan optimize
 ```
