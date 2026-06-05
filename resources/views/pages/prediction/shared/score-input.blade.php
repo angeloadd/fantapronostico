@@ -2,7 +2,10 @@
     'label text-base-content',
     'order-last' => $label === 'away_score',
 ])>
-    {{ __('messages.prediction.result') }} {{__($teamName)}}
+    <span class="md:hidden text-sm">{{__($label)}}</span>
+    <span class="hidden md:inline">
+       {{ __('messages.prediction.result') }} {{__($teamName)}}
+    </span>
 </label>
 <input
     type="number"

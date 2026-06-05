@@ -1,7 +1,6 @@
 <x-prediction::shared.layout>
-    <div class="py-8">
-        <x-prediction::shared.card status="edit">
-            <x-prediction::shared.form
+    <x-prediction::shared.card status="edit" :isForm="true">
+        <x-prediction::shared.form
                 method="PUT"
                 action="{{route('prediction.update', ['prediction' => $prediction])}}"
                 :homeTeamName="__($game->home_team->name)"
@@ -16,7 +15,6 @@
                 :btnText="__('Modifica il Pronostico')"
                 btnBg="bg-primary text-base-content-content"
                 :prediction="$prediction ?? null"
-            />
-        </x-prediction::shared.card>
-    </div>
+        />
+    </x-prediction::shared.card>
 </x-prediction::shared.layout>

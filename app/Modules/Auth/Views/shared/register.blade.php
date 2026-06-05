@@ -21,5 +21,6 @@
             ],
         ]"
         btnText="{{__('auth.register.btn')}}"
+        :showTec="true"
     />
 </x-auth::shared.nav>

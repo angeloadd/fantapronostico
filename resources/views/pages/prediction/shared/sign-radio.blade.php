@@ -7,5 +7,5 @@
         class="radio bg-white dark:bg-neutral mx-2 @error('sign') border-error @enderror"
         @checked(old('sign', $prediction?->sign) === $value)
     />
-    <label for="{{$label}}">{{strtoupper($value)}}: {{__($teamName)}}</label>
+    <label for="{{$label}}" class="text-sm text-center">{{strtoupper($value)}}: {{__($teamName)}}</label>
 </div>

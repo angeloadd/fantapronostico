@@ -1,4 +1,4 @@
-<div class="flex items-center justify-between w-full">
+<div class="flex items-center justify-around w-full">
     <x-prediction::shared.sign-radio
         :TeamName="$homeTeamName"
         value="1"

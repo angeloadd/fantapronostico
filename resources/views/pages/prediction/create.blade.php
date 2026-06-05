@@ -1,7 +1,7 @@
 <x-prediction::shared.layout>
     <x-prediction::shared.game-bar :games="$games" :game="$game"/>
     <div>
-        <x-prediction::shared.card>
+        <x-prediction::shared.card :isForm="true">
             <x-prediction::shared.form
                 method="POST"
                 action="{{route('prediction.store', ['game' => $game])}}"

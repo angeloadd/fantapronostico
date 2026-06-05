@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Database\Seeders;
 
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Artisan;
 
 final class DevBeforeStartSeeder extends DevBaseSeeder
 {
@@ -40,5 +41,7 @@ final class DevBeforeStartSeeder extends DevBaseSeeder
 
         $this->createChampions($users, $teams, $league, $skipEmails);
         // No predictions, goals, or ranks — tournament has not started
+
+        Artisan::call('fp:ranking:calculate-view', ['--leagueId' => $league->id]);
     }
 }

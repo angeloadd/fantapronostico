@@ -17,4 +17,14 @@ final class MiscController extends Controller
     {
         return view('misc.terms');
     }
+
+    public function impressum(): Renderable
+    {
+        return view('misc.impressum');
+    }
+
+    public function tec(): Renderable
+    {
+        return view('misc.tec');
+    }
 }

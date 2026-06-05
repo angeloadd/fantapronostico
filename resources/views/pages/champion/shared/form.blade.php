@@ -1,45 +1,45 @@
-<form class="w-full flex flex-col justify-center items-center space-y-6" action="{{$action}}" method="POST">
+<form class="flex flex-col justify-center items-center gap-6" action="{{$action}}" method="POST">
     @csrf
     @method($method)
-    <div class="w-full flex flex-col space-y-2 p-3">
-        <label for="winner" class="label">
-            {{ __('messages.champion.winner_label') }}
-        </label>
-        @error('winner')
-        <span class="text-error text-sm">{{ __('messages.common.required') }}</span>
-        @enderror
+    <div class="w-full flex flex-col gap-2">
+        <label for="winner" class="label">Vincente</label>
         <select name="winner"
                 id="winner"
                 class="select w-full bg-white dark:bg-neutral @error('winner') border-error @enderror"
         >
             <option
-                value=""
-                @selected(null === old('winner', ($prediction ?? null)?->team->id))
+                    value=""
+                    @selected(null === old('winner', $prediction?->team_id))
             >{{ __('messages.champion.select_winner') }}</option>
             @foreach($teams as $team)
                 <option
-                    value="{{$team->id}}"
-                    @selected(old('winner', ($prediction ?? null)?->team->id) === $team->id)>{{__($team->name)}}</option>
+                        value="{{$team->id}}"
+                        @selected((int) old('winner', $prediction?->team_id) === $team->id)>{{__($team->name)}}
+                </option>
             @endforeach
         </select>
-    </div>
-    <div class="w-full flex flex-col space-y-2 p-3">
-        <label for="topScorer" class="label">{{ __('messages.champion.scorer_label') }}</label>
-        @error('topScorer')
-        <span class="text-error text-sm">{{ __('messages.common.required') }}</span>
+        @error('winner')
+        <span class="text-error text-xs">{{ __('messages.common.required') }}</span>
         @enderror
+    </div>
+    <div class="w-full flex flex-col gap-2">
+        <label for="topScorer" class="label">Capocannoniere</label>
         <select name="topScorer"
                 id="topScorer"
                 class="select w-full bg-white dark:bg-neutral  @error('topScorer') border-error @enderror"
         >
-            <option value="" @selected(null === old('topScorer', ($prediction ?? null)?->player))>{{ __('messages.champion.select_scorer') }}</option>
+            <option value="" @selected(null === old('topScorer', $prediction?->player_id))>{{ __('messages.champion.select_scorer') }}</option>
             @foreach($players as $player)
-                <option value="{{$player['id']}}" @selected(old('topScorer', ($prediction ?? null)?->player->id) === $player->id)>
+                <option
+                        value="{{$player->id}}" @selected((int) old('topScorer', $prediction?->player_id) === $player->id)>
                     {{$player->displayed_name}} -
                     {{__($teams->where(static fn ($team) => $team->id === $player->national_id)->first()->name)}}
                 </option>
             @endforeach
+            @error('topScorer')
+            <span class="text-error text-xs">{{ __('messages.common.required') }}</span>
+            @enderror
         </select>
     </div>
-    <button type="submit" class="btn {{$btnBg}} text-primary-content w-full">{{ $btnText }}</button>
+    <button type="submit" class="btn bg-{{$btnTheme}} text-{{$btnTheme}}-content w-full">{{ $btnText }}</button>
 </form>

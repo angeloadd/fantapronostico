@@ -33,5 +33,12 @@
         @else
             {{$btn}}
         @endif
+
+        @if($showTec ?? false)
+            <p class="text-xs text-base-content/60 text-center">
+                Registrandoti accetti i nostri
+                <a href="{{ route('tec') }}" class="underline hover:text-base-content" target="_blank">Termini e Condizioni d'uso</a>.
+            </p>
+        @endif
     </div>
 </form>

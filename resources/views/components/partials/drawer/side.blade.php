@@ -23,7 +23,7 @@
             <ul class="menu text-lg w-full">
                 <li>
                     <a href="/admin"
-                       class="text-primary-content/85 rounded-2xl hover:bg-[#2b3b5a]"
+                       class="text-primary-content/85 rounded-2xl hover:bg-[#2b3b5a] dark:hover:bg-primary/50"
                     >
                         <x-dynamic-component :component="'partials.svgs.admin'"/>
                         <span class="pl-1">{{ __('messages.nav.mod_panel') }}</span>

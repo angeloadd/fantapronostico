@@ -1,5 +1,5 @@
 <x-champion::shared.layout>
-    <x-champion::shared.card>
+    <x-champion::shared.card :isForm="true">
         <x-champion::shared.card-header
             :$tournamentLogo
             :$tournamentName
@@ -8,11 +8,12 @@
         />
         <x-champion::shared.form
             btnText="{{ __('messages.common.predict') }}"
-            btnBg="bg-accent"
+            btnBg="accent"
             method="POST"
             action="{{route('champion.store')}}"
             :$teams
             :$players
+            :prediction="null"
         />
     </x-champion::shared.card>
 

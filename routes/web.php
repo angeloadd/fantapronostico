@@ -33,6 +33,9 @@ Route::group([], static function (Router $r): void {
     }
 });
 
+Route::get('impressum', [MiscController::class, 'impressum'])->name('impressum');
+Route::get('tec', [MiscController::class, 'tec'])->name('tec');
+
 Route::middleware(['auth', LeagueEnricherMiddleware::class])->group(static function (): void {
     /* homepage */
     Route::get('/', [HomeController::class, 'index'])->name('home');

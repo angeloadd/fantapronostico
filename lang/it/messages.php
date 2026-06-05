@@ -69,8 +69,6 @@ return [
     'champion' => [
         'not_open' => 'Il Pronostico Vincitore e Capocannoniere non è ancora aperto',
         'deadline_hint' => "Inserisci il pronostico entro la data di inizio dell'Europeo",
-        'winner_label' => "Inserisci un pronostico per la squadra vincente dell'Europeo",
-        'scorer_label' => "Inserisci un pronostico per il Capocannoniere dell'Europeo",
         'select_winner' => '-- Seleziona Squadra Vincente --',
         'select_scorer' => '-- Seleziona Capocannoniere --',
         'selection_pending' => 'Selezione Vincente e Capocannoniere',
