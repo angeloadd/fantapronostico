@@ -42,18 +42,18 @@
     name: luxury;
     color-scheme: dark;
 
-    --color-base-100: hsl(220, 60%, 8%);
-    --color-base-200: hsl(220, 50%, 12%);
-    --color-base-300: hsl(220, 40%, 18%);
-    --color-base-content: hsl(220, 20%, 95%);
+    --color-base-100: hsl(220, 20%, 9%);
+    --color-base-200: hsl(220, 20%, 14%);
+    --color-base-300: hsl(220, 20%, 21%);
+    --color-base-content: hsl(220, 20%, 93%);
 
-    --color-primary: hsl(45, 100%, 50%);
-    --color-primary-content: hsl(220, 60%, 10%);
+    --color-primary: hsl(220, 70%, 52%);
+    --color-primary-content: hsl(0, 0%, 100%);
 
-    --color-secondary: hsl(220, 40%, 18%);
-    --color-secondary-content: hsl(220, 20%, 95%);
+    --color-secondary: hsl(220, 20%, 24%);
+    --color-secondary-content: hsl(220, 20%, 93%);
 
-    --color-accent: hsl(45, 100%, 50%);
+    --color-accent: hsl(45, 100%, 55%);
     --color-accent-content: hsl(220, 60%, 10%);
 
     --color-neutral: hsl(220, 30%, 25%);
@@ -68,6 +68,8 @@
     --radius-field: 0.5rem;
     --radius-box: 0.75rem;
 }
+
+@variant dark (&:where([data-theme=luxury], [data-theme=luxury] *));
 
 // my style
 @import 'fireworks';

@@ -1,6 +1,6 @@
 <aside class="drawer-side">
     <label for="sidebarBtn" aria-label="{{ __('messages.accessibility.close_sidebar') }}" class="drawer-overlay"></label>
-    <div class="min-h-screen bg-primary flex flex-col items-center justify-start" id="sideBar">
+    <div class="min-h-screen bg-primary flex flex-col items-center justify-start dark:bg-neutral" id="sideBar">
         <div class="h-14 flex justify-center items-center pt-1">
             <x-partials.logo.large primary="var(--color-primary-content)" secondary="var(--color-accent)" width="w-60"/>
         </div>

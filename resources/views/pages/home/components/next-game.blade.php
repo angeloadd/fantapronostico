@@ -13,7 +13,7 @@
                 <x-home::shared.team-display :teamCode="$game->home_team->code" :teamName="$game->home_team->name"/>
                 <div class="flex flex-col items-center gap-3">
                     <x-home::shared.game-date :date="$game->started_at"/>
-                    <a href="{{ route('prediction.create', ['game' => $game]) }}" class="btn bg-accent btn-lg rounded-2xl">
+                    <a href="{{ route('prediction.create', ['game' => $game]) }}" class="btn bg-accent text-accent-content btn-lg rounded-2xl">
                         {{ __('messages.common.predict') }}
                     </a>
                 </div>

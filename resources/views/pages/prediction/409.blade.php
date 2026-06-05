@@ -1,6 +1,6 @@
 <x-prediction::shared.layout>
     <x-prediction::shared.game-bar :games="$games" :game="$game"/>
-    <div class="w-full flex justify-center items-center text-primary/80 text-center">
+    <div class="w-full flex justify-center items-center text-base-content/80 text-center">
         <x-prediction::shared.card status="disabled">
             <x-prediction::shared.card-header
                     :homeTeamName="$game->home_team->name"

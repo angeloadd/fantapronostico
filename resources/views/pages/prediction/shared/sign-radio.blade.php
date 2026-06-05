@@ -4,7 +4,7 @@
         type="radio"
         value="{{$value}}"
         name="sign"
-        class="radio bg-white mx-2 @error('sign') border-error @enderror"
+        class="radio bg-white dark:bg-neutral mx-2 @error('sign') border-error @enderror"
         @checked(old('sign', $prediction?->sign) === $value)
     />
     <label for="{{$label}}">{{strtoupper($value)}}: {{__($teamName)}}</label>

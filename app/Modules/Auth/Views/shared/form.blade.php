@@ -18,7 +18,7 @@
         @if($passwordReset ?? false)
             <a
                     href="{{route('password.email')}}"
-                    class="text text-right text-base-content/70 hover:text-primary hover:underline"
+                    class="text text-right text-base-content/70 hover:text-base-content hover:underline"
             >{{__('auth.login.request_password_reset')}}</a>
         @endif
 

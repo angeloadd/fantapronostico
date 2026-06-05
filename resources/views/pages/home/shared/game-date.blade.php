@@ -1,4 +1,4 @@
-<div class="text-primary/70 text-center">
+<div class="text-base-content/70 text-center">
     <p class="font-bold">
         {{str($date->avoidMutation()->timezone('Europe/Rome')->isoFormat('D MMMM YYYY'))->title()}}
     </p>

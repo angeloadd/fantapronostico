@@ -67,10 +67,23 @@ return [
             'replace_placeholders' => true,
         ],
 
+        'single_worker' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/worker.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+            'replace_placeholders' => true,
+        ],
+
+        'daily_schedule' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/schedule.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+            'replace_placeholders' => true,
+        ],
+
         'schedule' => [
             'driver' => 'stack',
             'channels' => explode(',', (string) env('LOG_SCHEDULE_STACK', 'daily')),
-            'path' => storage_path('logs/schedule.log'),
             'level' => env('LOG_LEVEL', 'debug'),
             'replace_placeholders' => true,
         ],
@@ -78,7 +91,6 @@ return [
         'worker' => [
             'driver' => 'stack',
             'channels' => explode(',', (string) env('LOG_WORKER_STACK', 'single')),
-            'path' => storage_path('logs/worker.log'),
             'level' => env('LOG_LEVEL', 'debug'),
             'replace_placeholders' => true,
         ],

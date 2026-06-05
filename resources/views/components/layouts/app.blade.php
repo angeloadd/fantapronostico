@@ -41,7 +41,7 @@
             {{ $style }}
         @endif
     </head>
-    <body class="bg-base-200 min-h-screen">
+    <body class="bg-base-200 min-h-screen" x-cloak>
         {{ $slot }}
 
         <x-partials.notifications.toast-wrapper/>

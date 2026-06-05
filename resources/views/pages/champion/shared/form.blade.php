@@ -10,7 +10,7 @@
         @enderror
         <select name="winner"
                 id="winner"
-                class="select w-full bg-white @error('winner') border-error @enderror"
+                class="select w-full bg-white dark:bg-neutral @error('winner') border-error @enderror"
         >
             <option
                 value=""
@@ -30,7 +30,7 @@
         @enderror
         <select name="topScorer"
                 id="topScorer"
-                class="select w-full bg-white  @error('topScorer') border-error @enderror"
+                class="select w-full bg-white dark:bg-neutral  @error('topScorer') border-error @enderror"
         >
             <option value="" @selected(null === old('topScorer', ($prediction ?? null)?->player))>{{ __('messages.champion.select_scorer') }}</option>
             @foreach($players as $player)
@@ -41,5 +41,5 @@
             @endforeach
         </select>
     </div>
-    <button type="submit" class="btn {{$btnBg}} text-base-100 fp2024-title w-full">{{ $btnText }}</button>
+    <button type="submit" class="btn {{$btnBg}} text-primary-content w-full">{{ $btnText }}</button>
 </form>

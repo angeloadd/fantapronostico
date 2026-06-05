@@ -22,7 +22,7 @@
             </x-prediction::shared.table>
 
         </div>
-        <a href="{{route('prediction.edit', ['prediction'=> $prediction])}}" class="btn btn-primary text-primary-content w-full mt-2 sm:mt-8">
+        <a href="{{route('prediction.edit', ['prediction'=> $prediction])}}" class="btn btn-primary text-base-content-content w-full mt-2 sm:mt-8">
             {{ __('messages.prediction.edit') }}
         </a>
     </x-prediction::shared.card>

@@ -15,7 +15,9 @@
             {{Auth::user()->name ?? __('messages.common.hello')}}
         </span>
 
-        <button class="text-primary mr-4" type="button" onclick="logOutModal.showModal()">
+        <x-partials.themes.toggle/>
+
+        <button class="text-base-content mr-4" type="button" onclick="logOutModal.showModal()">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="cursor-pointer size-5 md:size-6">
                 <path d="m16 17 5-5-5-5"/>
                 <path d="M21 12H9"/>
