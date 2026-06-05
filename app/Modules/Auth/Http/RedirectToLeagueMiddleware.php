@@ -24,7 +24,6 @@ final class RedirectToLeagueMiddleware
             return $next($request);
         }
 
-
         return redirect('/');
     }
 }
