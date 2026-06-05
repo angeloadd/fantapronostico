@@ -4,6 +4,7 @@
   }
 
   {$SERVER_NAME} {
+      tls /run/secrets/origin_cert /run/secrets/origin_key
       # Set the webroot to the public/ directory
       	root * /app/public/
       	# Enable compression (optional)
