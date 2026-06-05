@@ -19,7 +19,7 @@ RUN install-php-extensions pdo_pgsql pcntl intl
 COPY . .
 COPY --from=vendor /app/vendor ./vendor
 COPY --from=assets /app/public ./public
-COPY Caddyfile /etc/caddy/Caddyfile
+COPY Caddyfile /etc/frankenphp/Caddyfile
 
 RUN chown -R www-data:www-data storage bootstrap/cache
 
