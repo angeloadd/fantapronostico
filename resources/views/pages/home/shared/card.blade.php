@@ -7,7 +7,7 @@
         "border-accent/30" => !($grayed ?? false),
         'border-base-300' => ($grayed ?? false),
         ])>
-        <div class="card-body overflow-auto p-4 md:p-5">
+        <div class="card-body {{$overflow ?? ''}} p-4 md:p-5">
             {{ $slot }}
         </div>
     </div>

@@ -1,4 +1,4 @@
-<div class="drawer md:drawer-open w-full">
+<div class="drawer lg:drawer-open w-full">
     <x-partials.drawer.content>
         {{$slot}}
     </x-partials.drawer.content>

@@ -1,5 +1,5 @@
-<div class="sticky z-10 top-0 md:static w-full navbar bg-base-100 flex justify-between items-center shadow-lg h-14">
-    <div class="navbar-start md:hidden">
+<div class="sticky z-10 top-0 lg:static w-full navbar bg-base-100 flex justify-between items-center shadow-lg h-14">
+    <div class="navbar-start lg:hidden">
         <label for="sidebarBtn" aria-label="{{ __('messages.accessibility.close_sidebar') }}" class="btn btn-square btn-ghost">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-5">
                 <rect width="18" height="18" x="3" y="3" rx="2"/>

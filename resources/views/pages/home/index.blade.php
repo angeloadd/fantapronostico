@@ -17,7 +17,7 @@
 
         {{-- Row 2: champion (1 col) + ranking (2 cols), grows to fill --}}
         <div class="min-h-0 md:col-span-2 md:row-span-2 order-2 md:order-3">
-            <x-home::components.ranking :ranking="$ranking"/>
+            <x-home::components.ranking :ranking="$ranking" overflow="overflow-auto"/>
         </div>
         <div class="min-h-0 order-3 md:order-2">
             <x-home::components.champion
