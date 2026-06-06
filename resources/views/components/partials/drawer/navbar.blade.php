@@ -8,7 +8,7 @@
         </label>
     </div>
     <div class="navbar-center md:hidden">
-        <x-partials.logo.ball width="w-60"/>
+        <x-partials.logo.large width="w-60"/>
     </div>
     <div class="navbar-end md:ml-auto gap-3 sm:gap-6">
         <span class="hidden md:inline text-base-content/65">

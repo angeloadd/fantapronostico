@@ -1,4 +1,4 @@
 <x-layouts.with-drawer>
     <x-partials.notifications.toast-message/>
-    {{$slot}}
+        {{$slot}}
 </x-layouts.with-drawer>

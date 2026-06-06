@@ -1,4 +1,4 @@
-<x-home::shared.card title="{{ __('messages.home.ranking_title') }}">
+<x-home::shared.card title="{{ __('messages.home.ranking_title') }}" :overflow="$overflow ?? ''">
     <div class="overflow-auto sm:overflow-visible w-full">
         @foreach($ranking as $position => $rank)
             <div @class([
