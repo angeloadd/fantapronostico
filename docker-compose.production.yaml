@@ -18,7 +18,7 @@ services:
         condition: service_healthy
     volumes:
       - caddy_data:/data
-      - storage:/app/storage
+      - storage:/app/storage/app
 
   db:
     image: postgres:17-alpine
@@ -50,7 +50,7 @@ services:
       db:
         condition: service_healthy
     volumes:
-      - storage:/app/storage
+      - storage:/app/storage/app
 
   queue:
     build:
@@ -65,7 +65,7 @@ services:
       db:
         condition: service_healthy
     volumes:
-      - storage:/app/storage
+      - storage:/app/storage/app
 
   dozzle:
     image: amir20/dozzle:latest
