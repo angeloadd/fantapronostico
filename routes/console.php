@@ -135,34 +135,34 @@ $doScheduleBeforeTournamentIsFinished = static fn () => Tournament::first()
 
 // Daily maintenance runs in the dead window (07:00–15:00 UTC) when no matches are scheduled
 Schedule::command('fp:tournament:add')
-    ->appendOutputTo('/dev/stderr')
+    ->sendOutputTo('/proc/1/fd/1')
     ->dailyAt('08:00');
 
 Schedule::command('fp:teams:get')
-    ->appendOutputTo('/dev/stderr')
+    ->sendOutputTo('/proc/1/fd/1')
     ->dailyAt('08:10')
     ->when($doScheduleBeforeTournamentIsFinished);
 Schedule::command('fp:games:get')
-    ->appendOutputTo('/dev/stderr')
+    ->sendOutputTo('/proc/1/fd/1')
     ->dailyAt('08:15')
     ->when($doScheduleBeforeTournamentIsFinished);
 Schedule::command('fp:players:get')
-    ->appendOutputTo('/dev/stderr')
+    ->sendOutputTo('/proc/1/fd/1')
     ->dailyAt('08:20')
     ->when($doScheduleBeforeTournamentIsFinished);
 
 Schedule::command('fp:games:set-ongoing')
-    ->appendOutputTo('/dev/stderr')
+    ->sendOutputTo('/proc/1/fd/1')
     ->everyFifteenMinutes()
     ->when($doScheduleBeforeTournamentIsFinished);
 
 Schedule::command('fp:games:goals:get')
-    ->appendOutputTo('/dev/stderr')
+    ->sendOutputTo('/proc/1/fd/1')
     ->hourlyAt('5')
     ->when($doScheduleBeforeTournamentIsFinished);
 
 Schedule::command('fp:topscorers:get')
-    ->appendOutputTo('/dev/stderr')
+    ->sendOutputTo('/proc/1/fd/1')
     ->hourlyAt('10')
     ->when(
         static fn () => Tournament::first()?->final_started_at->isPast() && Tournament::first()
@@ -173,7 +173,7 @@ Schedule::command('fp:topscorers:get')
             Game::all()->every('status', '=', 'finished')
     );
 Schedule::command('fp:winner:get')
-    ->appendOutputTo('/dev/stderr')
+    ->sendOutputTo('/proc/1/fd/1')
     ->everyTenMinutes()
     ->when(
         static fn () => Tournament::first()?->final_started_at->isPast() && Tournament::first()
@@ -185,5 +185,5 @@ Schedule::command('fp:winner:get')
     );
 
 Schedule::command('fp:bot:telegram')
-    ->appendOutputTo('/dev/stderr')
+    ->sendOutputTo('/proc/1/fd/1')
     ->everyThirtyMinutes();
