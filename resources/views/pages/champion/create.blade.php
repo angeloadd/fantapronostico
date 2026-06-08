@@ -8,7 +8,7 @@
         />
         <x-champion::shared.form
             btnText="{{ __('messages.common.predict') }}"
-            btnBg="accent"
+            btnTheme="accent"
             method="POST"
             action="{{route('champion.store')}}"
             :$teams

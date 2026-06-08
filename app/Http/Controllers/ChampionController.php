@@ -169,11 +169,15 @@ final class ChampionController extends Controller
         );
     }
 
-    public function error(): Renderable
+    public function error(): Renderable|RedirectResponse
     {
         $tournament = Tournament::first();
         $firstMatchStartDate = Tournament::first()?->first()?->started_at;
         $championSettableFrom = $firstMatchStartDate->avoidMutation()->subDays(2);
+
+        if ($championSettableFrom->isPast()) {
+            return redirect(route('champion.index'));
+        }
 
         return view('pages.champion.409', [
             'championSettableFrom' => $championSettableFrom,

@@ -41,5 +41,5 @@
             @enderror
         </select>
     </div>
-    <button type="submit" class="btn bg-{{$btnTheme}} text-{{$btnTheme}}-content w-full">{{ $btnText }}</button>
+    <button type="submit" class="btn btn-{{$btnTheme}} w-full">{{ $btnText }}</button>
 </form>

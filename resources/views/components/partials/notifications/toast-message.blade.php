@@ -1,23 +1,24 @@
 @if(!isset($validation))
-@if(null !== session($sessionKey ?? 'message'))
-    <template x-teleport="#toastWrapper">
-        <x-partials.notifications.toast :text="session($sessionKey ?? 'message')" type="success"/>
-    </template>
-@elseif(null !== session($errorKey ?? 'error_message'))
-    <template x-teleport="#toastWrapper">
-        <x-partials.notifications.toast :text="session($errorKey ?? 'error_message')" type="error"/>
-    </template>
-@elseif(null !== session($warningKey ?? 'warning_message'))
-    <template x-teleport="#toastWrapper">
-        <x-partials.notifications.toast :text="session($warningKey ?? 'warning_message')" type="warning"/>
-    </template>
-@elseif(null !== session($infoKey ?? 'info_message'))
-    <template x-teleport="#toastWrapper">
-        <x-partials.notifications.toast :text="session($infoKey ?? 'info_message')" type="info"/>
-    </template>
-@endif
-@endif
-@if(null !== ($validation ?? null))
+    @if(!isset($sessionKey))
+        @foreach([
+        'message' => 'info',
+        'error_message' => 'error',
+        'warning_message' => 'warning',
+        'info_message' => 'info',
+        'status' => 'info',
+    ] as $key => $alertType)
+            @if(null !== session($key))
+                <template x-teleport="#toastWrapper">
+                    <x-partials.notifications.toast :text="session($key)" type="{{$alertType}}"/>
+                </template>
+            @endif
+        @endforeach
+    @else
+        <template x-teleport="#toastWrapper">
+            <x-partials.notifications.toast :text="session($sessionKey)" type="{{$type ?? 'info'}}"/>
+        </template>
+    @endif
+@else
     <template x-teleport="#toastWrapper">
         <x-partials.notifications.toast :text="$validation" type="error"/>
     </template>

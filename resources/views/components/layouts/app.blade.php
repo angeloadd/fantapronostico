@@ -47,6 +47,8 @@
 
         <x-partials.notifications.toast-wrapper/>
 
+        <x-partials.notifications.toast-message/>
+
         <x-partials.footer.index/>
 
         @stack('scripts')

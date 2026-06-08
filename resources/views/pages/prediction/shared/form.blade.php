@@ -33,5 +33,5 @@
         :$isGroupStage
         :$prediction
     />
-    <button type="submit" class="btn {{$btnBg}} w-full fp2024-title">{{$btnText}}</button>
+    <button type="submit" class="btn btn-{{$btnTheme}} w-full fp2024-title">{{$btnText}}</button>
 </form>

@@ -285,8 +285,12 @@ final class PredictionController extends Controller
         return redirect(route('prediction.index', ['game' => $goToGame]));
     }
 
-    public function gameNotPredictable(Game $game): Renderable
+    public function gameNotPredictable(Game $game): Renderable|RedirectResponse
     {
+        if (!$game->isNotPredictableYet()) {
+            return redirect(route('prediction.index', compact('game')));
+        }
+
         return view(
             'pages.prediction.409',
             [

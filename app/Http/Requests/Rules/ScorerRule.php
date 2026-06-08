@@ -27,7 +27,7 @@ final class ScorerRule implements ValidationRule
             if ('home_scorer_id' === $attribute) {
                 $fail('Il campo gol casa non è valido');
             } else {
-                $fail('Il campo gol trasferta non è valido');
+                $fail('Il campo gol ospite non è valido');
             }
         }
     }

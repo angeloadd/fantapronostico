@@ -13,7 +13,7 @@
                 :isGameInTheFuture="$game->started_at->isFuture()"
                 :isGroupStage="$game->isGroupStage()"
                 :btnText="__('Modifica il Pronostico')"
-                btnBg="bg-primary text-base-content-content"
+                btnTheme="primary"
                 :prediction="$prediction ?? null"
         />
     </x-prediction::shared.card>

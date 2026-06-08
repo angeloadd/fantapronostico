@@ -1,5 +1,3 @@
-<x-partials.notifications.toast-message/>
-
 <div class="flex-1 flex flex-col items-center justify-center gap-4 w-full">
     <h2 class="text-2xl">{{__('auth.league.heading')}}</h2>
     <x-auth::shared.form

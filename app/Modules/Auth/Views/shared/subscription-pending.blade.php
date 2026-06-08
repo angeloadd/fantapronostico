@@ -1,5 +1,3 @@
-<x-partials.notifications.toast-message sessionKey="status"/>
-
 <div hx-get="{{ route('leagues.check') }}" hx-trigger="every 3s" hx-swap="none"></div>
 
 <div class="flex-1 flex flex-col items-center justify-center gap-4 w-full text-center">
