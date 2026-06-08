@@ -7,7 +7,7 @@
             </svg>
         </label>
     </div>
-    <div class="navbar-center md:hidden">
+    <div class="navbar-center lg:hidden">
         <x-partials.logo.large width="w-60"/>
     </div>
     <div class="navbar-end md:ml-auto gap-3 sm:gap-6">
