@@ -1,5 +1,4 @@
-<fieldset class="flex-1 flex flex-col items-center justify-center gap-4 w-full">
-    <legend class="text-center text-sm">{{__('auth.request_password_reset.paragraph')}}</legend>
+<div class="flex-1 flex flex-col items-center justify-center gap-4 w-full">
     <x-auth::shared.form
         action="{{route('password.update')}}"
         method="POST"
@@ -9,6 +8,7 @@
             'name' => 'password',
             'type' => 'password',
             'placeholder' => 'Nuova Password',
+            'label' => __('auth.request_password_reset.paragraph'),
         ],
         [
             'name' => 'token',
@@ -23,6 +23,6 @@
             'value' => request()->email
         ]
     ]"
-        btnText="{{__('auth.reset-password.btn')}}"
+        btnText="{{__('auth.reset_password.btn')}}"
     />
-</fieldset>
+</div>

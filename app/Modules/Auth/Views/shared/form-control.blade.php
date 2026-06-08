@@ -8,7 +8,7 @@
     />
 @else
     <div class="flex flex-col gap-1">
-        <label for="{{$name}}" class="@if(!isset($label)) hidden @endif text-base-content/70">{{$label ?? ''}}</label>
+        <label for="{{$name}}" class="@if(!isset($label)) hidden @endif text-base-content/70 text-xs text-base-content/60 py-2">{{$label ?? ''}}</label>
         <input
             id="{{$name}}"
             name="{{$name}}"

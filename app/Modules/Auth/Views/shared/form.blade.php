@@ -12,6 +12,7 @@
                     :value="$formControl['value'] ?? null"
                     :checked="!empty($formControl['checked'] ?? null)"
                     :hidden="!empty($formControl['hidden'])"
+                    :label="$formControl['label'] ?? null"
             />
         @endforeach
 
