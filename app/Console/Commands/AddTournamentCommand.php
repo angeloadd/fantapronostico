@@ -20,20 +20,21 @@ final class AddTournamentCommand extends Command
      */
     public function handle(): int
     {
-        $tournament = Tournament::createOrFirst([
-            'country' => 'World',
-            'name' => 'FIFA World Cup',
-            'logo' => 'https://media.api-sports.io/football/leagues/1.png',
-            'is_cup' => true,
-            'season' => 2026,
-            'api_id' => 1,
-            'started_at' => new DateTimeImmutable('2026-06-11 19:00:00'),
-            'final_started_at' => new DateTimeImmutable('2026-07-19 19:00:00'),
-        ]);
+        $tournament = Tournament::updateOrCreate(
+            ['season' => 2026, 'api_id' => 1],
+            [
+                'country' => 'World',
+                'logo' => 'https://media.api-sports.io/football/leagues/1.png',
+                'is_cup' => true,
+                'season' => 2026,
+                'started_at' => new DateTimeImmutable('2026-06-11 19:00:00'),
+                'final_started_at' => new DateTimeImmutable('2026-07-19 19:00:00'),
+                'api_id' => 1,
+                'name' => 'FIFA World Cup',
+            ],
+        );
 
-        $tournament->leagues()->createOrFirst([
-            'name' => 'Fantapronostico2026',
-        ]);
+        $tournament->leagues()->updateOrCreate(['name' => 'Fantapronostico2026']);
 
         return self::SUCCESS;
     }
