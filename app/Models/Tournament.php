@@ -57,6 +57,9 @@ use Illuminate\Support\Carbon;
  *
  * @property-read Collection<int, League> $leagues
  * @property-read int|null $leagues_count
+ * @property Carbon|null $knockouts_started_at
+ *
+ * @method static Builder<static>|Tournament whereKnockoutsStartedAt($value)
  *
  * @mixin Eloquent
  */
@@ -74,6 +77,7 @@ final class Tournament extends Model
         'country',
         'is_cup',
         'final_started_at',
+        'knockouts_started_at',
     ];
 
     public static function attachByApiId(int $teamId, int $tournamentApiId): void
@@ -125,6 +129,7 @@ final class Tournament extends Model
         return [
             'final_started_at' => 'datetime',
             'started_at' => 'datetime',
+            'knockouts_started_at' => 'datetime',
         ];
     }
 }

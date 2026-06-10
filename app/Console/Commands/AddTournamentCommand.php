@@ -29,6 +29,7 @@ final class AddTournamentCommand extends Command
                 'season' => 2026,
                 'started_at' => new DateTimeImmutable('2026-06-11 19:00:00'),
                 'final_started_at' => new DateTimeImmutable('2026-07-19 19:00:00'),
+                'knockouts_started_at' => new DateTimeImmutable('2026-06-28 19:00:00'),
                 'api_id' => 1,
                 'name' => 'FIFA World Cup',
             ],
