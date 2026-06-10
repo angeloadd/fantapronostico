@@ -66,6 +66,7 @@ use Illuminate\Support\Facades\Auth;
  * @property-read int[] $home_scorers
  * @property-read string $sign
  * @property-read Carbon $predictable_from
+ * @property-read bool $is_predicted
  *
  * @mixin Eloquent
  */

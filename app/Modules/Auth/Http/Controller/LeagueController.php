@@ -24,6 +24,7 @@ final class LeagueController extends Controller
 
         if (0 === $leagues->count()) {
             session()->reflash();
+
             return redirect(route('leagues.pending'));
         }
 
