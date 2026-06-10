@@ -10,28 +10,12 @@
                 <x-home::components.winner :$leagueName :$winnerName/>
             </div>
         @else
-            <div
-                    @class([
-                        'min-h-0 md:col-span-1 flex justify-center items-center order-2 md:order-1',
-                        'hidden' => ($openGames ?? collect())->isEmpty()
-            ])>
+            <div class="min-h-0 md:col-span-1 flex justify-center items-center order-2 md:order-1 {{$openGames->isEmpty() ? 'hidden' : ''}}">
                 <x-home::components.modifiable-games :openGames="$openGames"/>
             </div>
-            <div class="min-h-0 md:col-span-2 flex justify-center items-center order-1 md:order-2">
+            <div class="min-h-0 {{$openGames->isNotEmpty() ? 'md:col-span-2' : 'md:col-span-3'}} flex justify-center items-center order-1 md:order-2">
                 <x-home::components.next-game :game="$nextGame ?? null" :hasFinalStarted="$hasFinalStarted"/>
             </div>
-{{--            @if(null !== ($predictedGames ?? null) && $predictedGames->isNotEmpty())--}}
-{{--                <div class="min-h-0 md:col-span-1 flex justify-center items-center order-1">--}}
-{{--                    <x-home::components.modifiable-games :predictedGames="$predictedGames"/>--}}
-{{--                </div>--}}
-{{--                <div class="min-h-0 md:col-span-2 flex justify-center items-center order-1">--}}
-{{--                    <x-home::components.next-game :game="$nextGame ?? null" :hasFinalStarted="$hasFinalStarted" :$nextGameCta/>--}}
-{{--                </div>--}}
-{{--            @else--}}
-{{--                <div class="min-h-0 md:col-span-3 flex justify-center items-center order-1">--}}
-{{--                    <x-home::components.next-game :game="$nextGame ?? null" :hasFinalStarted="$hasFinalStarted" :$nextGameCta />--}}
-{{--                </div>--}}
-{{--            @endif--}}
         @endif
 
         {{-- Row 2: champion (1 col) + ranking (2 cols), grows to fill --}}
