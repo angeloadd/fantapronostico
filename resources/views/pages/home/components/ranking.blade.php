@@ -1,4 +1,5 @@
 <x-home::shared.card title="{{ __('messages.home.ranking_title') }}">
+    <div class="overflow-auto space-y-2">
     @foreach($ranking as $position => $rank)
         @if($position > 10)
             <div class="flex items-center justify-center px-3 py-2 text-base-content/60">
@@ -23,4 +24,5 @@
             </div>
         </div>
     @endforeach
+    </div>
 </x-home::shared.card>

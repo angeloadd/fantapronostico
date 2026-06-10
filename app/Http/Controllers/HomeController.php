@@ -36,14 +36,12 @@ final class HomeController extends Controller
         $tournament = $league->tournament;
         $ranking = $this->calculator->get($league);
 
-        $latestGames = Game::where('started_at', '>', now())
-            ->get()
-            ->groupBy('started_at')
-            ->first();
+        $openGames = $tournament->games->where(
+            fn (Game $game) => $game->started_at->isFuture() && $game->predictable_from->isPast()
+        );
 
-        $nextGame = $latestGames?->filter(
-            static fn (Game $game) => null === $game->predictions->firstWhere('user_id', $user->id)
-        )?->first() ?? $latestGames?->last();
+        $nextGame = $openGames->firstWhere('isPredicted', false) ?? $openGames->first();
+        $newOpenGames = $openGames->filter(static fn (Game $game) => $game->id !== $nextGame?->id);
 
         return view('pages.home.index', [
             'ranking' => $ranking->filter(static fn (UserRank $rank, int $index) => $user->id === $rank->userId() || $index <= 9),
@@ -57,6 +55,7 @@ final class HomeController extends Controller
             'games' => $this->gameRepository->getAll(),
             'userRank' => $ranking->filter(static fn (UserRank $rank) => $rank->userId() === $user->id)->first(),
             'tournamentStartedAt' => $tournament->started_at->toImmutable(),
+            'openGames' => $newOpenGames,
         ]);
     }
 

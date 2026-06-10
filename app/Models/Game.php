@@ -22,6 +22,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * App\Models\Game
@@ -403,6 +404,16 @@ final class Game extends Model
             ->whereUserId($user->id)
             ->first()
             ?->total ?? 0;
+    }
+
+    /**
+     * @return Attribute<bool, never>
+     */
+    public function isPredicted(): Attribute
+    {
+        return Attribute::get(
+            fn (): bool => $this->predictions->where('user_id', Auth::user()?->id ?? 0)->isNotEmpty()
+        );
     }
 
     protected static function booted(): void

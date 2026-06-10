@@ -4,7 +4,7 @@
     @endif
     <div
             @class([
-                'card-body shadow-lg rounded-2xl border bg-base-100 overflow-auto min-h-0 grow p-4 md:p-5 flex flex-col my-auto',
+                'card-body shadow-lg rounded-2xl border bg-base-100 min-h-0 grow p-4 flex flex-col my-auto',
                 "border-accent/30" => !($grayed ?? false),
                 'border-base-300' => ($grayed ?? false),
                 ])>
