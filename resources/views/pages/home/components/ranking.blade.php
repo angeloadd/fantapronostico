@@ -1,10 +1,15 @@
 <x-home::shared.card title="{{ __('messages.home.ranking_title') }}">
     @foreach($ranking as $position => $rank)
+        @if($position > 10)
+            <div class="flex items-center justify-center px-3 py-2 text-base-content/60">
+                <span class="tracking-widest text-xs select-none">• • •</span>
+            </div>
+        @endif
         <div @class([
-                            'flex justify-between gap-2 px-3 py-2 rounded-2xl hover:bg-accent/20',
-                            'bg-accent/20 hover:bg-accent/25' => Auth::user()?->id === $rank->userId(),
-                            'hover:bg-base-200' => Auth::user()?->id !== $rank->userId(),
-                        ])>
+            'flex justify-between gap-2 px-3 py-2 rounded-2xl',
+            'bg-accent/20 hover:bg-accent/25' => Auth::user()?->id === $rank->userId(),
+            'hover:bg-base-200' => Auth::user()?->id !== $rank->userId(),
+        ])>
             <div class="space-x-2">
                 <x-partials.ranking.badge :$position/>
                 <span>{{$rank->userName()}}
