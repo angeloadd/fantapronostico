@@ -9,16 +9,12 @@ use Illuminate\Support\Facades\Artisan;
 
 final class DevGroupPhaseSeeder extends DevBaseSeeder
 {
-    private const FINISHED_COUNT = 24;
-
     public function run(): void
     {
         $now = Carbon::now();
+        $finishedCount = 24;
 
-        $tournamentStart = $this->computeStartedAt(0, self::FINISHED_COUNT, $now);
-        $finalStart = $this->computeStartedAt(51, self::FINISHED_COUNT, $now);
-
-        $tournament = $this->createTournament($tournamentStart, $finalStart);
+        $tournament = $this->createTournament($now, $finishedCount);
         $league = $this->createLeague($tournament);
         $teams = $this->createTeamsAndPlayers($tournament);
         $users = $this->createUsers($league);
@@ -28,8 +24,8 @@ final class DevGroupPhaseSeeder extends DevBaseSeeder
         foreach (self::SCHEDULE as $i => $slot) {
             $homeTeam = $teams[$slot['home']];
             $awayTeam = $teams[$slot['away']];
-            $startedAt = $this->computeStartedAt($i, self::FINISHED_COUNT, $now);
-            $status = $i < self::FINISHED_COUNT ? 'finished' : 'not_started';
+            $startedAt = $this->computeStartedAt($i, $finishedCount, $now);
+            $status = $i < $finishedCount ? 'finished' : 'not_started';
 
             $game = $this->createGame($homeTeam, $awayTeam, $slot['stage'], $startedAt, $tournament, $status);
 

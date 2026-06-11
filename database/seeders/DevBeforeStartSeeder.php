@@ -14,10 +14,7 @@ final class DevBeforeStartSeeder extends DevBaseSeeder
         $now = Carbon::now();
         $finishedCount = 0;
 
-        $tournamentStart = $this->computeStartedAt(0, $finishedCount, $now);
-        $finalStart = $this->computeStartedAt(51, $finishedCount, $now);
-
-        $tournament = $this->createTournament($tournamentStart, $finalStart);
+        $tournament = $this->createTournament($now, $finishedCount);
         $league = $this->createLeague($tournament);
         $teams = $this->createTeamsAndPlayers($tournament);
         $users = $this->createUsers($league);
@@ -35,7 +32,6 @@ final class DevBeforeStartSeeder extends DevBaseSeeder
                 $slot['stage'],
                 $this->computeStartedAt($i, $finishedCount, $now),
                 $tournament,
-                'not_started'
             );
         }
 

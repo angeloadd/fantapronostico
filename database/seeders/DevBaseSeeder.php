@@ -231,8 +231,12 @@ abstract class DevBaseSeeder extends Seeder
         return $now->copy()->addDays($daysFromNow)->setHour($hour)->setMinute(0)->setSecond(0);
     }
 
-    protected function createTournament(Carbon $start, Carbon $finalStart): Tournament
+    protected function createTournament(Carbon $now, int $finishedCount): Tournament
     {
+        $tournamentStart = $this->computeStartedAt(0, $finishedCount, $now);
+        $knockoutStart = $this->computeStartedAt(36, $finishedCount, $now);
+        $finalStart = $this->computeStartedAt(51, $finishedCount, $now);
+
         return Tournament::create([
             'country' => 'World',
             'name' => 'UEFA Euro Cup',
@@ -240,8 +244,9 @@ abstract class DevBaseSeeder extends Seeder
             'is_cup' => true,
             'season' => 2024,
             'api_id' => 4,
-            'started_at' => $start,
+            'started_at' => $tournamentStart,
             'final_started_at' => $finalStart,
+            'knockouts_started_at' => $knockoutStart,
         ]);
     }
 

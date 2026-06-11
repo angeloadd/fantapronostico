@@ -9,16 +9,12 @@ use Illuminate\Support\Facades\Artisan;
 
 final class DevFinalSeeder extends DevBaseSeeder
 {
-    private const FINISHED_COUNT = 52;
-
     public function run(): void
     {
         $now = Carbon::now();
+        $finishedCount = 52;
 
-        $tournamentStart = $this->computeStartedAt(0, self::FINISHED_COUNT, $now);
-        $finalStart = $this->computeStartedAt(51, self::FINISHED_COUNT, $now);
-
-        $tournament = $this->createTournament($tournamentStart, $finalStart);
+        $tournament = $this->createTournament($now, $finishedCount);
         $league = $this->createLeague($tournament);
         $teams = $this->createTeamsAndPlayers($tournament);
         $users = $this->createUsers($league);
@@ -28,7 +24,7 @@ final class DevFinalSeeder extends DevBaseSeeder
         foreach (self::SCHEDULE as $i => $slot) {
             $homeTeam = $teams[$slot['home']];
             $awayTeam = $teams[$slot['away']];
-            $startedAt = $this->computeStartedAt($i, self::FINISHED_COUNT, $now);
+            $startedAt = $this->computeStartedAt($i, $finishedCount, $now);
 
             $game = $this->createGame($homeTeam, $awayTeam, $slot['stage'], $startedAt, $tournament, 'finished');
             $this->createGoalsForGame($game, $homeTeam, $awayTeam);
