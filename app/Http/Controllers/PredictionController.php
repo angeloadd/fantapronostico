@@ -28,12 +28,6 @@ final class PredictionController extends Controller
 
     public function index(Game $game): Renderable|RedirectResponse
     {
-        // prerequisite auth
-        // if no Game redirect to general error page for tournament not ready
-        // if Game is not predictable redirect to not predictable page
-        // if Match is not started and no prediction redirect to create
-        // if Game is not started and prediction redirect to edit
-        // if match is started finally show index.
         if ($game->started_at->isFuture()) {
             return redirect(route('prediction.show', compact('game')))
                 ->with('message', session('message') ?: null)
@@ -43,7 +37,7 @@ final class PredictionController extends Controller
         return view(
             'pages.prediction.index',
             [
-                'predictions' => $this->predictionRepository->getSortedDescByUpdatedAtByGame($game),
+                'predictions' => $this->predictionRepository->getSortedByUpdatedAtByGame($game),
                 'games' => $this->gameRepository->getAll(),
             ],
             compact('game')

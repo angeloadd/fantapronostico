@@ -17,7 +17,7 @@
         </svg>
         <div
                 x-cloak
-                x-data="countdown({{$date->avoidMutation()->timezone('Europe/Berlin')->timestamp * 1000}})"
+                x-data="countdown({{$date->avoidMutation()->timezone(Auth::user()?->timezone ?? 'Europe/Rome')->timestamp * 1000}})"
                 class="countdown"
         >
             {{$isOpen ?? true ? __('messages.countdown.closes') : __('messages.countdown.opens')}}&nbsp;{{ __('messages.countdown.in') }}&nbsp;

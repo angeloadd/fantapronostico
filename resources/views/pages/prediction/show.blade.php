@@ -16,7 +16,7 @@
             >
                 <x-prediction::shared.table-row
                         :prediction="$prediction"
-                        :lastUpdate="$prediction->updated_at->avoidMutation()->timezone('Europe/Rome')->format('d/m/Y \o\r\e H:i:s \e u \m\s')"
+                        :lastUpdate="$prediction->updated_at->avoidMutation()->timezone(Auth::user()?->timezone ?? 'Europe/Rome')->format('d/m/Y \o\r\e H:i:s \e u \m\s')"
                         key=""
                 />
             </x-prediction::shared.table>

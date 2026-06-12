@@ -14,7 +14,7 @@ interface PredictionRepositoryInterface
     /**
      * @return Collection<int, Prediction>
      */
-    public function getSortedDescByUpdatedAtByGame(Game $game): Collection;
+    public function getSortedByUpdatedAtByGame(Game $game): Collection;
 
     /**
      * @return Collection<int, Prediction>

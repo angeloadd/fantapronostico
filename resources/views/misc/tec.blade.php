@@ -1,7 +1,8 @@
 <x-layouts.with-drawer>
     <div class="max-w-3xl mx-auto w-full px-4 py-10 prose prose-sm sm:prose dark:prose-invert">
         <h1>Termini e Condizioni d'Uso</h1>
-        <p class="text-sm text-base-content/60">Ultimo aggiornamento: {{ now()->avoidMutation()->timezone('Europe/Rome')->isoFormat('D MMMM YYYY') }}</p>
+        <p class="text-sm text-base-content/60">Ultimo aggiornamento: {{ $lastUpdate }}</p>
+
 
         <h2>1. Oggetto del servizio</h2>
         <p>

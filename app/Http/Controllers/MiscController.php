@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use DateTimeImmutable;
 use Illuminate\Contracts\Support\Renderable;
+use IntlDateFormatter;
 
 final class MiscController extends Controller
 {
@@ -25,6 +27,8 @@ final class MiscController extends Controller
 
     public function tec(): Renderable
     {
-        return view('misc.tec');
+        return view('misc.tec', [
+            'lastUpdate' => str(new IntlDateFormatter('it_IT', pattern: 'd MMMM YYYY')->format(new DateTimeImmutable('2026-06-01')))->title(),
+        ]);
     }
 }

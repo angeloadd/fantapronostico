@@ -14,9 +14,9 @@ final class PredictionRepository implements PredictionRepositoryInterface
     /**
      * @return Collection<int, Prediction>
      */
-    public function getSortedDescByUpdatedAtByGame(Game $game): Collection
+    public function getSortedByUpdatedAtByGame(Game $game): Collection
     {
-        return $game->predictions->sortByDesc('updated_at')->values();
+        return $game->predictions->sortBy('updated_at')->values();
     }
 
     /**
