@@ -59,6 +59,11 @@ return [
         'heading' => 'La tua richiesta è stata inviata!',
         'paragraph' => 'Attendi che un moderatore accetti la tua richiesta e potrai iniziare a giocare.',
     ],
+    'banned' => [
+        'title' => 'Iscrizione in sospeso',
+        'heading' => 'Il tuo account è momentaneamente sospeso',
+        'paragraph' => 'Contatta un moderatore per ulteriori informazioni',
+    ],
     'subscription_accepted' => [
         'message' => 'Iscrizione accettata',
     ],

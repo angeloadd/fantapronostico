@@ -34,8 +34,12 @@ final class LeagueEnricherMiddleware
             return redirect(route('leagues.show'))->with('error_message', 'Devi essere iscritto ad una lega per accedere');
         }
 
-        if ('accepted' !== $user->selectedLeague->pivot->status) {
+        if ('pending' === $user->selectedLeague->pivot->status) {
             return redirect(route('leagues.show'))->with('error_message', 'Attendi che un moderatore accetti la tua iscrizione');
+        }
+
+        if ('banned' === $user->selectedLeague->pivot->status) {
+            return redirect(route('leagues.banned'))->with('error_message', 'Contatta un moderatore per ulteriori informazioni');
         }
 
         return $next($request);

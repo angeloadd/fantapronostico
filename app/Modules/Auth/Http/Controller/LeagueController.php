@@ -52,6 +52,11 @@ final class LeagueController extends Controller
         return view('auth::index', ['pageName' => 'subscription-pending']);
     }
 
+    public function banned(): View
+    {
+        return view('auth::index', ['pageName' => 'banned']);
+    }
+
     public function checkSubscription(Request $request): Response
     {
         $league = $request->user()?->selectedLeague;
