@@ -7,7 +7,7 @@
         @endisset
         @foreach($formControls as $formControl)
             @if(($formControl['type'] ?? null) === 'hidden')
-                <input type="hidden" value="{{$formControl['value']}}" name="{{$formControl['name']}}">
+                <input type="hidden" value="{{old($formControl['name'], $formControl['value'] ?? null)}}" name="{{$formControl['name']}}">
             @else
                 <x-auth::shared.form-control
                         :name="$formControl['name']"

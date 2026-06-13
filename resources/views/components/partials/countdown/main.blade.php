@@ -1,6 +1,6 @@
 <div
         @class([
-        'flex items-center justify-center gap-2 badge rounded-full mb-4',
+        'flex items-center justify-center gap-2 badge rounded-full',
         'bg-accent/30 border-accent text-accent' => ($isOpen ?? true) && !($isExpired ?? false),
         'bg-base-300 text-base-content/50' => !($isOpen ?? true) || ($isExpired ?? false),
 ])>
