@@ -53,6 +53,7 @@ final class FunWithFlags
         'TCA' => 'TC', 'UGA' => 'UG', 'UKR' => 'UA', 'UAE' => 'AE', 'USA' => 'US',
         'URU' => 'UY', 'UZB' => 'UZ', 'VAN' => 'VU', 'VEN' => 'VE', 'VIE' => 'VN',
         'VIR' => 'VI', 'YEM' => 'YE', 'ZAM' => 'ZM', 'ZIM' => 'ZW', 'SLO' => 'SI',
+        'CUR' => 'CW',
     ];
 
     // High-performance static map for matching Alpha-3 to Alpha-2
@@ -114,7 +115,7 @@ final class FunWithFlags
         'ENG' => '🏴󠁧󠁢󠁥󠁮󠁧󠁿',
         'SCO' => '🏴󠁧󠁢󠁳󠁣󠁴󠁿',
         'WAL' => '🏴󠁧󠁢󠁷󠁬󠁳󠁿',
-        'NIR' => '🇬🇧',
+        'NIR' => '🏴',
     ];
 
     /** @var ?array<string, string> */

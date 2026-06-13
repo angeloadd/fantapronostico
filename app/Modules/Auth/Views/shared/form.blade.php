@@ -2,18 +2,24 @@
     @method($method)
     @csrf
     <div class="flex flex-col gap-4 w-full">
-        @isset($slot) {{$slot}} @endisset
+        @isset($slot)
+            {{$slot}}
+        @endisset
         @foreach($formControls as $formControl)
-            <x-auth::shared.form-control
-                    :name="$formControl['name']"
-                    :type="$formControl['type']"
-                    :placeholder="!empty($formControl['placeholder'] ?? null) ? $formControl['placeholder'] : null"
-                    :prefix="$prefix"
-                    :value="$formControl['value'] ?? null"
-                    :checked="!empty($formControl['checked'] ?? null)"
-                    :hidden="!empty($formControl['hidden'])"
-                    :label="$formControl['label'] ?? null"
-            />
+            @if(($formControl['type'] ?? null) === 'hidden')
+                <input type="hidden" value="{{$formControl['value']}}" name="{{$formControl['name']}}">
+            @else
+                <x-auth::shared.form-control
+                        :name="$formControl['name']"
+                        :type="$formControl['type']"
+                        :placeholder="!empty($formControl['placeholder'] ?? null) ? $formControl['placeholder'] : null"
+                        :prefix="$prefix"
+                        :value="$formControl['value'] ?? null"
+                        :checked="!empty($formControl['checked'] ?? null)"
+                        :hidden="!empty($formControl['hidden'])"
+                        :label="$formControl['label'] ?? null"
+                />
+            @endif
         @endforeach
 
         @if($passwordReset ?? false)

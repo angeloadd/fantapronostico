@@ -13,13 +13,11 @@
         [
             'name' => 'token',
             'type' => 'hidden',
-            'placeholder' => 'Token',
             'value' => request()->token
         ],
         [
             'name' => 'email',
             'type' => 'hidden',
-            'placeholder' => 'Email',
             'value' => request()->email
         ]
     ]"

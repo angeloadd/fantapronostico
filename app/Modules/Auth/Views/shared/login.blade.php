@@ -16,9 +16,7 @@
         ],
         [
             'name' => 'remember',
-            'type' => 'checkbox',
-            'checked' => true,
-            'hidden' => true,
+            'type' => 'hidden',
             'value' => true
         ],
     ]"
