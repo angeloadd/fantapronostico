@@ -5,32 +5,30 @@ declare(strict_types=1);
 namespace App\Modules\ApiSport\Console;
 
 use App\Modules\ApiSport\Dto\NationalDto;
-use App\Modules\ApiSport\Exceptions\InvalidApisportTokenException;
 use App\Modules\ApiSport\Repository\ApiSportPlayerRepositoryInterface;
 use App\Modules\ApiSport\Request\GetPlayersByNationalRequest;
 use App\Modules\ApiSport\Service\ApiSportServiceInterface;
 use App\Modules\League\Models\League;
 use App\Modules\Tournament\Models\Team;
-use ErrorException;
 use Illuminate\Console\Command;
-use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Facades\DB;
 use Psr\Log\LoggerInterface;
 use Throwable;
 
 final class GetPlayersByTeamCommand extends Command
 {
-    private const OUTPUT = '%s: successfully updated %d players';
-
-    protected $signature = 'fp:players:get';
-
-    protected $description = 'get from apisport players by team';
+    private const string OUTPUT = '%s: successfully updated %d players';
 
     /**
-     * @throws InvalidApisportTokenException
-     * @throws ConnectionException
-     * @throws ErrorException
+     * @var string
      */
+    protected $signature = 'fp:players:get';
+
+    /**
+     * @var string
+     */
+    protected $description = 'get from apisport players by team';
+
     public function handle(ApiSportServiceInterface $apiSportService, LoggerInterface $logger, ApiSportPlayerRepositoryInterface $playerRepository): int
     {
 

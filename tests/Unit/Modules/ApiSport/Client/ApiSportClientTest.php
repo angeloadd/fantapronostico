@@ -9,15 +9,16 @@ use App\Modules\ApiSport\Exceptions\ExternalSystemUnavailableException;
 use App\Modules\ApiSport\Exceptions\InvalidApisportTokenException;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Http;
+use Psr\Log\LoggerInterface;
 use Tests\Unit\UnitTestCase;
 
 final class ApiSportClientTest extends UnitTestCase
 {
-    public const HOST_SUCCESSFUL = 'successful/*';
+    public const string HOST_SUCCESSFUL = 'successful/*';
 
-    public const HOST_MISSING_TOKEN = 'missing/token/*';
+    public const string HOST_MISSING_TOKEN = 'missing/token/*';
 
-    public const HOST_MISSING_RESPONSE = 'missing/response/*';
+    public const string HOST_MISSING_RESPONSE = 'missing/response/*';
 
     protected function setUp(): void
     {
@@ -31,7 +32,7 @@ final class ApiSportClientTest extends UnitTestCase
 
     public function test_get_return_response(): void
     {
-        (new ApiSportClient(self::HOST_SUCCESSFUL, 'token'))->get('test', ['query' => 'value']);
+        $this->getSportClient(self::HOST_SUCCESSFUL)->get('test', ['query' => 'value']);
         Http::assertSent(
             static fn (Request $request) => $request->hasHeader('x-apisports-key', 'token') &&
                 $request->url() === self::HOST_SUCCESSFUL.'/test?query=value'
@@ -41,12 +42,17 @@ final class ApiSportClientTest extends UnitTestCase
     public function test_get_throws_if_missing_token(): void
     {
         $this->expectException(InvalidApisportTokenException::class);
-        (new ApiSportClient(self::HOST_MISSING_TOKEN, 'token'))->get('test', ['query' => 'value']);
+        $this->getSportClient(self::HOST_MISSING_TOKEN)->get('test', ['query' => 'value']);
     }
 
     public function test_get_if_missing_response(): void
     {
         $this->expectException(ExternalSystemUnavailableException::class);
-        (new ApiSportClient(self::HOST_MISSING_RESPONSE, 'token'))->get('test', ['query' => 'value']);
+        $this->getSportClient(self::HOST_MISSING_RESPONSE)->get('test', ['query' => 'value']);
+    }
+
+    private function getSportClient(string $uri): ApiSportClient
+    {
+        return new ApiSportClient($uri, 'token', $this->createStub(LoggerInterface::class));
     }
 }

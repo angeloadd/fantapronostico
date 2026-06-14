@@ -15,7 +15,7 @@ use Throwable;
 
 final class GetGamesCommand extends Command
 {
-    private const OUTPUT = '%s: Successfully updated %s games';
+    private const string OUTPUT = '%s: Successfully updated %s games';
 
     /**
      * @var string
@@ -23,8 +23,6 @@ final class GetGamesCommand extends Command
     protected $signature = 'fp:games:get';
 
     /**
-     * The console command description.
-     *
      * @var string
      */
     protected $description = 'Get games from api sports by season and league';
@@ -37,7 +35,7 @@ final class GetGamesCommand extends Command
         $league = League::first();
 
         if (null === $league) {
-            $logger->error('No league found');
+            $logger->error('No league found in command: '.self::class);
 
             return 1;
         }

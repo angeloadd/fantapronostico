@@ -39,10 +39,15 @@ final class LeagueController extends Controller
             abort(404);
         }
 
-        $league->users()->attach($request->user(), ['status' => 'pending']);
+        $user = $request->user();
+        if (null === $user) {
+            abort(404);
+        }
 
-        $request->user()->selected_league_id = $league->id;
-        $request->user()->save();
+        $league->users()->attach($user, ['status' => 'pending']);
+
+        $user->selected_league_id = $league->id;
+        $user->save();
 
         return redirect(route('leagues.pending'));
     }

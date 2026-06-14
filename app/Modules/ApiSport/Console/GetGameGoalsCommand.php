@@ -32,7 +32,7 @@ final class GetGameGoalsCommand extends Command
         $league = League::first();
 
         if (null === $league) {
-            $logger->error('No league found');
+            $logger->error('No league found in command: '.self::class);
 
             return 1;
         }

@@ -62,7 +62,7 @@ ulteriori informazioni vi invito a visitare la sezione regolamento: %s/terms
 TEXT,
                     ucfirst($knockoutsStartFormatted),
                     __($tournament->name),
-                    config('app.url')
+                    (string) config('app.url')
                 ),
                 'parse_mode' => 'HTML',
             ]);

@@ -17,16 +17,25 @@ final class WinnerMapperStrategy implements MapperStrategyInterface
 
     public function map(array $externalResponse): ApiSportDto
     {
-        foreach ($externalResponse['response'] as $item) {
-            if ('Final' !== ($item['league']['round'] ?? null)) {
+        $games = $externalResponse['response'] ?? [];
+        if (!is_array($games) || [] === $games) {
+            return new WinnerDto(null);
+        }
+
+        foreach ($games as $game) {
+            if ('Final' !== ($game['league']['round'] ?? null)) {
                 continue;
             }
 
-            $winnerTeamId = $item['teams']['home']['winner']
-                ? $item['teams']['home']['id']
-                : $item['teams']['away']['id'];
+            $winnerTeamId = $game['teams']['home']['winner']
+                ? $game['teams']['home']['id']
+                : $game['teams']['away']['id'];
 
-            return new WinnerDto($winnerTeamId);
+            if (!is_numeric($winnerTeamId ?? null)) {
+                break;
+            }
+
+            return new WinnerDto((int) $winnerTeamId);
         }
 
         return new WinnerDto(null);

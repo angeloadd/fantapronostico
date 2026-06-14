@@ -8,6 +8,7 @@ use App\Enums\GameStatus;
 use App\Models\Game;
 use App\Modules\League\Models\League;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 use Psr\Log\LoggerInterface;
 use Throwable;
 
@@ -32,6 +33,7 @@ final class SetGameOngoingCommand extends Command
             return 1;
         }
 
+        DB::beginTransaction();
         try {
             $games = Game::whereTournamentId($league->tournament->id)
                 ->whereStatus(GameStatus::NOT_STARTED)
@@ -45,13 +47,16 @@ final class SetGameOngoingCommand extends Command
             }
 
         } catch (Throwable $e) {
+            DB::rollBack();
             $logger->error('Error updating games: '.$e->getMessage(), ['trace' => $e->getTraceAsString()]);
             $this->error('Error updating games: '.$e->getMessage());
 
             return 1;
         }
+        DB::commit();
 
-        $logger->info('Set games to ongoing: '.$games->count());
+        $logger->info('logger: Set games to ongoing: '.$games->count());
+        $this->info('console: Set games to ongoing: '.$games->count());
 
         return 0;
     }

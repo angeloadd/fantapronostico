@@ -16,6 +16,7 @@ use App\Modules\Tournament\Models\Team;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Facades\DB;
+use Psr\Log\LoggerInterface;
 use Tests\TestCase;
 
 final class ViewRankingCalculatorTest extends TestCase
@@ -34,7 +35,8 @@ final class ViewRankingCalculatorTest extends TestCase
     {
         parent::setUp();
 
-        $this->calculator = new ViewRankingCalculator();
+        $logger = $this->createStub(LoggerInterface::class);
+        $this->calculator = new ViewRankingCalculator($logger);
         $this->tournament = Tournament::factory()->create(['final_started_at' => Carbon::now()->addYear()]);
         $this->league = League::create([
             'tournament_id' => $this->tournament->id,
@@ -173,6 +175,9 @@ final class ViewRankingCalculatorTest extends TestCase
 
     // --- helpers ---
 
+    /**
+     * @return array{?Game, Team, Team}
+     */
     private function createFinishedGame(): array
     {
         $homeTeam = Team::factory()->create();

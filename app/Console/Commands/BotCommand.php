@@ -29,8 +29,21 @@ final class BotCommand extends Command
             }
         }
 
-        if ($this->argument('gameId')) {
-            return $this->sendGames($telegramService, collect([Game::find($this->argument('gameId'))]));
+        $gameId = $this->argument('gameId');
+        if ($gameId) {
+            /**
+             * @var ?Game $game
+             */
+            $game = Game::find($gameId);
+
+            if (null === $game) {
+                $this->error('Game not found');
+                Log::channel('schedule')->error('Game not found', ['gameId' => $gameId]);
+
+                return self::FAILURE;
+            }
+
+            return $this->sendGames($telegramService, collect([$game]));
         }
 
         // 24h reminder: all games
@@ -71,6 +84,9 @@ final class BotCommand extends Command
         }
     }
 
+    /**
+     * @param  Collection<int, Game>  $games
+     */
     private function sendGames(TelegramServiceInterface $telegramService, Collection $games): int
     {
         try {
@@ -85,10 +101,16 @@ final class BotCommand extends Command
         }
     }
 
-    /** @return array<int, TelegramReminderViewDto> */
+    /**
+     * @param  Collection<int, Game>  $games
+     * @return array<array-key, TelegramReminderViewDto>
+     */
     private function buildDtos(Collection $games): array
     {
-        return $games->map(
+        /**
+         * @var array<array-key, TelegramReminderViewDto> $collection
+         */
+        $collection = $games->map(
             static fn (Game $game) => new TelegramReminderViewDto(
                 $game->id,
                 $game->home_team->name ?? '',
@@ -96,6 +118,8 @@ final class BotCommand extends Command
                 (string) str($game->started_at->avoidMutation()->timezone('Europe/Rome')->isoFormat('\e\n\t\r\o \i\l D MMMM YYYY \a\l\l\e HH:mm'))->title()
             )
         )->toArray();
+
+        return $collection;
     }
 
     private function isAfterMidnight(Carbon $startedAt): bool

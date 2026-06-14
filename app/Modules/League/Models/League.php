@@ -23,6 +23,7 @@ use Illuminate\Support\Carbon;
  * @property-read Tournament $tournament
  * @property-read Collection<int, User> $users
  * @property-read int|null $users_count
+ * @property-read object{status: string} $pivot
  *
  * @method static Builder|League newModelQuery()
  * @method static Builder|League newQuery()

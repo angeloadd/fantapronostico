@@ -18,7 +18,7 @@ use Throwable;
 
 final class GetTeamsCommand extends Command
 {
-    private const OUTPUT = '%s: Successfully updated %s teams';
+    private const string OUTPUT = '%s: Successfully updated %s teams';
 
     /**
      * @var string
@@ -44,7 +44,7 @@ final class GetTeamsCommand extends Command
         $league = League::first();
 
         if (null === $league) {
-            $logger->error('No league found');
+            $logger->error('No league found in command: '.self::class);
 
             return 1;
         }
