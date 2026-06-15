@@ -49,6 +49,7 @@ final class FunWithFlags
         'URU' => '🇺🇾', 'UZB' => '🇺🇿', 'VAN' => '🇻🇺', 'VEN' => '🇻🇪', 'VIE' => '🇻🇳',
         'VIR' => '🇻🇮', 'YEM' => '🇾🇪', 'ZAM' => '🇿🇲', 'ZIM' => '🇿🇼', 'SLO' => '🇸🇮',
         'CUR' => '🇨🇼', 'ENG' => '🏴󠁧󠁢󠁥󠁮󠁧󠁿', 'SCO' => '🏴󠁧󠁢󠁳󠁣󠁴󠁿', 'WAL' => '🏴󠁧󠁢󠁷󠁬󠁳󠁿', 'NIR' => '🏴',
+        'NZL' => '🇳🇿',
     ];
 
     public static function getFlag(string $code): string
