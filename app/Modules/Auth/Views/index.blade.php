@@ -11,7 +11,7 @@
         <section class="w-full flex flex-col justify-center items-center min-h-screen px-6 lg:basis-2/5 xl:basis-1/2">
             <div class="card bg-base-100 shadow-lg w-full max-w-sm min-h-115">
                 <div class="card-body">
-                    <x-partials.logo.large primary="var(--color-primary)" secondary="var(--color-accent)"/>
+                    <x-partials.logo.large primary="var(--color-primary)" secondary="var(--color-accent)" textColor="text-base-conent" width="w-6"/>
                     <div class="flex-1 flex flex-col w-full">
                         <x-dynamic-component :component="'auth::shared.'.$pageName" :leagues="$leagues ?? collect([])"/>
                     </div>
