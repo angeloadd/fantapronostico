@@ -1,5 +1,59 @@
-@import "../assets/fonts/Inter-4.1/web/inter.css";
-@import "../assets/fonts/BebasNeue_Complete/Fonts/WEB/css/bebas-neue.css";
+@font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("../assets/fonts/Inter-4.1/web/Inter-Regular.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url("../assets/fonts/Inter-4.1/web/Inter-Medium.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Inter";
+    font-style: italic;
+    font-weight: 500;
+    font-display: swap;
+    src: url("../assets/fonts/Inter-4.1/web/Inter-MediumItalic.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url("../assets/fonts/Inter-4.1/web/Inter-SemiBold.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Inter";
+    font-style: italic;
+    font-weight: 600;
+    font-display: swap;
+    src: url("../assets/fonts/Inter-4.1/web/Inter-SemiBoldItalic.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url("../assets/fonts/Inter-4.1/web/Inter-Bold.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Inter";
+    font-style: italic;
+    font-weight: 700;
+    font-display: swap;
+    src: url("../assets/fonts/Inter-4.1/web/Inter-BoldItalic.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Bebas Neue";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("../assets/fonts/BebasNeue_Complete/Fonts/WEB/fonts/BebasNeue-Regular.woff2") format("woff2");
+}
 
 @import "tailwindcss";
 

@@ -3,7 +3,7 @@
         {{ $slot }}
     </div>
     <div>
-        <p class="text-xs text-base-content/50">{{ $label }}</p>
+        <p class="text-xs lg:text-[8px] xl:text-xs text-base-content/50">{{ $label }}</p>
         <p class="text-sm font-semibold">{{ $value }}</p>
     </div>
     @if($isPredictionSuccessful ?? false)

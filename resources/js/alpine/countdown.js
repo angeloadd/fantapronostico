@@ -4,6 +4,7 @@ export default (target) => ({
 	hours: 0,
 	minutes: 0,
 	seconds: 0,
+	_id: null,
 	tick() {
 		const diff = this.target - Date.now();
 		if (diff <= 0) {
@@ -17,7 +18,9 @@ export default (target) => ({
 	},
 	init() {
 		this.tick();
-		const id = setInterval(() => this.tick(), 1000);
-		this.$cleanup(() => clearInterval(id));
+		this._id = setInterval(() => this.tick(), 1000);
+	},
+	destroy() {
+		clearInterval(this._id);
 	},
 });

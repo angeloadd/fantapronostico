@@ -40,7 +40,7 @@
         @if(($style ?? null)?->isNotEmpty())
             {{ $style }}
         @endif
-        <script type="text/javascript" src="https://embeds.iubenda.com/widgets/512b11f0-d260-4d3e-8391-4466c11e503e.js"></script>
+{{--        <script type="text/javascript" src="https://embeds.iubenda.com/widgets/512b11f0-d260-4d3e-8391-4466c11e503e.js"></script>--}}
     </head>
     <body class="bg-base-200 min-h-screen" x-cloak>
         {{ $slot }}
