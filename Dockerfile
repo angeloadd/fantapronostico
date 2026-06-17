@@ -16,6 +16,8 @@ WORKDIR /app
 
 RUN install-php-extensions pdo_pgsql pcntl intl
 
+RUN apt-get update && apt-get install -y --no-install-recommends postgresql-client-17 && rm -rf /var/lib/apt/lists/*
+
 COPY . .
 COPY --from=vendor /app/vendor ./vendor
 COPY --from=assets /app/public ./public

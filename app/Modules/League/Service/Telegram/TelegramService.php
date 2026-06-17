@@ -57,8 +57,9 @@ final class TelegramService implements TelegramServiceInterface
 Si potrà pronosticare per ogni partita, oltre che al risultato e segno,
 anche un gol per squadra. Si potrà quindi indicare un giocatore dalla lista squadra disponibile per ogni pronostico o
 in alternativa la possibilità che una squadra non segni o che faccia un gol grazie all'autogol di un giocatore 
-avversario. I risultati esatti delle partite varranno inoltre sui 120' escludendo quindi eventuali rigori. Per
-ulteriori informazioni vi invito a visitare la sezione regolamento: %s/terms
+avversario. I risultati esatti delle partite varranno inoltre sui 120' escludendo quindi eventuali rigori. Se una 
+partita va ai rigori il segno che prende punti sarà X. Per ulteriori informazioni vi invito a visitare la sezione 
+regolamento: %s/terms
 TEXT,
                     ucfirst($knockoutsStartFormatted),
                     __($tournament->name),

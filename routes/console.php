@@ -187,3 +187,7 @@ Schedule::command('fp:winner:get')
 Schedule::command('fp:bot:telegram')
     ->sendOutputTo('/proc/1/fd/1')
     ->everyThirtyMinutes();
+
+Schedule::command('fp:db:dump')
+    ->sendOutputTo('/proc/1/fd/1')
+    ->dailyAt('15:00');
