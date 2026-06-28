@@ -102,8 +102,9 @@ final class Player extends Model
                         'last_name' => '',
                     ]);
 
-                if (0 === $nationalModel->tournaments->first()?->players->where('api_id', $player->apiId)->count()) {
-                    $nationalModel->tournaments->first()?->players()->attach($player->apiId);
+                $tournament = $nationalModel->tournaments->first();
+                if ($tournament !== null && !$tournament->players()->where('id', $player->apiId)->exists()) {
+                    $tournament->players()->attach($player->apiId);
                 }
             }
         }

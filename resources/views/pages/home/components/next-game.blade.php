@@ -1,20 +1,20 @@
-<x-home::shared.card title="{{ __('messages.home.next_game_title') }}" :grayed="$game->predictable_from->isFuture()">
+<x-home::shared.card title="{{ __('messages.home.next_game_title') }}" :grayed="$game?->predictable_from->isFuture()">
     @if(null !== $game && !$hasFinalStarted)
         <div class="ml-auto">
-            <x-partials.countdown.main :date="$game->predictable_from->isFuture() ? $game->predictable_from : $game->started_at" :isOpen="!$game->predictable_from->isFuture()"/>
+            <x-partials.countdown.main :date="$game->predictable_from->isFuture() ? $game?->predictable_from : $game->started_at" :isOpen="!$game?->predictable_from->isFuture()"/>
         </div>
     @endif
     <div @class([
             'my-auto flex w-full items-center',
             'justify-center'  => !isset($game) || $hasFinalStarted,
             'justify-between' => isset($game) && !$hasFinalStarted,
-            'text-base-content/80' => $game->predictable_from->isFuture()
+            'text-base-content/80' => $game?->predictable_from->isFuture()
         ])>
         @if(null !== $game && !$hasFinalStarted)
             <x-home::shared.team-display :teamCode="$game->home_team->code" :teamName="$game->home_team->name"/>
             <div class="flex flex-col items-center gap-3">
                 <x-home::shared.game-date :date="$game->started_at"/>
-                @if($game->predictable_from->isPast())
+                @if($game?->predictable_from->isPast())
                     <a href="{{ route('prediction.create', ['game' => $game]) }}" class="btn btn-accent btn-lg rounded-2xl">
                         {{$game->isPredicted ? 'Modifica' : 'Pronostica'}}
                     </a>
