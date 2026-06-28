@@ -12,7 +12,7 @@
         @foreach($players as $id => $player)
             <option
                 value="{{$id}}"
-                @selected(old($label, $prediction?->{$label}) === (string) $id)
+                @selected((string) old($label, $prediction?->{$label}) === (string) $id)
             >{{$player}}</option>
         @endforeach
     </select>
